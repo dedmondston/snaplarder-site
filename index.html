@@ -1,78 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SnapLarder — know before it goes off</title>
-<meta name="description" content="SnapLarder scans your shopping and reminds you before food goes off. One payment, no subscription.">
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    max-width: 38rem; margin: 0 auto; padding: 3rem 1.25rem 4rem;
-    color: #21281f; background: #f3efe1;
-  }
-  @media (prefers-color-scheme: dark) {
-    body { color: #ece7d6; background: #14170f; }
-    a { color: #8fbf87; }
-    .card { background: #1d2117; border-color: #2d3327; }
-  }
-  h1 { font-size: 2rem; margin: 0 0 .5rem; }
-  .tagline { font-size: 1.1rem; opacity: .75; margin: 0 0 2rem; }
-  h2 { font-size: .8rem; letter-spacing: .09em; margin: 2.5rem 0 .6rem; opacity: .65; }
-  ul { padding-left: 1.1rem; }
-  li { margin-bottom: .5rem; }
-  a { color: #2f5d3a; }
-  .card {
-    background: #fbf9f1; border: 1px solid #e3ddc9;
-    border-radius: 14px; padding: 1.1rem 1.25rem; margin: 1.5rem 0;
-  }
-  .cta {
-    display: inline-block; background: #2f5d3a; color: #f3efe1;
-    padding: .7rem 1.4rem; border-radius: 12px;
-    text-decoration: none; font-weight: 700; margin: .5rem 0 1rem;
-  }
-  footer { margin-top: 3.5rem; font-size: .85rem; opacity: .6; }
-  footer a { margin-right: 1rem; }
-</style>
+<meta name="description" content="SnapLarder tracks what's in your fridge, freezer and cupboard, and tells you before it goes off. Open something and the date keeps up. One payment, no subscription.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<main class="page">
 
-<h1>SnapLarder</h1>
-<p class="tagline">Know before it goes off.</p>
+  <header class="masthead">
+    <h1 class="wordmark">SnapLarder</h1>
+    <div class="scale" aria-hidden="true"><span></span><span></span><span></span></div>
+    <p class="standfirst">Know before it goes off.</p>
+  </header>
 
-<!-- REPLACE the # with your App Store link once the app is live. -->
-<a class="cta" href="#">Download on the App Store</a>
+  <!--
+    The hero shows the thing nothing else in this category does: a date
+    that keeps up with what you actually did to the food. Shown the way
+    the app shows it rather than described.
+  -->
+  <section class="demo" aria-label="How a date changes">
+    <p class="demo-item">Chicken breasts</p>
 
-<h2>WHAT IT DOES</h2>
-<ul>
-  <li>Scan a barcode or photograph a label — it fills in the rest</li>
-  <li>Reminds you a few days before something expires, at a time you choose</li>
-  <li>Knows the difference between sealed and opened, fridge and freezer</li>
-  <li>Everything stays on your phone</li>
-</ul>
+    <div class="demo-row">
+      <span>Printed on the packet</span>
+      <b class="demo-when">22 Sep</b>
+    </div>
+    <div class="demo-row">
+      <span>You put it in the freezer</span>
+      <b class="demo-when">20 Mar</b>
+    </div>
+    <div class="demo-row is-soon">
+      <span>Thawed and opened</span>
+      <b class="demo-when">2 days</b>
+    </div>
 
-<h2>PRICE</h2>
-<p>Free for 14 days with no limits. After that you can keep tracking 10
-items free, or unlock unlimited items with a <strong>one-off
-payment</strong>. It isn't a subscription and there's nothing to cancel.</p>
+    <p class="demo-note">
+      Most trackers ask when something expires. SnapLarder asks what you did
+      with it.
+    </p>
+  </section>
 
-<div class="card">
-  <strong>A note on food safety.</strong> SnapLarder is a reminder tool.
-  It estimates dates from shelf-life tables and from what's printed on
-  the packet — it cannot tell you whether food is safe to eat. Use your
-  own judgement, and when in doubt, throw it out.
-</div>
+  <!-- REPLACE the # with your App Store link once the app is live. -->
+  <a class="cta" href="#">Download on the App Store</a>
 
-<h2>HELP</h2>
-<p>Something not working, or an idea? <a href="support.html">Get in touch</a>
-— it goes straight to the person who built it.</p>
+  <h2>Scanning, not typing</h2>
+  <p>
+    Point the camera at a barcode and it fills in the name, the storage advice
+    and the pack details. No barcode? Photograph the label and it reads the
+    printed date. A whole shop takes about a minute.
+  </p>
 
-<footer>
-  <a href="support.html">Support</a>
-  <a href="privacy.html">Privacy</a>
-  <a href="terms.html">Terms</a>
-</footer>
+  <h2>Dates you can check</h2>
+  <p>
+    Every date says where it came from — read off a label, or estimated from a
+    shelf-life table. You always know which you're looking at, and you can
+    change any of them in two taps.
+  </p>
 
+  <h2>Reminders when you can act on them</h2>
+  <p>
+    Choose how many days' notice you want and what time of day it arrives. A
+    nudge at nine in the morning about tonight's dinner is no use if you're at
+    work.
+  </p>
+
+  <h2>Nothing leaves your phone</h2>
+  <p>
+    No account, no sign-up, no server holding your shopping. Your items and
+    photos stay on the device. Looking up a barcode sends the number and
+    nothing else, to a free public database.
+  </p>
+
+  <h2>One payment</h2>
+  <p>
+    Free for a fortnight with no limits. After that, keep tracking ten items
+    free or unlock unlimited for a single payment. Not a subscription, and
+    nothing to cancel.
+  </p>
+
+  <p class="aside">
+    <b>SnapLarder is a reminder tool, not a food safety product.</b> It
+    estimates dates from shelf-life tables and from what's printed on the
+    packet. It cannot tell you whether food is safe to eat — use your own
+    judgement, and when in doubt, throw it out.
+  </p>
+
+  <h2>Something not working?</h2>
+  <p>
+    <a href="support.html">Get in touch</a> — it goes to the person who built
+    it.
+  </p>
+
+  <footer>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </footer>
+
+</main>
 </body>
 </html>

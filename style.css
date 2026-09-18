@@ -1,0 +1,247 @@
+/*
+  SnapLarder — site styles
+
+  Every colour is a custom property defined once on :root and redefined
+  for dark mode. Nothing later in the file can override the dark values,
+  which is what broke the first version: `.card` was declared after the
+  dark-mode block, so light-mode card sat under light-mode text and the
+  food safety note became unreadable.
+
+  Palette is the app's own. The green/amber/red scale isn't decoration —
+  it's the freshness scale the app uses on every row, so the rule under
+  the wordmark means the same thing here as it does in the product.
+*/
+
+:root {
+  --paper:      #f4f1e6;
+  --paper-2:    #ebe6d6;
+  --ink:        #1f2519;
+  --ink-soft:   #5c6355;
+  --rule:       #d9d3c0;
+  --card:       #fbf9f2;
+
+  --fresh:      #2f5d3a;
+  --soon:       #c08a2e;
+  --spoil:      #a8412f;
+
+  --link:       #2f5d3a;
+  --focus:      #c08a2e;
+
+  --measure:    34rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:    #13160f;
+    --paper-2:  #1b1f16;
+    --ink:      #ece7d6;
+    --ink-soft: #9aa08f;
+    --rule:     #2e3427;
+    --card:     #1b1f16;
+
+    --fresh:    #7fae74;
+    --soon:     #d9ab5a;
+    --spoil:    #d4705c;
+
+    --link:     #8fbf87;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 1.5rem 5rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-synthesis-weight: none;
+}
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------- masthead */
+
+.masthead {
+  padding: 4.5rem 0 0;
+}
+
+.wordmark {
+  margin: 0;
+  font-size: clamp(2.4rem, 9vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+/*
+  The freshness scale, as a rule under the wordmark. Same three colours,
+  same order, same meaning as the bar on every row in the app.
+*/
+.scale {
+  display: flex;
+  height: 3px;
+  margin: 1.1rem 0 1.4rem;
+  max-width: 11rem;
+}
+.scale span { flex: 1; }
+.scale span:nth-child(1) { background: var(--fresh); }
+.scale span:nth-child(2) { background: var(--soon); }
+.scale span:nth-child(3) { background: var(--spoil); }
+
+.standfirst {
+  margin: 0 0 2.5rem;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* -------------------------------------------------------------- hero */
+
+/*
+  The hero is the thing no other app in this category does: a date that
+  changes when you tell it what you did. Shown as the app shows it,
+  rather than described.
+*/
+.demo {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--card);
+  padding: 1.15rem 1.25rem;
+  margin: 0 0 2.5rem;
+}
+
+.demo-item {
+  font-weight: 600;
+  margin: 0 0 0.7rem;
+}
+
+.demo-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  padding: 0.28rem 0;
+}
+
+.demo-row b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.demo-when { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+.demo-row.is-soon b,
+.demo-row.is-soon .demo-when { color: var(--soon); }
+
+.demo-note {
+  margin: 0.8rem 0 0;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------ action */
+
+.cta {
+  display: inline-block;
+  background: var(--fresh);
+  color: var(--paper);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cta { color: #13160f; }
+}
+
+.cta:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ----------------------------------------------------------- content */
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 3rem 0 0.9rem;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 2rem 0 0.4rem;
+}
+
+p { margin: 0 0 1rem; }
+
+a { color: var(--link); }
+
+ul { padding-left: 1.1rem; margin: 0 0 1rem; }
+li { margin-bottom: 0.55rem; }
+
+/* A single quiet aside. Used once per page at most. */
+.aside {
+  border-left: 3px solid var(--soon);
+  padding: 0.1rem 0 0.1rem 1rem;
+  margin: 1.8rem 0;
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+}
+
+.aside b { color: var(--ink); }
+
+/* -------------------------------------------------- legal documents */
+
+.doc h2 {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  margin: 2.4rem 0 0.6rem;
+  color: var(--ink-soft);
+}
+
+.doc p { font-size: 1rem; }
+
+.updated {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}
+
+/* ------------------------------------------------------------ chrome */
+
+.back {
+  display: inline-block;
+  margin: 2.5rem 0 1.5rem;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+footer a { margin-right: 1.2rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
