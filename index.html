@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -35,77 +35,127 @@
 
 <main id="content" class="wrap">
 <section class="hero">
-  <div>
+  <div class="hero-copy">
+    <p class="eyebrow">Food expiry tracker for iPhone</p>
     <h1 class="wordmark">Know before it goes off.</h1>
-    <div class="scale" aria-hidden="true"><span></span><span></span><span></span></div>
     <p class="standfirst">
       Scan your shopping, see what to use first, and get a reminder before
       food goes off. Open or freeze something and the date keeps up.
     </p>
-    <a class="cta" href="https://apps.apple.com/app/id6803253210">Download on the App Store</a>
-    <p class="trust">One payment, no subscription · No account · Your food stays on your phone</p>
-  </div>
-
-  <!--
-    The thing nothing else in this category does: a date that keeps up
-    with what you actually did to the food. Shown the way the app shows it.
-  -->
-  <section class="demo" aria-label="How a date changes">
-    <p class="demo-item">Chicken breasts</p>
-    <div class="demo-row"><span>Printed on the packet</span><b class="demo-when">22 Sep</b></div>
-    <div class="demo-row"><span>You put it in the freezer</span><b class="demo-when">20 Mar</b></div>
-    <div class="demo-row is-soon"><span>Thawed and opened</span><b class="demo-when">2 days</b></div>
-    <p class="demo-note">Most trackers ask when something expires. SnapLarder asks what you did with it.</p>
-  </section>
-</section>
-
-<ul class="features">
-  <li class="card">
-    <h2>Three ways in</h2>
-    <p><b>Scan barcode</b> for packets, <b>Photo of label</b> for printed dates and receipts, <b>Type it in</b> for loose fruit and veg. A whole shop takes about a minute.</p>
-  </li>
-  <li class="card">
-    <h2>Dates you can check</h2>
-    <p>Every date says where it came from — read off the label or estimated — and you can change any of them in two taps.</p>
-  </li>
-  <li class="card">
-    <h2>Reminders that suit you</h2>
-    <p>Choose how many days' notice and what time of day, so the nudge arrives when you can still act on it.</p>
-  </li>
-  <li class="card">
-    <h2>Nothing leaves your phone</h2>
-    <p>No account, no server holding your shopping. A barcode lookup sends the number and nothing else. <a href="privacy.html">Privacy policy</a></p>
-  </li>
-  <li class="card">
-    <h2>One payment</h2>
-    <p>Free for a fortnight with no limits, then ten items free, or unlock unlimited once. Nothing to cancel.</p>
-  </li>
-  <li class="card">
-    <h2>New to it?</h2>
-    <p>A short guide shows you around the first time. See it again any time from Settings, or get <a href="support.html">help here</a>.</p>
-  </li>
-</ul>
-
-<section class="home-food">
-  <div>
-    <h2>How long does it last?</h2>
-    <p>The app's own figures for over a hundred foods: in the fridge, once opened and in the freezer.</p>
-  </div>
-  <div>
-    <ul class="chips">
-      <li><a href="food/hummus.html">Hummus</a></li>
-      <li><a href="food/chicken-breasts.html">Chicken breasts</a></li>
-      <li><a href="food/milk.html">Milk</a></li>
-      <li><a href="food/strawberries.html">Strawberries</a></li>
-      <li><a href="food/bread.html">Bread</a></li>
-      <li><a href="food/eggs.html">Eggs</a></li>
-      <li><a href="food/beef-mince.html">Beef mince</a></li>
-      <li><a href="food/spinach.html">Spinach</a></li>
-      <li><a href="food/cheddar.html">Cheddar</a></li>
-      <li><a href="food/rice.html">Rice</a></li>
-      <li><a href="food/"><b>All foods →</b></a></li>
+    <div class="actions">
+      <a class="cta" href="https://apps.apple.com/app/id6803253210">Download on the App Store</a>
+      <a class="cta cta-quiet" href="food/">How long does food last?</a>
+    </div>
+    <ul class="ticks">
+      <li>One payment, no subscription</li>
+      <li>No account</li>
+      <li>Your food stays on your phone</li>
     </ul>
   </div>
+
+  <div class="hero-art">
+    <figure class="phone">
+      <img src="img/kitchen.webp" width="560" height="881"
+           alt="The Kitchen screen in SnapLarder: three items tracked, with butter under Use now and two items under Still fresh.">
+    </figure>
+    <figure class="float float-review">
+      <img src="img/review.webp" width="540" height="486" loading="lazy"
+           alt="The review screen after scanning two barcodes, with a date for each item.">
+    </figure>
+    <section class="float float-date demo" aria-label="How a date changes">
+      <p class="demo-item">Chicken breasts</p>
+      <div class="demo-row"><span>Printed on the packet</span><b class="demo-when">22 Sep</b></div>
+      <div class="demo-row"><span>Put in the freezer</span><b class="demo-when">20 Mar</b></div>
+      <div class="demo-row is-soon"><span>Thawed</span><b class="demo-when">2 days</b></div>
+    </section>
+  </div>
+</section>
+
+<section class="band" id="how" aria-labelledby="how-title">
+  <h2 id="how-title" class="section-title">How it works</h2>
+  <ol class="steps">
+    <li class="card">
+      <span class="step-no" aria-hidden="true">1</span>
+      <h3>Add your shopping</h3>
+      <p><b>Scan barcode</b> for packets, <b>Photo of label</b> for printed dates and receipts, <b>Type it in</b> for loose fruit and veg. A whole shop takes about a minute.</p>
+    </li>
+    <li class="card">
+      <span class="step-no" aria-hidden="true">2</span>
+      <h3>See what to use first</h3>
+      <p>Your kitchen is sorted by what needs eating soonest, across the fridge, freezer and cupboard.</p>
+    </li>
+    <li class="card">
+      <span class="step-no" aria-hidden="true">3</span>
+      <h3>Get a nudge in time</h3>
+      <p>A reminder the number of days ahead you choose, at the time of day you choose. Open or freeze something and the date moves with it.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="band" aria-labelledby="why-title">
+  <h2 id="why-title" class="section-title">Made to be trusted</h2>
+  <ul class="features">
+    <li class="card">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m9 16 2 2 4-4"/></svg>
+      <h3>Dates you can check</h3>
+      <p>Every date says where it came from — read off the label or estimated — and you can change any of them in two taps.</p>
+    </li>
+    <li class="card">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/><path d="M9 10.5 11 12.5 15 8.5"/></svg>
+      <h3>Nothing leaves your phone</h3>
+      <p>No account, no server holding your shopping. A barcode lookup sends the number and nothing else. <a href="privacy.html">Privacy policy</a></p>
+    </li>
+    <li class="card">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
+      <h3>One payment</h3>
+      <p>Free for a fortnight with no limits, then ten items free, or unlock unlimited once. Nothing to cancel.</p>
+    </li>
+    <li class="card">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+      <h3>Reminders that suit you</h3>
+      <p>Choose how many days' notice and what time of day, so the nudge arrives when you can still act on it.</p>
+    </li>
+    <li class="card">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M4.9 6.5l14.2 11M19.1 6.5 4.9 17.5"/></svg>
+      <h3>Knows the freezer</h3>
+      <p>Freeze something and the date restarts on a freezer time. Take it out and it switches to a short thawed window.</p>
+    </li>
+    <li class="card">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg>
+      <h3>New to it?</h3>
+      <p>A short guide shows you around the first time. See it again any time from Settings, or get <a href="support.html">help here</a>.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="band food-band" aria-labelledby="food-title">
+  <div>
+    <h2 id="food-title" class="section-title">How long does it last?</h2>
+    <p>The app's own figures for over a hundred foods: in the fridge, once opened and in the freezer.</p>
+    <form class="food-search" action="food/" method="get" role="search">
+      <label for="home-q" class="sr">Find a food</label>
+      <input id="home-q" name="q" type="search" placeholder="Find a food, e.g. hummus" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <ul class="chips">
+    <li><a href="food/hummus.html">Hummus</a></li>
+    <li><a href="food/chicken-breasts.html">Chicken breasts</a></li>
+    <li><a href="food/milk.html">Milk</a></li>
+    <li><a href="food/strawberries.html">Strawberries</a></li>
+    <li><a href="food/bread.html">Bread</a></li>
+    <li><a href="food/eggs.html">Eggs</a></li>
+    <li><a href="food/beef-mince.html">Beef mince</a></li>
+    <li><a href="food/cooked-rice.html">Cooked rice</a></li>
+    <li><a href="food/cheddar.html">Cheddar</a></li>
+    <li><a href="food/"><b>All foods →</b></a></li>
+  </ul>
+</section>
+
+<section class="band closing">
+  <h2 class="section-title">Try it free for a fortnight</h2>
+  <p>No limits for the first 14 days, and nothing to cancel afterwards.</p>
+  <a class="cta" href="https://apps.apple.com/app/id6803253210">Download on the App Store</a>
 </section>
 
 <p class="aside">
@@ -118,10 +168,27 @@
 </main>
 
 <footer class="site-foot">
-  <div class="wrap">
-    <ul><li><a href="./">Home</a></li><li><a href="food/">Food guide</a></li><li><a href="support.html">Support</a></li><li><a href="food-safety.html">Food safety</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="./"><img src="favicon.svg" alt="" width="28" height="28">SnapLarder</a>
+      <p>Reminders before food goes off. Made in the UK by one independent developer.</p>
+      <a class="get" href="https://apps.apple.com/app/id6803253210">Get the app</a>
+    </div>
+    <nav aria-label="Footer">
+      <h2>Explore</h2>
+      <ul><li><a href="./">Home</a></li><li><a href="food/">Food guide</a></li><li><a href="support.html">Support</a></li></ul>
+    </nav>
+    <nav aria-label="Legal">
+      <h2>Legal</h2>
+      <ul><li><a href="food-safety.html">Food safety</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul>
+    </nav>
+    <div>
+      <h2>Contact</h2>
+      <ul><li><a href="mailto:support@snaplarder.com">support@snaplarder.com</a></li><li><a href="sitemap.xml">Site map</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap foot-note">
     <p>SnapLarder gives reminders, not food safety advice. Always check food yourself before eating it.</p>
-    <p><a href="mailto:support@snaplarder.com">support@snaplarder.com</a> · <a href="sitemap.xml">Site map</a></p>
   </div>
 </footer>
 </body>

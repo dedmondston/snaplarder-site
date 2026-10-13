@@ -1,0 +1,850 @@
+/*
+  SnapLarder — site styles
+
+  Every colour is a custom property defined once on :root and redefined
+  for dark mode. Nothing later in the file can override the dark values,
+  which is what broke the first version: `.card` was declared after the
+  dark-mode block, so light-mode card sat under light-mode text and the
+  food safety note became unreadable.
+
+  Palette is the app's own. The green/amber/red scale isn't decoration —
+  it's the freshness scale the app uses on every row, so the rule under
+  each title means the same thing here as it does in the product.
+
+  Layout: a navigation bar on every page, and pages that use the width
+  of a laptop rather than one long narrow column. Prose still keeps a
+  readable line length; it's the page around it that gets wider.
+*/
+
+:root {
+  --paper:      #f4f1e6;
+  --paper-2:    #ebe6d6;
+  --ink:        #1f2519;
+  --ink-soft:   #5c6355;
+  --rule:       #d9d3c0;
+  --card:       #fbf9f2;
+
+  --fresh:      #2f5d3a;
+  --soon:       #c08a2e;
+  --spoil:      #a8412f;
+
+  --link:       #2f5d3a;
+  --focus:      #c08a2e;
+  --on-fresh:   #f4f1e6;
+
+  --shadow:     0 1px 2px rgb(31 37 25 / 6%), 0 8px 24px rgb(31 37 25 / 8%);
+  --radius:     14px;
+  --head-bg:    rgb(244 241 230 / 85%);
+
+  --wide:       70rem;
+  --measure:    38rem;
+  --gutter:     1.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:    #13160f;
+    --paper-2:  #1b1f16;
+    --ink:      #ece7d6;
+    --ink-soft: #9aa08f;
+    --rule:     #2e3427;
+    --card:     #1b1f16;
+
+    --fresh:    #7fae74;
+    --soon:     #d9ab5a;
+    --spoil:    #d4705c;
+
+    --link:     #8fbf87;
+    --on-fresh: #13160f;
+    --shadow:   0 1px 2px rgb(0 0 0 / 30%), 0 10px 30px rgb(0 0 0 / 35%);
+    --head-bg:  rgb(19 22 15 / 85%);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-synthesis-weight: none;
+}
+
+.wrap {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+a { color: var(--link); }
+
+a:focus-visible,
+summary:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--card);
+  padding: 0.5rem 1rem;
+  z-index: 10;
+}
+.skip:focus { left: var(--gutter); }
+
+[hidden] { display: none !important; }
+
+/* ------------------------------------------------------- navigation */
+
+/*
+  Quick links on every page. On a phone: brand and the App Store button
+  on one line, the links below, wrapping rather than hiding off the edge.
+*/
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--rule);
+  background: var(--head-bg);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  backdrop-filter: saturate(1.4) blur(12px);
+}
+
+/* Anchored headings land below the sticky bar, not under it. */
+[id] { scroll-margin-top: 6rem; }
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1.25rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.get {
+  order: 2;
+  margin-left: auto;
+  background: var(--fresh);
+  color: var(--on-fresh);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-head nav {
+  order: 3;
+  flex-basis: 100%;
+}
+
+.site-head ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.1rem 0;
+}
+
+.site-head nav a { white-space: nowrap; }
+
+.site-head li { margin: 0; }
+
+.site-head nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.35rem 0;
+  display: inline-block;
+}
+
+.site-head nav a:hover { color: var(--ink); }
+
+.site-head nav a[aria-current="page"] {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--fresh);
+}
+
+@media (min-width: 52rem) {
+  .bar { flex-wrap: nowrap; }
+  .site-head nav { order: 2; flex-basis: auto; margin-left: auto; }
+  .get { order: 3; margin-left: 0; }
+}
+
+/* ------------------------------------------------------ page titles */
+
+.page-head { padding: 2.2rem 0 0.4rem; }
+
+.page-title,
+.wordmark {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.page-title { font-size: clamp(1.9rem, 6vw, 2.6rem); }
+.wordmark { font-size: clamp(2.2rem, 8vw, 3rem); }
+
+/*
+  The freshness scale, as a rule under each title. Same three colours,
+  same order, same meaning as the bar on every row in the app.
+*/
+.scale {
+  display: flex;
+  height: 3px;
+  margin: 1rem 0 1.2rem;
+  max-width: 11rem;
+}
+.scale span { flex: 1; }
+.scale span:nth-child(1) { background: var(--fresh); }
+.scale span:nth-child(2) { background: var(--soon); }
+.scale span:nth-child(3) { background: var(--spoil); }
+
+.standfirst {
+  margin: 0 0 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+/* ----------------------------------------------------------- content */
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 2.4rem 0 0.8rem;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.6rem 0 0.4rem;
+}
+
+p { margin: 0 0 1rem; }
+
+ul, ol { padding-left: 1.1rem; margin: 0 0 1rem; }
+li { margin-bottom: 0.5rem; }
+
+.prose { max-width: var(--measure); padding-bottom: 1rem; }
+.prose > h2:first-child { margin-top: 0.5rem; }
+
+/* A single quiet aside. Used once per page at most. */
+.aside {
+  border-left: 3px solid var(--soon);
+  padding: 0.1rem 0 0.1rem 1rem;
+  margin: 1.5rem 0;
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+  max-width: var(--measure);
+}
+.aside b { color: var(--ink); }
+
+.updated {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 1.5rem;
+  max-width: var(--measure);
+}
+
+.cta {
+  display: inline-block;
+  background: var(--fresh);
+  color: var(--on-fresh);
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--fresh);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Small rounded links: quick routes to a food or a section. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+.chips li { margin: 0; }
+.chips a {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  text-decoration: none;
+  font-size: 0.93rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.chips a:hover { border-color: var(--fresh); }
+
+.card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1.1rem 1.2rem;
+}
+
+/* ------------------------------------------- the date card (demo) */
+
+/*
+  Shows a date the way the app shows it. Used on the home page and as
+  the at-a-glance box on every food page.
+*/
+.demo {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1.15rem 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+.demo-item { font-weight: 600; margin: 0 0 0.7rem; }
+
+.demo-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  padding: 0.28rem 0;
+}
+
+.demo-row b { color: var(--ink); font-weight: 600; }
+
+.demo-when { margin-left: auto; font-variant-numeric: tabular-nums; text-align: right; }
+
+.demo-row.is-soon b,
+.demo-row.is-soon .demo-when { color: var(--soon); }
+
+.demo-note {
+  margin: 0.8rem 0 0;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+/* -------------------------------------------------------------- home */
+
+/*
+  Home: a hero with the real app beside the pitch, then short bands —
+  how it works, why to trust it, the food guide, and a last call to
+  download. Every band shares the same title style and spacing.
+*/
+
+.hero {
+  display: grid;
+  gap: 2.5rem;
+  padding: 2.5rem 0 1rem;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.hero .wordmark { font-size: clamp(2.5rem, 9vw, 4.2rem); margin-bottom: 1.1rem; }
+.hero .standfirst { font-size: clamp(1.1rem, 2.6vw, 1.3rem); margin-bottom: 1.6rem; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.actions .cta { padding: 0.8rem 1.3rem; }
+
+.cta-quiet {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule);
+}
+.cta-quiet:hover { border-color: var(--fresh); }
+
+.ticks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.4rem 0 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.ticks li { margin: 0; padding-left: 1.4rem; position: relative; }
+.ticks li::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.38em;
+  width: 0.45rem;
+  height: 0.75rem;
+  border: solid var(--fresh);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* The real app, in a simple phone outline, with two screens floating. */
+.hero-art {
+  position: relative;
+  max-width: 32rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+}
+
+.hero-art figure { margin: 0; }
+.hero-art img { display: block; width: 100%; height: auto; }
+
+.phone {
+  width: 64%;
+  margin: 0 0 0 auto;
+  margin-right: 8%;
+  border: 8px solid #1f2519;
+  outline: 1px solid var(--rule);
+  border-radius: 34px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #f2ecde;
+}
+
+.float {
+  position: absolute;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.float-review {
+  width: 44%;
+  left: 0;
+  bottom: 0;
+  border: 1px solid var(--rule);
+}
+
+.float-date.demo {
+  width: 50%;
+  right: 0;
+  top: 8%;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+}
+.float-date .demo-row { font-size: 0.85rem; padding: 0.18rem 0; }
+.float-date .demo-item { margin-bottom: 0.4rem; }
+
+@media (min-width: 56rem) {
+  .hero { grid-template-columns: 1.15fr 1fr; gap: 2.5rem; padding-top: 3.5rem; }
+  .hero-art { margin-right: 0; }
+}
+
+/* Bands: one section each, same title style and spacing. */
+.band { margin: 4rem 0 0; }
+
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 1.4rem;
+}
+
+.steps,
+.features {
+  display: grid;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.steps li,
+.features li { margin: 0; }
+
+.steps .card,
+.features .card { padding: 1.3rem 1.3rem 1.2rem; }
+
+.steps h3,
+.features h3 { margin: 0.8rem 0 0.35rem; font-size: 1.05rem; }
+
+.steps p,
+.features p { margin: 0; font-size: 0.97rem; color: var(--ink-soft); }
+
+.step-no {
+  display: inline-grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  background: var(--fresh);
+  color: var(--on-fresh);
+  font-weight: 700;
+}
+
+.icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0.4rem;
+  border-radius: 10px;
+  background: var(--paper-2);
+  fill: none;
+  stroke: var(--fresh);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (min-width: 40rem) {
+  .features { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 56rem) {
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .features { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* The food guide, with a search box that hands off to food/?q= */
+.food-band {
+  display: grid;
+  gap: 1.2rem 3rem;
+  align-items: center;
+  padding: 1.8rem;
+  border-radius: var(--radius);
+  background: var(--paper-2);
+}
+.food-band { grid-template-columns: minmax(0, 1fr); }
+.food-band > * { min-width: 0; }
+.food-band .section-title { margin-bottom: 0.6rem; }
+.food-band p { color: var(--ink-soft); margin: 0 0 1rem; }
+.food-band .chips { margin: 0; }
+
+.food-search { display: flex; gap: 0.5rem; max-width: 28rem; }
+.food-search input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+}
+.food-search button {
+  font: inherit;
+  font-weight: 700;
+  color: var(--on-fresh);
+  background: var(--fresh);
+  border: 0;
+  border-radius: 999px;
+  padding: 0 1.2rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+.food-search button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+@media (min-width: 56rem) {
+  .food-band { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 2.4rem; }
+}
+
+.closing { text-align: center; padding: 1rem 0; }
+.closing .section-title { margin-bottom: 0.5rem; }
+.closing p { color: var(--ink-soft); }
+
+.band + .aside { margin-top: 3rem; }
+
+/* ------------------------------------------- pages with a contents list */
+
+.with-toc { display: grid; gap: 0 3rem; }
+
+.toc details {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 0.7rem 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.toc summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.toc ol {
+  margin: 0.7rem 0 0.2rem;
+  padding-left: 1.2rem;
+  font-size: 0.93rem;
+}
+
+.toc li { margin-bottom: 0.35rem; }
+
+@media (min-width: 60rem) {
+  .with-toc { grid-template-columns: 15rem minmax(0, 1fr); }
+  .toc details {
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+}
+
+/* ------------------------------------------------------- food guide */
+
+.food-top { display: grid; gap: 0 2.5rem; align-items: end; }
+.food-top .aside { margin: 0 0 1.2rem; }
+
+@media (min-width: 56rem) {
+  .food-top { grid-template-columns: 1fr 1fr; }
+}
+
+.food-tools {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0 0 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.food-tools .chips { margin: 0; }
+
+.food-filter label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.93rem;
+  margin-bottom: 0.35rem;
+}
+
+.food-filter input {
+  width: 100%;
+  max-width: 24rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+}
+
+.food-none { color: var(--ink-soft); margin: 0.6rem 0 0; }
+
+@media (min-width: 56rem) {
+  .food-tools { grid-template-columns: 24rem 1fr; align-items: end; }
+}
+
+/* The four categories side by side on a wide screen. */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.food-cat h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  scroll-margin-top: 1rem;
+}
+
+.food-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.food-table th {
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 0 0.4rem 0.3rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.food-table td {
+  padding: 0.32rem 0.4rem 0.32rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.food-table tr:last-child td { border-bottom: 0; }
+.food-table td:nth-child(2) { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.food-table td:last-child,
+.food-table th:last-child { padding-right: 0; color: var(--ink-soft); text-align: right; }
+
+/* A single food: facts and text on the left, quick links on the right. */
+.food-layout { display: grid; gap: 0 2.5rem; padding-bottom: 1rem; }
+.food-main { max-width: var(--measure); }
+
+.food-side { display: grid; gap: 1rem; align-content: start; }
+.food-side h2 { margin: 0 0 0.6rem; font-size: 1rem; }
+.food-side p { font-size: 0.95rem; color: var(--ink-soft); }
+.food-side .chips { margin: 0; }
+
+@media (min-width: 56rem) {
+  .food-layout { grid-template-columns: minmax(0, 1fr) 19rem; }
+  .food-side { padding-top: 2.2rem; }
+}
+
+/* ------------------------------------------------------------ footer */
+
+.site-foot {
+  margin-top: 4rem;
+  border-top: 1px solid var(--rule);
+  background: var(--paper-2);
+  padding: 2.4rem 0 1.5rem;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+}
+
+.foot-grid { display: grid; gap: 1.8rem 2rem; grid-template-columns: repeat(2, 1fr); }
+.foot-brand { grid-column: 1 / -1; }
+.foot-brand p { margin: 0.6rem 0 0.9rem; max-width: 22rem; }
+.foot-brand .get { display: inline-block; }
+
+.site-foot h2 {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.site-foot ul { list-style: none; padding: 0; margin: 0; }
+.site-foot li { margin: 0 0 0.45rem; }
+.site-foot a { text-decoration: none; }
+.site-foot a:hover { text-decoration: underline; }
+.site-foot ul a { color: var(--ink); overflow-wrap: anywhere; }
+
+.foot-note { margin-top: 1.8rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); }
+.foot-note p { margin: 0; font-size: 0.88rem; }
+
+@media (min-width: 52rem) {
+  .foot-grid { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; }
+  .foot-brand { grid-column: auto; }
+}
+
+/* Long words and addresses wrap rather than widen the page on a phone. */
+.prose p, .prose li { overflow-wrap: anywhere; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+.count {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-left: 0.3rem;
+}
+
+.home-cta { margin: 2.5rem 0 0; max-width: var(--measure); }
+.home-cta h2 { margin: 0 0 0.4rem; }
+.home-cta p { color: var(--ink-soft); }
+
+/* Read by screen readers, not shown: the full wording behind "3 wks". */
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.food-table td { position: relative; }
+
+/* ------------------------------------------------ phone refinements */
+
+@media (max-width: 51.99rem) {
+  /* Quick links in one swipeable row rather than wrapping onto two. */
+  .site-head nav {
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter);
+  }
+  .site-head nav::-webkit-scrollbar { display: none; }
+  .site-head ul { flex-wrap: nowrap; gap: 0 1.1rem; }
+}
+
+@media (max-width: 29.99rem) {
+  /* Small phones: the three main links on top; Privacy and Terms are in
+     the footer of every page, so the bar never needs scrolling. */
+  .site-head nav li:nth-child(n+4) { display: none; }
+  .site-head ul { gap: 0 1rem; }
+}
+
+@media (max-width: 39.99rem) {
+  /* Icon beside the heading, so each card is half the height. */
+  .steps .card,
+  .features .card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.2rem 0.9rem;
+    align-items: start;
+    padding: 1rem 1.1rem;
+  }
+  .steps .card > :not(.step-no):not(.icon),
+  .features .card > :not(.icon) { grid-column: 2; }
+  .step-no, .icon { grid-row: 1 / span 2; }
+  .steps h3, .features h3 { margin: 0.3rem 0 0.2rem; }
+
+  .float-date.demo { width: 62%; top: 4%; padding: 0.7rem 0.8rem; }
+  .float-date .demo-row { font-size: 0.78rem; }
+  .float-date .demo-when { white-space: nowrap; }
+  .float-date .demo-row span { white-space: nowrap; }
+  .phone { width: 58%; margin-right: auto; margin-left: 4%; border-width: 6px; border-radius: 26px; }
+  .float-review { width: 46%; left: auto; right: 0; }
+
+  .foot-grid > div:last-child { grid-column: 1 / -1; }
+  .band { margin-top: 3rem; }
+}
+
+/* ------------------------------------- shared look across every page */
+
+/* Search boxes match the home page: rounded, same height. */
+.food-filter input { border-radius: 999px; padding: 0.65rem 1rem; }
+
+/* Contents list: quieter links, the current one easy to spot on hover. */
+.toc a { text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* The App Store button fits a narrow sidebar on one line. */
+.food-side .cta { display: block; text-align: center; padding: 0.75rem 1rem; }
+
+.page-head { padding-top: 2.6rem; }

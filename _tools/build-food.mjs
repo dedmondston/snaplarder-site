@@ -89,9 +89,6 @@ const NO_FREEZE = new Set([
   'greek yogurt', 'sour cream', 'cream cheese', 'cottage cheese', 'tomato',
   'cherry tomatoes', 'guacamole', 'salsa (fresh)', 'mayonnaise',
   'boiled eggs', 'scotch eggs', 'overnight oats',
-  // Freezes fine, but the app's two days after thawing is too long for
-  // cooked rice, so the page gives the rice-specific advice instead.
-  'cooked rice',
 ]);
 
 /** Cupboard foods worth freezing; other cupboard staples don't need it. */
@@ -170,8 +167,8 @@ export function buildFoodList(table, app) {
         aka: display.aka ?? null,
         slug: slugify(display.name),
         opened: app.openedDaysFor({ name: key, category }),
-        frozen: app.freezerDaysFor(category),
-        thawed: app.THAWED_DAYS,
+        frozen: app.freezerDaysFor(category, key),
+        thawed: app.thawedDaysFor({ name: key }),
       });
     }
   }
@@ -214,9 +211,7 @@ function foodPage(f, foods) {
   if (f.category === 'pantry' && f.location === 'pantry') {
     lines.push('Once opened, check the label: some products need to go in the fridge.');
   }
-  if (f.key === 'cooked rice') {
-    // No freezer line: hidden for the thawing time, not because it won't freeze.
-  } else if (NO_FREEZE.has(f.key)) {
+  if (NO_FREEZE.has(f.key)) {
     lines.push(`${f.name} ${verb === 'do' ? "don't" : "doesn't"} freeze well.`);
   } else if (!showFreezer(f)) {
     lines.push(`There's no need to freeze ${lname}.`);
@@ -324,7 +319,11 @@ ${cards}
     var input = document.getElementById('food-filter');
     var none = document.querySelector('.food-none');
     box.hidden = false;
-    input.addEventListener('input', function () {
+    input.addEventListener('input', filter);
+    // Arriving from the home page search: food/?q=hummus
+    var q0 = new URLSearchParams(location.search).get('q');
+    if (q0) { input.value = q0; filter(); }
+    function filter() {
       var q = input.value.trim().toLowerCase();
       var shown = 0;
       document.querySelectorAll('.food-cat').forEach(function (card) {
@@ -338,7 +337,7 @@ ${cards}
         shown += any;
       });
       none.hidden = shown > 0;
-    });
+    }
   })();
 </script>`;
 

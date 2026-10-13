@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -48,7 +48,7 @@
     <summary>On this page</summary>
     <ol>
       <li><a href="#summary">Summary</a></li>
-      <li><a href="#who-is-responsible">Who is responsible</a></li>
+      <li><a href="#what-the-developer-receives">What the developer receives</a></li>
       <li><a href="#what-the-app-stores-on-your-phone">What the app stores on your phone</a></li>
       <li><a href="#camera-and-photos">Camera and photos</a></li>
       <li><a href="#barcode-lookup">Barcode lookup</a></li>
@@ -58,7 +58,6 @@
       <li><a href="#analytics-and-advertising">Analytics and advertising</a></li>
       <li><a href="#if-you-email-support">If you email support</a></li>
       <li><a href="#the-website">The website</a></li>
-      <li><a href="#legal-basis">Legal basis</a></li>
       <li><a href="#your-rights">Your rights</a></li>
       <li><a href="#children">Children</a></li>
       <li><a href="#changes">Changes</a></li>
@@ -68,10 +67,14 @@
 </nav>
 <article class="prose">
   <h2 id="summary">Summary</h2>
-  <p>SnapLarder keeps your food data on your phone. There is no account, and the developer never receives your items, photos or how you use the app.</p>
-  <p>Two features contact outside services, and both are described below: looking up a barcode, and checking your purchase. Neither sends your name, email address or anything you have added to the app.</p>
-  <h2 id="who-is-responsible">Who is responsible</h2>
-  <p>SnapLarder is made by Derek Edmondston, an independent developer in the United Kingdom, who is responsible for your data under UK data protection law. You can contact the developer at <a href="mailto:support@snaplarder.com">support@snaplarder.com</a>.</p>
+  <p>SnapLarder keeps your food data on your phone. There is no account, and the developer never receives your items, photos, settings or how you use the app.</p>
+  <h2 id="what-the-developer-receives">What the developer receives</h2>
+  <p>Only two things, and only in these situations:</p>
+  <ul>
+    <li>If you email support: your email address and whatever you write. Used only to reply and fix the problem.</li>
+    <li>If you buy the unlock: a purchase record held by RevenueCat, the service that checks your purchase (see <a href="#purchases">Purchases</a>). It shows an anonymous code and what was bought and when. It does not include your name, email address, Apple ID or payment details, and the developer cannot tell who you are from it.</li>
+  </ul>
+  <p>Nothing else reaches the developer. Payments and refunds are handled by Apple, not by the developer.</p>
   <h2 id="what-the-app-stores-on-your-phone">What the app stores on your phone</h2>
   <ul>
     <li>The food items you add, with their dates, locations, quantities and whether you have used them.</li>
@@ -105,12 +108,9 @@
   <p>If you email <a href="mailto:support@snaplarder.com">support@snaplarder.com</a>, the developer receives your email address and whatever you choose to send, through the developer's email provider. It is used only to reply to you and to fix the problem you report, and is kept only as long as needed for that.</p>
   <h2 id="the-website">The website</h2>
   <p><a href="https://snaplarder.com">snaplarder.com</a> uses no cookies, no analytics and no advertising. Two companies receive your IP address when you visit, as part of delivering the pages: GitHub, which hosts the site and records visitors' IP addresses for security, and Google, which supplies the typeface through Google Fonts. Each handles it under its own privacy policy.</p>
-  <h2 id="legal-basis">Legal basis</h2>
-  <p>The developer relies on two lawful bases under UK GDPR: providing the app and the purchase you made (barcode lookup and purchase checks), and legitimate interests in answering your messages and keeping the website secure.</p>
   <h2 id="your-rights">Your rights</h2>
-  <p>Your items, photos, dates and settings never leave your device. Deleting the app deletes them, and there is nothing for the developer to hand over, correct or erase.</p>
-  <p>For the data described under <a href="#purchases">Purchases</a> and <a href="#if-you-email-support">If you email support</a>, you have the right to ask for a copy, to have it corrected or deleted, and to object to its use. Email <a href="mailto:support@snaplarder.com">support@snaplarder.com</a> and the developer will act on it, or pass the request on to RevenueCat.</p>
-  <p>If you are unhappy with how your data is handled, you can complain to the <a href="https://ico.org.uk">Information Commissioner's Office</a> at <a href="https://ico.org.uk">ico.org.uk</a>.</p>
+  <p>Your items, photos, dates and settings never leave your phone, so there is nothing for the developer to hand over, correct or delete. Deleting the app deletes them.</p>
+  <p>For your support emails and your purchase record, you can ask for a copy, a correction or deletion by emailing <a href="mailto:support@snaplarder.com">support@snaplarder.com</a>. The developer, Derek Edmondston in the United Kingdom, is responsible for this data under UK data protection law, and uses it only to provide the unlock you bought and to answer you. If you are unhappy with how it is handled, you can complain to the <a href="https://ico.org.uk">Information Commissioner's Office</a> at <a href="https://ico.org.uk">ico.org.uk</a>.</p>
   <h2 id="children">Children</h2>
   <p>SnapLarder is suitable for all ages but is designed for adults who look after a household's food. It does not knowingly collect personal data from children.</p>
   <h2 id="changes">Changes</h2>
@@ -128,10 +128,27 @@
 </main>
 
 <footer class="site-foot">
-  <div class="wrap">
-    <ul><li><a href="./">Home</a></li><li><a href="food/">Food guide</a></li><li><a href="support.html">Support</a></li><li><a href="food-safety.html">Food safety</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="./"><img src="favicon.svg" alt="" width="28" height="28">SnapLarder</a>
+      <p>Reminders before food goes off. Made in the UK by one independent developer.</p>
+      <a class="get" href="https://apps.apple.com/app/id6803253210">Get the app</a>
+    </div>
+    <nav aria-label="Footer">
+      <h2>Explore</h2>
+      <ul><li><a href="./">Home</a></li><li><a href="food/">Food guide</a></li><li><a href="support.html">Support</a></li></ul>
+    </nav>
+    <nav aria-label="Legal">
+      <h2>Legal</h2>
+      <ul><li><a href="food-safety.html">Food safety</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul>
+    </nav>
+    <div>
+      <h2>Contact</h2>
+      <ul><li><a href="mailto:support@snaplarder.com">support@snaplarder.com</a></li><li><a href="sitemap.xml">Site map</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap foot-note">
     <p>SnapLarder gives reminders, not food safety advice. Always check food yourself before eating it.</p>
-    <p><a href="mailto:support@snaplarder.com">support@snaplarder.com</a> · <a href="sitemap.xml">Site map</a></p>
   </div>
 </footer>
 </body>

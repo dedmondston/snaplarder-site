@@ -35,3 +35,8 @@ figures, but it:
 - leaves out freezer times for foods that don't freeze well, and for
   cupboard food that doesn't need freezing;
 - skips half and half and the two "(opened)" entries.
+
+## Styles and images
+- All pages use `site.css` (it replaced `style.css`, which can be deleted).
+- `img/kitchen.webp` and `img/review.webp` on the home page are frames from
+  a real screen recording of the app, with the status bar cropped off.
