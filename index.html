@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SnapLarder">
 <meta property="og:title" content="SnapLarder — know before it goes off">
-<meta property="og:description" content="Scan your shopping, see what to use first, and get a reminder before food goes off.">
+<meta property="og:description" content="SnapLarder tracks what's in your fridge, freezer and cupboard, and tells you before it goes off. Open something and the date keeps up. One payment, no subscription.">
 <meta property="og:url" content="https://snaplarder.com/">
 <meta property="og:image" content="https://snaplarder.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -23,115 +23,106 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="page">
+<a class="skip" href="#content">Skip to content</a>
 
-  <header class="masthead">
-    <h1 class="wordmark">SnapLarder</h1>
+<header class="site-head">
+  <div class="wrap bar">
+    <a class="brand" href="./" aria-current="page"><img src="favicon.svg" alt="" width="28" height="28">SnapLarder</a>
+    <a class="get" href="https://apps.apple.com/app/id6803253210">Get the app</a>
+    <nav aria-label="Main"><ul><li><a href="food/">Food guide</a></li><li><a href="support.html">Support</a></li><li><a href="food-safety.html">Food safety</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></nav>
+  </div>
+</header>
+
+<main id="content" class="wrap">
+<section class="hero">
+  <div>
+    <h1 class="wordmark">Know before it goes off.</h1>
     <div class="scale" aria-hidden="true"><span></span><span></span><span></span></div>
-    <p class="standfirst">Know before it goes off.</p>
-  </header>
+    <p class="standfirst">
+      Scan your shopping, see what to use first, and get a reminder before
+      food goes off. Open or freeze something and the date keeps up.
+    </p>
+    <a class="cta" href="https://apps.apple.com/app/id6803253210">Download on the App Store</a>
+    <p class="trust">One payment, no subscription · No account · Your food stays on your phone</p>
+  </div>
 
   <!--
-    The hero shows the thing nothing else in this category does: a date
-    that keeps up with what you actually did to the food. Shown the way
-    the app shows it rather than described.
+    The thing nothing else in this category does: a date that keeps up
+    with what you actually did to the food. Shown the way the app shows it.
   -->
   <section class="demo" aria-label="How a date changes">
     <p class="demo-item">Chicken breasts</p>
-
-    <div class="demo-row">
-      <span>Printed on the packet</span>
-      <b class="demo-when">22 Sep</b>
-    </div>
-    <div class="demo-row">
-      <span>You put it in the freezer</span>
-      <b class="demo-when">20 Mar</b>
-    </div>
-    <div class="demo-row is-soon">
-      <span>Thawed and opened</span>
-      <b class="demo-when">2 days</b>
-    </div>
-
-    <p class="demo-note">
-      Most trackers ask when something expires. SnapLarder asks what you did
-      with it.
-    </p>
+    <div class="demo-row"><span>Printed on the packet</span><b class="demo-when">22 Sep</b></div>
+    <div class="demo-row"><span>You put it in the freezer</span><b class="demo-when">20 Mar</b></div>
+    <div class="demo-row is-soon"><span>Thawed and opened</span><b class="demo-when">2 days</b></div>
+    <p class="demo-note">Most trackers ask when something expires. SnapLarder asks what you did with it.</p>
   </section>
+</section>
 
-  <a class="cta" href="https://apps.apple.com/app/id6803253210">Download on the App Store</a>
+<ul class="features">
+  <li class="card">
+    <h2>Three ways in</h2>
+    <p><b>Scan barcode</b> for packets, <b>Photo of label</b> for printed dates and receipts, <b>Type it in</b> for loose fruit and veg. A whole shop takes about a minute.</p>
+  </li>
+  <li class="card">
+    <h2>Dates you can check</h2>
+    <p>Every date says where it came from — read off the label or estimated — and you can change any of them in two taps.</p>
+  </li>
+  <li class="card">
+    <h2>Reminders that suit you</h2>
+    <p>Choose how many days' notice and what time of day, so the nudge arrives when you can still act on it.</p>
+  </li>
+  <li class="card">
+    <h2>Nothing leaves your phone</h2>
+    <p>No account, no server holding your shopping. A barcode lookup sends the number and nothing else. <a href="privacy.html">Privacy policy</a></p>
+  </li>
+  <li class="card">
+    <h2>One payment</h2>
+    <p>Free for a fortnight with no limits, then ten items free, or unlock unlimited once. Nothing to cancel.</p>
+  </li>
+  <li class="card">
+    <h2>New to it?</h2>
+    <p>A short guide shows you around the first time. See it again any time from Settings, or get <a href="support.html">help here</a>.</p>
+  </li>
+</ul>
 
-  <h2>Three ways in</h2>
-  <p>
-    Open Add and pick one. <b>Scan barcode</b> reads packaged food by itself,
-    no button needed. <b>Photo of label</b> reads the printed date, or a whole
-    receipt. <b>Type it in</b> is there for loose fruit and veg. A whole shop
-    takes about a minute.
-  </p>
-  <p>
-    New to it? A short guide shows you around the first time, and you can
-    see it again any time from Settings.
-  </p>
+<section class="home-food">
+  <div>
+    <h2>How long does it last?</h2>
+    <p>The app's own figures for over a hundred foods: in the fridge, once opened and in the freezer.</p>
+  </div>
+  <div>
+    <ul class="chips">
+      <li><a href="food/hummus.html">Hummus</a></li>
+      <li><a href="food/chicken-breasts.html">Chicken breasts</a></li>
+      <li><a href="food/milk.html">Milk</a></li>
+      <li><a href="food/strawberries.html">Strawberries</a></li>
+      <li><a href="food/bread.html">Bread</a></li>
+      <li><a href="food/eggs.html">Eggs</a></li>
+      <li><a href="food/beef-mince.html">Beef mince</a></li>
+      <li><a href="food/spinach.html">Spinach</a></li>
+      <li><a href="food/cheddar.html">Cheddar</a></li>
+      <li><a href="food/rice.html">Rice</a></li>
+      <li><a href="food/"><b>All foods →</b></a></li>
+    </ul>
+  </div>
+</section>
 
-  <h2>Dates you can check</h2>
-  <p>
-    Every date says where it came from — read off a label, or estimated from a
-    shelf-life table. You always know which you're looking at, and you can
-    change any of them in two taps.
-  </p>
-
-  <h2>Reminders when you can act on them</h2>
-  <p>
-    Choose how many days' notice you want and what time of day it arrives. A
-    nudge at nine in the morning about tonight's dinner is no use if you're at
-    work.
-  </p>
-
-  <h2>Nothing leaves your phone</h2>
-  <p>
-    No account, no sign-up, no server holding your shopping. Your items and
-    photos stay on the device. Looking up a barcode sends the number and
-    nothing else, to a free public database. The details are in the
-    <a href="privacy.html">privacy policy</a>.
-  </p>
-
-  <h2>One payment</h2>
-  <p>
-    Free for a fortnight with no limits. After that, keep tracking ten items
-    free or unlock unlimited for a single payment. Not a subscription, and
-    nothing to cancel.
-  </p>
-
-  <h2>How long does it last?</h2>
-  <p>
-    The <a href="food/">food guide</a> has the app's own figures for over a
-    hundred everyday foods: in the fridge, once opened and in the freezer.
-    Try <a href="food/hummus.html">hummus</a>,
-    <a href="food/chicken-breasts.html">chicken breasts</a> or
-    <a href="food/strawberries.html">strawberries</a>.
-  </p>
-
-  <p class="aside">
-    <b>SnapLarder is a reminder tool, not a food safety product.</b> It
-    estimates dates from shelf-life tables and from what's printed on the
-    packet. It cannot tell you whether food is safe to eat — use your own
-    judgement, and when in doubt, throw it out.
-    <a href="food-safety.html">Read the food safety notice</a>.
-  </p>
-
-  <h2>Something not working?</h2>
-  <p>
-    <a href="support.html">Get in touch</a> — it goes to the person who built
-    it.
-  </p>
-
-  <footer>
-    <a href="food/">Food guide</a>
-    <a href="support.html">Support</a>
-    <a href="food-safety.html">Food safety</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-  </footer>
-
+<p class="aside">
+  <b>SnapLarder is a reminder tool, not a food safety product.</b> It
+  estimates dates from shelf-life tables and from what's printed on the
+  packet. It cannot tell you whether food is safe to eat — use your own
+  judgement, and when in doubt, throw it out.
+  <a href="food-safety.html">Read the food safety notice</a>.
+</p>
 </main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <ul><li><a href="./">Home</a></li><li><a href="food/">Food guide</a></li><li><a href="support.html">Support</a></li><li><a href="food-safety.html">Food safety</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul>
+    <p>SnapLarder gives reminders, not food safety advice. Always check food yourself before eating it.</p>
+    <p><a href="mailto:support@snaplarder.com">support@snaplarder.com</a> · <a href="sitemap.xml">Site map</a></p>
+  </div>
+</footer>
 </body>
 </html>

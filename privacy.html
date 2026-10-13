@@ -23,15 +23,50 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="page doc">
+<a class="skip" href="#content">Skip to content</a>
 
-  <a class="back" href="./">← SnapLarder</a>
+<header class="site-head">
+  <div class="wrap bar">
+    <a class="brand" href="./"><img src="favicon.svg" alt="" width="28" height="28">SnapLarder</a>
+    <a class="get" href="https://apps.apple.com/app/id6803253210">Get the app</a>
+    <nav aria-label="Main"><ul><li><a href="food/">Food guide</a></li><li><a href="support.html">Support</a></li><li><a href="food-safety.html">Food safety</a></li><li><a href="privacy.html" aria-current="page">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></nav>
+  </div>
+</header>
 
-  <h1 class="wordmark page-title">Privacy policy</h1>
+<main id="content" class="wrap">
+<header class="page-head">
+  <h1 class="page-title">Privacy policy</h1>
   <div class="scale" aria-hidden="true"><span></span><span></span><span></span></div>
+  
+</header>
 
-  <p class="updated">Last updated October 2026</p>
+<p class="updated">Last updated October 2026</p>
 
+<div class="with-toc">
+<nav class="toc" aria-label="On this page">
+  <details>
+    <summary>On this page</summary>
+    <ol>
+      <li><a href="#summary">Summary</a></li>
+      <li><a href="#who-is-responsible">Who is responsible</a></li>
+      <li><a href="#what-the-app-stores-on-your-phone">What the app stores on your phone</a></li>
+      <li><a href="#camera-and-photos">Camera and photos</a></li>
+      <li><a href="#barcode-lookup">Barcode lookup</a></li>
+      <li><a href="#reminders">Reminders</a></li>
+      <li><a href="#purchases">Purchases</a></li>
+      <li><a href="#ratings">Ratings</a></li>
+      <li><a href="#analytics-and-advertising">Analytics and advertising</a></li>
+      <li><a href="#if-you-email-support">If you email support</a></li>
+      <li><a href="#the-website">The website</a></li>
+      <li><a href="#legal-basis">Legal basis</a></li>
+      <li><a href="#your-rights">Your rights</a></li>
+      <li><a href="#children">Children</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </details>
+</nav>
+<article class="prose">
   <h2 id="summary">Summary</h2>
   <p>SnapLarder keeps your food data on your phone. There is no account, and the developer never receives your items, photos or how you use the app.</p>
   <p>Two features contact outside services, and both are described below: looking up a barcode, and checking your purchase. Neither sends your name, email address or anything you have added to the app.</p>
@@ -82,16 +117,22 @@
   <p>If this policy changes, the new version will be published at <a href="https://snaplarder.com/privacy.html">https://snaplarder.com/privacy.html</a> and in the app, with a new date at the top.</p>
   <h2 id="contact">Contact</h2>
   <p><a href="mailto:support@snaplarder.com">support@snaplarder.com</a></p>
-
-  <footer>
-    <a href="./">SnapLarder</a>
-    <a href="food/">Food guide</a>
-    <a href="support.html">Support</a>
-    <a href="food-safety.html">Food safety</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-  </footer>
-
+</article>
+</div>
+<script>
+  // Open the contents list where there's room to show it beside the text.
+  if (window.matchMedia('(min-width: 60rem)').matches) {
+    document.querySelector('.toc details').open = true;
+  }
+</script>
 </main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <ul><li><a href="./">Home</a></li><li><a href="food/">Food guide</a></li><li><a href="support.html">Support</a></li><li><a href="food-safety.html">Food safety</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul>
+    <p>SnapLarder gives reminders, not food safety advice. Always check food yourself before eating it.</p>
+    <p><a href="mailto:support@snaplarder.com">support@snaplarder.com</a> · <a href="sitemap.xml">Site map</a></p>
+  </div>
+</footer>
 </body>
 </html>

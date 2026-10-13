@@ -9,7 +9,11 @@
 
   Palette is the app's own. The green/amber/red scale isn't decoration —
   it's the freshness scale the app uses on every row, so the rule under
-  the wordmark means the same thing here as it does in the product.
+  each title means the same thing here as it does in the product.
+
+  Layout: a navigation bar on every page, and pages that use the width
+  of a laptop rather than one long narrow column. Prose still keeps a
+  readable line length; it's the page around it that gets wider.
 */
 
 :root {
@@ -26,8 +30,11 @@
 
   --link:       #2f5d3a;
   --focus:      #c08a2e;
+  --on-fresh:   #f4f1e6;
 
-  --measure:    34rem;
+  --wide:       68rem;
+  --measure:    38rem;
+  --gutter:     1.25rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,6 +51,7 @@
     --spoil:    #d4705c;
 
     --link:     #8fbf87;
+    --on-fresh: #13160f;
   }
 }
 
@@ -53,7 +61,6 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  padding: 0 1.5rem 5rem;
   background: var(--paper);
   color: var(--ink);
   font-family: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -62,33 +69,140 @@ body {
   font-synthesis-weight: none;
 }
 
-.page {
-  max-width: var(--measure);
+.wrap {
+  max-width: var(--wide);
   margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
-/* ---------------------------------------------------------- masthead */
+a { color: var(--link); }
 
-.masthead {
-  padding: 4.5rem 0 0;
+a:focus-visible,
+summary:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
 }
 
-.wordmark {
-  margin: 0;
-  font-size: clamp(2.4rem, 9vw, 3.4rem);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1;
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--card);
+  padding: 0.5rem 1rem;
+  z-index: 10;
 }
+.skip:focus { left: var(--gutter); }
+
+[hidden] { display: none !important; }
+
+/* ------------------------------------------------------- navigation */
 
 /*
-  The freshness scale, as a rule under the wordmark. Same three colours,
+  Quick links on every page. On a phone: brand and the App Store button
+  on one line, the links below, wrapping rather than hiding off the edge.
+*/
+.site-head {
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1.25rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.get {
+  order: 2;
+  margin-left: auto;
+  background: var(--fresh);
+  color: var(--on-fresh);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-head nav {
+  order: 3;
+  flex-basis: 100%;
+}
+
+.site-head ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.1rem 0;
+}
+
+.site-head nav a { white-space: nowrap; }
+
+.site-head li { margin: 0; }
+
+.site-head nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.35rem 0;
+  display: inline-block;
+}
+
+.site-head nav a:hover { color: var(--ink); }
+
+.site-head nav a[aria-current="page"] {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--fresh);
+}
+
+@media (min-width: 52rem) {
+  .bar { flex-wrap: nowrap; }
+  .site-head nav { order: 2; flex-basis: auto; margin-left: auto; }
+  .get { order: 3; margin-left: 0; }
+}
+
+/* ------------------------------------------------------ page titles */
+
+.page-head { padding: 2.2rem 0 0.4rem; }
+
+.page-title,
+.wordmark {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.page-title { font-size: clamp(1.9rem, 6vw, 2.6rem); }
+.wordmark { font-size: clamp(2.2rem, 8vw, 3rem); }
+
+/*
+  The freshness scale, as a rule under each title. Same three colours,
   same order, same meaning as the bar on every row in the app.
 */
 .scale {
   display: flex;
   height: 3px;
-  margin: 1.1rem 0 1.4rem;
+  margin: 1rem 0 1.2rem;
   max-width: 11rem;
 }
 .scale span { flex: 1; }
@@ -97,31 +211,110 @@ body {
 .scale span:nth-child(3) { background: var(--spoil); }
 
 .standfirst {
-  margin: 0 0 2.5rem;
-  font-size: 1.25rem;
+  margin: 0 0 1.5rem;
+  font-size: 1.2rem;
   line-height: 1.45;
   color: var(--ink-soft);
+  max-width: var(--measure);
 }
 
-/* -------------------------------------------------------------- hero */
+/* ----------------------------------------------------------- content */
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 2.4rem 0 0.8rem;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 1.6rem 0 0.4rem;
+}
+
+p { margin: 0 0 1rem; }
+
+ul, ol { padding-left: 1.1rem; margin: 0 0 1rem; }
+li { margin-bottom: 0.5rem; }
+
+.prose { max-width: var(--measure); padding-bottom: 1rem; }
+.prose > h2:first-child { margin-top: 0.5rem; }
+
+/* A single quiet aside. Used once per page at most. */
+.aside {
+  border-left: 3px solid var(--soon);
+  padding: 0.1rem 0 0.1rem 1rem;
+  margin: 1.5rem 0;
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+  max-width: var(--measure);
+}
+.aside b { color: var(--ink); }
+
+.updated {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 1.5rem;
+  max-width: var(--measure);
+}
+
+.cta {
+  display: inline-block;
+  background: var(--fresh);
+  color: var(--on-fresh);
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Small rounded links: quick routes to a food or a section. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+.chips li { margin: 0; }
+.chips a {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  text-decoration: none;
+  font-size: 0.93rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.chips a:hover { border-color: var(--fresh); }
+
+.card {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--card);
+  padding: 1.1rem 1.2rem;
+}
+
+/* ------------------------------------------- the date card (demo) */
 
 /*
-  The hero is the thing no other app in this category does: a date that
-  changes when you tell it what you did. Shown as the app shows it,
-  rather than described.
+  Shows a date the way the app shows it. Used on the home page and as
+  the at-a-glance box on every food page.
 */
 .demo {
   border: 1px solid var(--rule);
   border-radius: 10px;
   background: var(--card);
   padding: 1.15rem 1.25rem;
-  margin: 0 0 2.5rem;
+  margin: 0 0 1.5rem;
 }
 
-.demo-item {
-  font-weight: 600;
-  margin: 0 0 0.7rem;
-}
+.demo-item { font-weight: 600; margin: 0 0 0.7rem; }
 
 .demo-row {
   display: flex;
@@ -132,12 +325,9 @@ body {
   padding: 0.28rem 0;
 }
 
-.demo-row b {
-  color: var(--ink);
-  font-weight: 600;
-}
+.demo-row b { color: var(--ink); font-weight: 600; }
 
-.demo-when { margin-left: auto; font-variant-numeric: tabular-nums; }
+.demo-when { margin-left: auto; font-variant-numeric: tabular-nums; text-align: right; }
 
 .demo-row.is-soon b,
 .demo-row.is-soon .demo-when { color: var(--soon); }
@@ -150,179 +340,239 @@ body {
   color: var(--ink-soft);
 }
 
-/* ------------------------------------------------------------ action */
+/* -------------------------------------------------------------- home */
 
-.cta {
-  display: inline-block;
-  background: var(--fresh);
-  color: var(--paper);
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+.hero {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2.2rem 0 0.5rem;
+  align-items: center;
 }
 
-@media (prefers-color-scheme: dark) {
-  .cta { color: #13160f; }
-}
+.hero .standfirst { margin-bottom: 1.2rem; }
 
-.cta:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 3px;
-}
-
-/* ----------------------------------------------------------- content */
-
-h2 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  margin: 3rem 0 0.9rem;
-}
-
-h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 2rem 0 0.4rem;
-}
-
-p { margin: 0 0 1rem; }
-
-a { color: var(--link); }
-
-ul { padding-left: 1.1rem; margin: 0 0 1rem; }
-li { margin-bottom: 0.55rem; }
-
-/* A single quiet aside. Used once per page at most. */
-.aside {
-  border-left: 3px solid var(--soon);
-  padding: 0.1rem 0 0.1rem 1rem;
-  margin: 1.8rem 0;
+.trust {
+  margin: 0.9rem 0 0;
+  font-size: 0.92rem;
   color: var(--ink-soft);
-  font-size: 0.97rem;
 }
 
-.aside b { color: var(--ink); }
+.features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  margin: 1.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
 
-/* -------------------------------------------------- legal documents */
+.features li { margin: 0; }
 
-.doc h2 {
+.features .card { padding: 0.9rem 1.1rem; }
+.features h2 { margin: 0 0 0.3rem; font-size: 1.02rem; }
+.features p { margin: 0; font-size: 0.95rem; color: var(--ink-soft); }
+
+.home-food {
+  display: grid;
+  gap: 0.5rem 2rem;
+  margin: 2.2rem 0 0;
+  align-items: start;
+}
+.home-food h2 { margin: 0; }
+.home-food p { margin: 0.4rem 0 0.8rem; color: var(--ink-soft); }
+
+@media (min-width: 36rem) {
+  .features { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 56rem) {
+  .features { grid-template-columns: repeat(3, 1fr); margin-top: 1.5rem; }
+  .hero { grid-template-columns: 1.1fr 1fr; gap: 3rem; padding-top: 2rem; }
+  .hero .demo { margin: 0; }
+  .home-food { grid-template-columns: 18rem 1fr; }
+}
+
+/* ------------------------------------------- pages with a contents list */
+
+.with-toc { display: grid; gap: 0 3rem; }
+
+.toc details {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--card);
+  padding: 0.7rem 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.toc summary {
+  cursor: pointer;
+  font-weight: 700;
   font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  margin: 2.4rem 0 0.6rem;
-  color: var(--ink-soft);
 }
 
-.doc p { font-size: 1rem; }
-
-.updated {
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-  margin: 0 0 2rem;
+.toc ol {
+  margin: 0.7rem 0 0.2rem;
+  padding-left: 1.2rem;
+  font-size: 0.93rem;
 }
 
-/* ------------------------------------------------------------ chrome */
+.toc li { margin-bottom: 0.35rem; }
 
-.back {
-  display: inline-block;
-  margin: 2.5rem 0 1.5rem;
-  font-size: 0.95rem;
-  text-decoration: none;
+@media (min-width: 60rem) {
+  .with-toc { grid-template-columns: 15rem minmax(0, 1fr); }
+  .toc details {
+    position: sticky;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
 }
 
-footer {
-  margin-top: 4rem;
-  padding-top: 1.2rem;
+/* ------------------------------------------------------- food guide */
+
+.food-top { display: grid; gap: 0 2.5rem; align-items: end; }
+.food-top .aside { margin: 0 0 1.2rem; }
+
+@media (min-width: 56rem) {
+  .food-top { grid-template-columns: 1fr 1fr; }
+}
+
+.food-tools {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0 0 1.5rem;
+  padding: 1rem 0;
   border-top: 1px solid var(--rule);
-  font-size: 0.9rem;
-  color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule);
 }
 
-footer a { margin-right: 1.2rem; }
-
-/* ------------------------------------------------------ page titles */
-
-/* Inner pages: the wordmark style, smaller. Was an inline style on each. */
-.page-title { font-size: 2rem; }
-
-/* -------------------------------------------------------- food guide */
-
-.food-filter { margin: 0 0 1rem; }
+.food-tools .chips { margin: 0; }
 
 .food-filter label {
   display: block;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   margin-bottom: 0.35rem;
 }
 
 .food-filter input {
   width: 100%;
+  max-width: 24rem;
   font: inherit;
   color: var(--ink);
   background: var(--card);
   border: 1px solid var(--rule);
   border-radius: 8px;
-  padding: 0.65rem 0.8rem;
+  padding: 0.6rem 0.8rem;
 }
 
-.food-filter input:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
+.food-none { color: var(--ink-soft); margin: 0.6rem 0 0; }
+
+@media (min-width: 56rem) {
+  .food-tools { grid-template-columns: 24rem 1fr; align-items: end; }
 }
 
-.food-none { color: var(--ink-soft); margin-top: 0.8rem; }
+/* The four categories side by side on a wide screen. */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.food-cat h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  scroll-margin-top: 1rem;
+}
 
 .food-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.97rem;
-  margin: 0 0 1rem;
+  font-size: 0.92rem;
 }
 
 .food-table th {
   text-align: left;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  padding: 0 0.5rem 0.4rem 0;
+  padding: 0 0.4rem 0.3rem 0;
   border-bottom: 1px solid var(--rule);
 }
 
 .food-table td {
-  padding: 0.55rem 0.5rem 0.55rem 0;
+  padding: 0.32rem 0.4rem 0.32rem 0;
   border-bottom: 1px solid var(--rule);
   vertical-align: top;
 }
 
-.food-table td:nth-child(2) { font-variant-numeric: tabular-nums; }
+.food-table tr:last-child td { border-bottom: 0; }
+.food-table td:nth-child(2) { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .food-table td:last-child,
-.food-table th:last-child { padding-right: 0; color: var(--ink-soft); }
+.food-table th:last-child { padding-right: 0; color: var(--ink-soft); text-align: right; }
 
-.food-links {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
-  gap: 0.35rem 1rem;
+/* A single food: facts and text on the left, quick links on the right. */
+.food-layout { display: grid; gap: 0 2.5rem; padding-bottom: 1rem; }
+.food-main { max-width: var(--measure); }
+
+.food-side { display: grid; gap: 1rem; align-content: start; }
+.food-side h2 { margin: 0 0 0.6rem; font-size: 1rem; }
+.food-side p { font-size: 0.95rem; color: var(--ink-soft); }
+.food-side .chips { margin: 0; }
+
+@media (min-width: 56rem) {
+  .food-layout { grid-template-columns: minmax(0, 1fr) 19rem; }
+  .food-side { padding-top: 2.2rem; }
 }
 
-.food-links li { margin: 0; }
+/* ------------------------------------------------------------ footer */
 
-.demo-note a { color: var(--link); }
+.site-foot {
+  margin-top: 3rem;
+  border-top: 1px solid var(--rule);
+  padding: 1.2rem 0 2.5rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.site-foot p { margin: 0 0 0.4rem; max-width: var(--measure); }
+.site-foot ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.8rem;
+}
+.site-foot li { margin: 0; }
 
-[hidden] { display: none !important; }
-
-/* Long words and addresses must wrap rather than widen the page on a phone. */
-.doc p, .doc li { overflow-wrap: anywhere; }
-
-footer { line-height: 2; }
-footer a { white-space: nowrap; }
+/* Long words and addresses wrap rather than widen the page on a phone. */
+.prose p, .prose li { overflow-wrap: anywhere; }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
+
+.count {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-left: 0.3rem;
+}
+
+.home-cta { margin: 1.8rem 0 0; max-width: var(--measure); }
+.home-cta h2 { margin: 0 0 0.4rem; }
+.home-cta p { color: var(--ink-soft); }
+
+/* Read by screen readers, not shown: the full wording behind "3 wks". */
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.food-table td { position: relative; }

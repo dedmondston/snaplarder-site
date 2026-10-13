@@ -1,9 +1,10 @@
 # Website tools
 
-Folders starting with `_` aren't published by GitHub Pages, so this
-folder stays private to the repo.
+Folders starting with `_` aren't published on snaplarder.com by GitHub
+Pages. They're still visible in the repository on GitHub, so keep nothing
+secret here.
 
-## Rebuild the generated pages
+## Rebuild the site
 
 From the website folder:
 
@@ -11,28 +12,26 @@ From the website folder:
 
 (Use the path to your app folder. Plain Node 20+, nothing to install.)
 
-It regenerates, from the app's own files:
+Every page is generated, so the navigation bar is identical everywhere:
 
-| Page | Comes from |
+| Page | Edit this |
 |---|---|
-| privacy.html, terms.html, food-safety.html | `src/services/legal.js` |
-| food/ (index and one page per food) | `assets/expiryData.json` plus the app's location, opened and freezer rules |
-| sitemap.xml, robots.txt | the list of pages |
+| index.html, support.html, 404.html | `_tools/pages/` (plain HTML; the first line holds the title and description) |
+| privacy.html, terms.html, food-safety.html | the app's `src/services/legal.js` |
+| food/ (index and one page per food) | the app's `assets/expiryData.json` and its location, opened and freezer rules |
+| navigation bar, footer, head tags | `_tools/page.mjs` |
+| sitemap.xml, robots.txt | nothing: built from the list of pages |
 
-Run it whenever you change `legal.js` or `expiryData.json`, then commit
-and push. Don't edit the generated pages by hand: the next build
-overwrites them.
-
-`index.html`, `support.html` and `404.html` are written by hand.
+Run the build after any change, then commit and push. Don't edit the
+generated .html files in the site's root or `food/` by hand: the next
+build overwrites them.
 
 ## Where the food guide says less than the app
 
-`_tools/build-food.mjs` lists these with reasons. In short, the site
-never shows a longer time than the app, but it:
+`_tools/build-food.mjs` lists these with reasons. It shows the app's own
+figures, but it:
 
-- shows hummus, guacamole, pesto and fresh salsa in the fridge (the app
-  currently files them in the cupboard);
-- leaves out "once opened" for long-life cupboard food, eggs, butter,
-  cheddar and parmesan, where the app's default is far too short;
-- leaves out freezer times for foods that don't freeze well;
+- leaves out "once opened" where opening doesn't shorten the time (eggs);
+- leaves out freezer times for foods that don't freeze well, and for
+  cupboard food that doesn't need freezing;
 - skips half and half and the two "(opened)" entries.

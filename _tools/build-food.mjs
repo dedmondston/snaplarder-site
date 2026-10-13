@@ -5,7 +5,7 @@
  * Change a number in the app and rebuild; the site follows.
  *
  * Where the website deliberately says less than the app, it's listed
- * below with the reason. It never shows a longer time than the app.
+ * below with the reason. It never shows a figure the app doesn't use.
  */
 
 import { writeFile, mkdir, readdir, unlink } from 'node:fs/promises';
@@ -64,6 +64,9 @@ const NAMES = {
   cereal: { name: 'Breakfast cereal' },
   'salsa (fresh)': { name: 'Fresh salsa' },
   'coffee (ground)': { name: 'Ground coffee' },
+  'boiled eggs': { name: 'Hard-boiled eggs' },
+  'cooked potatoes': { name: 'Cooked potatoes', aka: 'mashed, roast or boiled' },
+  'flavoured butter': { name: 'Flavoured butter', aka: 'garlic or brandy butter' },
 };
 
 /**
@@ -74,27 +77,10 @@ const NAMES = {
 const SKIP = new Set(['half and half', 'salsa (jarred, opened)', 'broth (opened)']);
 
 /**
- * Chilled foods the app's rules currently place in the cupboard,
- * because they sit in the "pantry" category. Shown as fridge here.
- * TODO in the app: storageLocation.js should send these to the fridge.
+ * "Once opened" is shown only where opening actually shortens the time,
+ * e.g. not for eggs, whose opened figure equals their normal one.
  */
-const CHILLED = new Set(['hummus', 'guacamole', 'pesto', 'salsa (fresh)']);
-
-/**
- * "Once opened" is shown for fresh and chilled food only. For long-life
- * cupboard food the app's opened figure (4–5 days) is far too short —
- * opened rice or honey keeps for months — so the page points to the
- * label rather than publish a number that's wrong.
- */
-const showOpened = (f) =>
-  !NO_OPENED.has(f.key) && (f.category !== 'pantry' || CHILLED.has(f.key));
-
-/**
- * Fresh foods whose opened figure is the app's dairy default (4 days),
- * which badly undersells them: butter and hard cheese keep for weeks
- * once opened, and "opened" doesn't mean much for eggs.
- */
-const NO_OPENED = new Set(['eggs', 'butter', 'cheddar block', 'parmesan']);
+const showOpened = (f) => f.opened < f.days;
 
 /** Foods that change texture badly when frozen: no freezer time shown. */
 const NO_FREEZE = new Set([
@@ -102,6 +88,10 @@ const NO_FREEZE = new Set([
   'cantaloupe', 'potato', 'sweet potato', 'avocado', 'eggs', 'yogurt',
   'greek yogurt', 'sour cream', 'cream cheese', 'cottage cheese', 'tomato',
   'cherry tomatoes', 'guacamole', 'salsa (fresh)', 'mayonnaise',
+  'boiled eggs', 'scotch eggs', 'overnight oats',
+  // Freezes fine, but the app's two days after thawing is too long for
+  // cooked rice, so the page gives the rice-specific advice instead.
+  'cooked rice',
 ]);
 
 /** Cupboard foods worth freezing; other cupboard staples don't need it. */
@@ -110,10 +100,15 @@ const FREEZE_FROM_CUPBOARD = new Set(['bread', 'bagels', 'tortillas', 'banana', 
 const showFreezer = (f) =>
   !NO_FREEZE.has(f.key) && (f.location !== 'pantry' || FREEZE_FROM_CUPBOARD.has(f.key));
 
+/** Foods you make rather than buy: dated from cooking, not from the shop. */
+const COOKED = new Set(['cooked rice', 'cooked pasta', 'cooked potatoes', 'boiled eggs']);
+
 /** Extra lines for a few foods, kept short and factual. */
 const NOTES = {
-  rice: 'This is uncooked rice. Cooked rice is different: cool it quickly, keep it in the fridge and eat it within a day.',
-  pasta: 'This is dried pasta. Fresh pasta from the chiller cabinet keeps for days, not years, so check its packet.',
+  rice: 'This is uncooked rice. <a href="cooked-rice.html">Cooked rice</a> is different: eat it within a day.',
+  pasta: 'This is dried pasta. <a href="fresh-pasta.html">Fresh pasta</a> from the chiller cabinet keeps for days, not years.',
+  'cooked rice': 'Cool it quickly, keep it in the fridge and eat it within a day. Only reheat it once.',
+  'fresh pasta': 'This is fresh pasta from the chiller cabinet. <a href="dried-pasta.html">Dried pasta</a> keeps for years.',
   eggs: 'UK supermarkets often sell eggs unchilled, but keeping them in the fridge helps them last.',
 };
 
@@ -138,6 +133,17 @@ export function duration(d) {
   return `about ${Math.round(d / 365)} years`;
 }
 
+/** The short form for the overview lists: 3 days, 3 wks, 8 mths, 2 yrs. */
+export function shortDuration(d) {
+  if (d === 1) return '1 day';
+  if (d < 14) return `${d} days`;
+  if (d < 60) return `${Math.round(d / 7)} wks`;
+  const months = Math.round(d / 30.4);
+  if (months === 12) return '1 yr';
+  if (d < 730) return `${months} mths`;
+  return `${Math.round(d / 365)} yrs`;
+}
+
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const lowerFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 
@@ -154,7 +160,7 @@ export function buildFoodList(table, app) {
     for (const [key, days] of Object.entries(items)) {
       if (SKIP.has(key)) continue;
       const display = NAMES[key] ?? { name: key.charAt(0).toUpperCase() + key.slice(1) };
-      const location = CHILLED.has(key) ? 'fridge' : app.locationFor({ name: key, category });
+      const location = app.locationFor({ name: key, category });
       foods.push({
         key,
         category,
@@ -179,6 +185,15 @@ export function buildFoodList(table, app) {
   return foods;
 }
 
+const catLabel = (c) => CATEGORIES.find(([k]) => k === c)[1];
+
+/** The four category jump links, used on every food page and the index. */
+function categoryChips(prefix) {
+  return `<ul class="chips">
+${CATEGORIES.map(([c, label]) => `  <li><a href="${prefix}#${c}">${esc(label)}</a></li>`).join('\n')}
+</ul>`;
+}
+
 function foodPage(f, foods) {
   const verb = isPlural(f.name) ? 'do' : 'does';
   const lname = lowerFirst(f.name);
@@ -188,18 +203,20 @@ function foodPage(f, foods) {
   const opened = f.category === 'produce' ? 'Once cut' : 'Once opened';
 
   const rows = [
-    [`As bought, in ${where}`, keeps],
+    [`${COOKED.has(f.key) ? 'Once cooked' : 'As bought'}, in ${where}`, keeps],
     showOpened(f) ? [opened, duration(f.opened)] : null,
     showFreezer(f) && f.location !== 'freezer' ? ['In the freezer', duration(f.frozen)] : null,
     showFreezer(f) ? ['After thawing', `use within ${duration(f.thawed)}`] : null,
   ].filter(Boolean);
 
   const lines = [];
-  lines.push(`${f.name} ${verb === 'do' ? 'keep' : 'keeps'} for ${keeps} in ${where}, counted from when you buy ${verb === 'do' ? 'them' : 'it'}. That's SnapLarder's estimate for ${lname}${f.aka ? ` (${esc(f.aka)})` : ''} in general. If the packet has a date, go by the packet: it's specific to that product.`);
-  if (!showOpened(f) && f.category === 'pantry') {
-    lines.push('Once opened, follow the storage instructions on the label. Some products need to go in the fridge after opening.');
+  lines.push(`${f.name} ${verb === 'do' ? 'keep' : 'keeps'} for ${keeps} in ${where}, counted from when you ${COOKED.has(f.key) ? 'cook' : 'buy'} ${verb === 'do' ? 'them' : 'it'}. That's SnapLarder's estimate for ${lname}${f.aka ? ` (${esc(f.aka)})` : ''} in general. If the packet has a date, go by the packet: it's specific to that product.`);
+  if (f.category === 'pantry' && f.location === 'pantry') {
+    lines.push('Once opened, check the label: some products need to go in the fridge.');
   }
-  if (NO_FREEZE.has(f.key)) {
+  if (f.key === 'cooked rice') {
+    // No freezer line: hidden for the thawing time, not because it won't freeze.
+  } else if (NO_FREEZE.has(f.key)) {
     lines.push(`${f.name} ${verb === 'do' ? "don't" : "doesn't"} freeze well.`);
   } else if (!showFreezer(f)) {
     lines.push(`There's no need to freeze ${lname}.`);
@@ -215,29 +232,37 @@ function foodPage(f, foods) {
   const start = Math.max(0, Math.min(same.length - 8, (at < 0 ? same.length : at) - 4));
   const related = same.slice(start, start + 8);
 
-  const body = `${heading(title)}
+  const body = `<div class="food-layout">
+<div class="food-main">
+${heading(title)}
 
-  <section class="demo" aria-label="${esc(f.name)} at a glance">
-    <p class="demo-item">${esc(f.name)}</p>
-${rows.map(([k, v]) => `    <div class="demo-row"><span>${esc(k)}</span><b class="demo-when">${esc(v)}</b></div>`).join('\n')}
-    <p class="demo-note">${showOpened(f) ? 'Opening never extends a date: if the packet date comes sooner, go by that. ' : ''}Estimates for quality, not a safety ruling. <a href="../food-safety.html">What the dates mean</a></p>
+<section class="demo" aria-label="${esc(f.name)} at a glance">
+  <p class="demo-item">${esc(f.name)}</p>
+${rows.map(([k, v]) => `  <div class="demo-row"><span>${esc(k)}</span><b class="demo-when">${esc(v)}</b></div>`).join('\n')}
+  <p class="demo-note">${showOpened(f) ? 'Opening never extends a date: if the packet date comes sooner, go by that. ' : ''}Estimates for quality, not a safety ruling. <a href="../food-safety.html">What the dates mean</a></p>
+</section>
+
+${lines.map((l) => `<p>${l}</p>`).join('\n')}
+</div>
+
+<aside class="food-side" aria-label="Quick links">
+  <section class="card">
+    <h2>Let your phone keep track</h2>
+    <p>Scan the barcode or photograph the label. SnapLarder dates it, moves the date when you open or freeze it, and reminds you before it goes off.</p>
+    <a class="cta" href="${APP_STORE_URL}">Download on the App Store</a>
   </section>
-
-${lines.map((l) => `  <p>${l}</p>`).join('\n')}
-
-  <h2>Let your phone keep track</h2>
-  <p>
-    SnapLarder works this out for you. Scan the barcode or photograph the
-    label, and it dates each item, then moves the date when you open or
-    freeze it. You get a reminder before it goes off.
-  </p>
-  <a class="cta" href="${APP_STORE_URL}">Download on the App Store</a>
-
-  <h2>More ${esc(CATEGORIES.find(([c]) => c === f.category)[1].toLowerCase())}</h2>
-  <ul class="food-links">
-${related.map((o) => `    <li><a href="${o.slug}.html">${esc(o.name)}</a></li>`).join('\n')}
-  </ul>
-  <p><a href="./">All foods</a></p>`;
+  <section>
+    <h2>More ${esc(catLabel(f.category).toLowerCase())}</h2>
+    <ul class="chips">
+${related.map((o) => `      <li><a href="${o.slug}.html">${esc(o.name)}</a></li>`).join('\n')}
+    </ul>
+  </section>
+  <section>
+    <h2>All foods</h2>
+    ${categoryChips('./')}
+  </section>
+</aside>
+</div>`;
 
   return page({
     path: `food/${f.slug}.html`,
@@ -248,71 +273,74 @@ ${related.map((o) => `    <li><a href="${o.slug}.html">${esc(o.name)}</a></li>`)
 }
 
 function indexPage(foods) {
-  const sections = CATEGORIES.map(([cat, label]) => {
+  const cards = CATEGORIES.map(([cat, label]) => {
     const list = foods.filter((f) => f.category === cat);
-    return `  <h2 id="${cat}">${esc(label)}</h2>
+    return `<section class="card food-cat">
+  <h2 id="${cat}">${esc(label)} <span class="count">${list.length}</span></h2>
   <table class="food-table">
-    <thead><tr><th scope="col">Food</th><th scope="col">Keeps for</th><th scope="col">Where</th></tr></thead>
+    <thead><tr><th scope="col">Food</th><th scope="col">Keeps</th><th scope="col">Where</th></tr></thead>
     <tbody>
-${list.map((f) => `      <tr data-name="${esc((f.name + ' ' + (f.aka ?? '') + ' ' + f.key).toLowerCase())}"><td><a href="${f.slug}.html">${esc(f.name)}</a></td><td>${esc(duration(f.days))}</td><td>${WHERE_SHORT[f.location]}</td></tr>`).join('\n')}
+${list.map((f) => `      <tr data-name="${esc((f.name + ' ' + (f.aka ?? '') + ' ' + f.key).toLowerCase())}"><td><a href="${f.slug}.html">${esc(f.name)}</a></td><td><span aria-hidden="true">${shortDuration(f.days)}</span><span class="sr">${esc(duration(f.days))}</span></td><td>${WHERE_SHORT[f.location]}</td></tr>`).join('\n')}
     </tbody>
-  </table>`;
-  }).join('\n\n');
+  </table>
+</section>`;
+  }).join('\n');
 
-  const body = `${heading('How long does food last?')}
+  const body = `<div class="food-top">
+${heading('How long does food last?', `Typical times for ${foods.length} everyday foods, in the fridge, freezer and cupboard. Tap a food for opened and frozen times.`)}
+<p class="aside">
+  <b>Use-by or best before?</b> A use-by date is about safety: don't eat
+  food after it, even if it looks and smells fine. A best-before date is
+  about quality. These times are general estimates; when the packet has a
+  date, go by the packet.
+</p>
+</div>
 
-  <p class="standfirst">Typical times for ${foods.length} everyday foods, in the fridge, the freezer and the cupboard.</p>
-
-  <p class="aside">
-    <b>Use-by or best before?</b> A use-by date is about safety: don't eat
-    food after it, even if it looks and smells fine. A best-before date is
-    about quality: food is usually fine after it, but may not be at its best.
-    These times are general estimates. When the packet has a date, go by
-    the packet.
-  </p>
-
+<div class="food-tools">
   <div class="food-filter" hidden>
     <label for="food-filter">Find a food</label>
     <input id="food-filter" type="search" placeholder="e.g. hummus" autocomplete="off">
     <p class="food-none" hidden>Nothing matches. Try another name.</p>
   </div>
+  <nav aria-label="Categories">
+    ${categoryChips('')}
+  </nav>
+</div>
 
-${sections}
+<div class="food-grid">
+${cards}
+</div>
 
+<section class="card home-cta">
   <h2>Let your phone keep track</h2>
-  <p>
-    SnapLarder uses these same figures. Scan your shopping and it dates each
-    item, moves the date when you open or freeze it, and reminds you before
-    it goes off.
-  </p>
+  <p>SnapLarder uses these same figures. Scan your shopping and it dates each item, moves the date when you open or freeze it, and reminds you before it goes off.</p>
   <a class="cta" href="${APP_STORE_URL}">Download on the App Store</a>
+</section>
 
-  <script>
-    // Optional extra: filter the tables as you type. Without script,
-    // the full list still shows.
-    (function () {
-      var box = document.querySelector('.food-filter');
-      var input = document.getElementById('food-filter');
-      var none = document.querySelector('.food-none');
-      box.hidden = false;
-      input.addEventListener('input', function () {
-        var q = input.value.trim().toLowerCase();
-        var shown = 0;
-        document.querySelectorAll('.food-table').forEach(function (t) {
-          var any = 0;
-          t.querySelectorAll('tbody tr').forEach(function (r) {
-            var hit = !q || r.dataset.name.indexOf(q) !== -1;
-            r.hidden = !hit;
-            if (hit) any++;
-          });
-          t.hidden = !any;
-          t.previousElementSibling.hidden = !any;
-          shown += any;
+<script>
+  // Filter the lists as you type. Without script, everything still shows.
+  (function () {
+    var box = document.querySelector('.food-filter');
+    var input = document.getElementById('food-filter');
+    var none = document.querySelector('.food-none');
+    box.hidden = false;
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      var shown = 0;
+      document.querySelectorAll('.food-cat').forEach(function (card) {
+        var any = 0;
+        card.querySelectorAll('tbody tr').forEach(function (r) {
+          var hit = !q || r.dataset.name.indexOf(q) !== -1;
+          r.hidden = !hit;
+          if (hit) any++;
         });
-        none.hidden = shown > 0;
+        card.hidden = !any;
+        shown += any;
       });
-    })();
-  </script>`;
+      none.hidden = shown > 0;
+    });
+  })();
+</script>`;
 
   return page({
     path: 'food/index.html',

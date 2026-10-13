@@ -6,7 +6,7 @@
 
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { page, heading, esc } from './page.mjs';
+import { page, heading, esc, withContents } from './page.mjs';
 
 const HEADING_RE = /^(\d+\.\s+)?[A-Z][A-Z ,'’&-]+$/;
 
@@ -125,9 +125,9 @@ export async function buildLegal(siteRoot, legal) {
   for (const d of docs) {
     const body = [
       heading(d.title),
-      d.updated ? `  <p class="updated">Last updated ${esc(legal.LAST_UPDATED)}</p>` : '',
-      d.intro ? `  <p class="updated">${d.intro}</p>` : '',
-      textToHtml(d.text, { skipLines: d.skip }),
+      d.updated ? `<p class="updated">Last updated ${esc(legal.LAST_UPDATED)}</p>` : '',
+      d.intro ? `<p class="updated">${d.intro}</p>` : '',
+      withContents(textToHtml(d.text, { skipLines: d.skip })),
     ].filter(Boolean).join('\n\n');
 
     const html = page({
@@ -135,7 +135,6 @@ export async function buildLegal(siteRoot, legal) {
       title: `${d.title} — ${legal.APP_NAME}`,
       description: d.description,
       body,
-      mainClass: 'doc',
     });
     await writeFile(path.join(siteRoot, d.path), html, 'utf8');
   }

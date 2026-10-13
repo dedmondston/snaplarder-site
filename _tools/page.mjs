@@ -1,12 +1,21 @@
 /**
- * The shell every generated page shares: head, App Store banner,
- * header and footer. index.html, support.html and 404.html are written
- * by hand but follow the same pattern; keep them in step if this changes.
+ * The shell every page shares: head, App Store banner, navigation bar
+ * and footer. Every HTML page on the site is built through this, so the
+ * navigation can't differ from page to page.
  */
 
 export const SITE = 'https://snaplarder.com';
 export const APP_STORE_ID = '6803253210';
 export const APP_STORE_URL = `https://apps.apple.com/app/id${APP_STORE_ID}`;
+
+/** The quick links in the bar at the top of every page. */
+const NAV = [
+  ['food/', 'Food guide'],
+  ['support.html', 'Support'],
+  ['food-safety.html', 'Food safety'],
+  ['privacy.html', 'Privacy'],
+  ['terms.html', 'Terms'],
+];
 
 export function esc(s) {
   return String(s)
@@ -18,17 +27,25 @@ export function esc(s) {
 
 /**
  * @param {object} p
- * @param {string} p.path        site path of this page, e.g. 'food/milk.html'
- * @param {string} p.title       <title>
- * @param {string} p.description meta description
- * @param {string} p.body        everything inside <main>
- * @param {string} [p.mainClass] extra class on <main>, e.g. 'doc'
- * @param {string} [p.extraHead] anything else for <head>
+ * @param {string} p.path         site path, e.g. 'food/milk.html'
+ * @param {string} p.title        <title>
+ * @param {string} p.description  meta description
+ * @param {string} p.body         everything inside <main>
+ * @param {boolean} [p.absolute]  root-relative links (the 404 page, served at any depth)
+ * @param {boolean} [p.noindex]
+ * @param {string} [p.extraHead]
  */
-export function page({ path, title, description, body, mainClass = '', extraHead = '' }) {
-  // Relative links, so the pages also work when opened from disk.
-  const up = '../'.repeat(path.split('/').length - 1);
+export function page({ path, title, description, body, absolute = false, noindex = false, extraHead = '' }) {
+  // Relative links, so pages also work when opened straight from disk.
+  const up = absolute ? '/' : '../'.repeat(path.split('/').length - 1);
+  const home = up || './';
   const url = `${SITE}/${path.replace(/(^|\/)index\.html$/, '$1')}`;
+  const section = path.startsWith('food/') ? 'food/' : path;
+
+  const links = NAV.map(([href, label]) => {
+    const current = href === section ? ' aria-current="page"' : '';
+    return `<li><a href="${up}${href}"${current}>${label}</a></li>`;
+  }).join('');
 
   return `<!DOCTYPE html>
 <html lang="en-GB">
@@ -37,7 +54,7 @@ export function page({ path, title, description, body, mainClass = '', extraHead
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${url}">
+${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${url}">`}
 <meta name="apple-itunes-app" content="app-id=${APP_STORE_ID}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SnapLarder">
@@ -55,32 +72,74 @@ export function page({ path, title, description, body, mainClass = '', extraHead
 <link rel="stylesheet" href="${up}style.css">
 ${extraHead}</head>
 <body>
-<main class="page ${mainClass}">
+<a class="skip" href="#content">Skip to content</a>
 
-  <a class="back" href="${up || './'}">← SnapLarder</a>
+<header class="site-head">
+  <div class="wrap bar">
+    <a class="brand" href="${home}"${path === 'index.html' ? ' aria-current="page"' : ''}><img src="${up}favicon.svg" alt="" width="28" height="28">SnapLarder</a>
+    <a class="get" href="${APP_STORE_URL}">Get the app</a>
+    <nav aria-label="Main"><ul>${links}</ul></nav>
+  </div>
+</header>
 
+<main id="content" class="wrap">
 ${body}
-
-${footer(up)}
-
 </main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <ul><li><a href="${home}">Home</a></li>${links.replace(/ aria-current="page"/g, '')}</ul>
+    <p>SnapLarder gives reminders, not food safety advice. Always check food yourself before eating it.</p>
+    <p><a href="mailto:support@snaplarder.com">support@snaplarder.com</a> · <a href="${up}sitemap.xml">Site map</a></p>
+  </div>
+</footer>
 </body>
 </html>
 `;
 }
 
-export function footer(up = '') {
-  return `  <footer>
-    <a href="${up || './'}">SnapLarder</a>
-    <a href="${up}food/">Food guide</a>
-    <a href="${up}support.html">Support</a>
-    <a href="${up}food-safety.html">Food safety</a>
-    <a href="${up}privacy.html">Privacy</a>
-    <a href="${up}terms.html">Terms</a>
-  </footer>`;
+export function heading(title, standfirst = '') {
+  return `<header class="page-head">
+  <h1 class="page-title">${esc(title)}</h1>
+  <div class="scale" aria-hidden="true"><span></span><span></span><span></span></div>
+  ${standfirst ? `<p class="standfirst">${standfirst}</p>` : ''}
+</header>`;
 }
 
-export function heading(title) {
-  return `  <h1 class="wordmark page-title">${esc(title)}</h1>
-  <div class="scale" aria-hidden="true"><span></span><span></span><span></span></div>`;
+const slug = (s) => s.toLowerCase().replace(/<[^>]+>/g, '').replace(/&[a-z]+;/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+/**
+ * Wraps a long text page with an "On this page" list built from its h2
+ * headings, so every section is one tap away. Headings without an id get
+ * one. On wide screens the list sits beside the text and stays in view;
+ * on a phone it's a collapsed list at the top.
+ */
+export function withContents(html) {
+  const items = [];
+  const body = html.replace(/<h2( id="([^"]+)")?>([\s\S]*?)<\/h2>/g, (m, _a, id, text) => {
+    const anchor = id || slug(text);
+    items.push([anchor, text.replace(/<[^>]+>/g, '')]);
+    return `<h2 id="${anchor}">${text}</h2>`;
+  });
+  if (items.length < 3) return `<article class="prose">\n${body}\n</article>`;
+
+  return `<div class="with-toc">
+<nav class="toc" aria-label="On this page">
+  <details>
+    <summary>On this page</summary>
+    <ol>
+${items.map(([a, t]) => `      <li><a href="#${a}">${esc(t).replace(/&amp;([a-z]+;)/g, '&$1')}</a></li>`).join('\n')}
+    </ol>
+  </details>
+</nav>
+<article class="prose">
+${body}
+</article>
+</div>
+<script>
+  // Open the contents list where there's room to show it beside the text.
+  if (window.matchMedia('(min-width: 60rem)').matches) {
+    document.querySelector('.toc details').open = true;
+  }
+</script>`;
 }
