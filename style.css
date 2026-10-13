@@ -242,6 +242,87 @@ footer {
 
 footer a { margin-right: 1.2rem; }
 
+/* ------------------------------------------------------ page titles */
+
+/* Inner pages: the wordmark style, smaller. Was an inline style on each. */
+.page-title { font-size: 2rem; }
+
+/* -------------------------------------------------------- food guide */
+
+.food-filter { margin: 0 0 1rem; }
+
+.food-filter label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+
+.food-filter input {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem 0.8rem;
+}
+
+.food-filter input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.food-none { color: var(--ink-soft); margin-top: 0.8rem; }
+
+.food-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.97rem;
+  margin: 0 0 1rem;
+}
+
+.food-table th {
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 0 0.5rem 0.4rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.food-table td {
+  padding: 0.55rem 0.5rem 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.food-table td:nth-child(2) { font-variant-numeric: tabular-nums; }
+.food-table td:last-child,
+.food-table th:last-child { padding-right: 0; color: var(--ink-soft); }
+
+.food-links {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0.35rem 1rem;
+}
+
+.food-links li { margin: 0; }
+
+.demo-note a { color: var(--link); }
+
+[hidden] { display: none !important; }
+
+/* Long words and addresses must wrap rather than widen the page on a phone. */
+.doc p, .doc li { overflow-wrap: anywhere; }
+
+footer { line-height: 2; }
+footer a { white-space: nowrap; }
+
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
