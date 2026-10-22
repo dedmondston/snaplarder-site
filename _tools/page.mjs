@@ -103,7 +103,7 @@ ${body}
     </nav>
     <div>
       <h2>Contact</h2>
-      <ul><li><a href="mailto:support@snaplarder.com">support@snaplarder.com</a></li><li><a href="${up}sitemap.xml">Site map</a></li></ul>
+      <ul><li><a href="mailto:support@snaplarder.com">support@snaplarder.com</a></li><li><a href="${up}press.html">Press and partners</a></li><li><a href="${up}sitemap.xml">Site map</a></li></ul>
     </div>
   </div>
   <div class="wrap foot-note">
