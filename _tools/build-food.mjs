@@ -112,7 +112,7 @@ const showFreezer = (f) =>
   !NO_FREEZE.has(f.key) && (f.location !== 'pantry' || FREEZE_FROM_CUPBOARD.has(f.key));
 
 /** Foods you make rather than buy: dated from cooking, not from the shop. */
-const COOKED = new Set(['cooked rice', 'cooked pasta', 'cooked potatoes', 'boiled eggs']);
+const COOKED = new Set(['cooked rice', 'cooked pasta', 'cooked potatoes', 'boiled eggs', 'leftovers']);
 
 /** Extra lines for a few foods, kept short and factual. */
 const NOTES = {
@@ -121,6 +121,7 @@ const NOTES = {
   'cooked rice': 'Cool it quickly, keep it in the fridge and eat it within a day. Only reheat it once.',
   'fresh pasta': 'This is fresh pasta from the chiller cabinet. <a href="dried-pasta.html">Dried pasta</a> keeps for years.',
   eggs: 'UK supermarkets often sell eggs unchilled, but keeping them in the fridge helps them last.',
+  leftovers: 'Two days is the UK’s advice and the strictest of the countries SnapLarder covers. Ireland’s safefood says 3 days, and the USDA 3 to 4. Put leftovers in the fridge within 2 hours, and reheat them only once, until steaming hot. Holiday guides: <a href="../christmas-leftovers.html">Christmas leftovers</a> · <a href="../thanksgiving-leftovers.html">Thanksgiving leftovers</a>',
 };
 
 const CATEGORIES = [
