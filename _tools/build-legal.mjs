@@ -38,7 +38,7 @@ function linkify(text, headings) {
 
   // Full https:// URLs and bare domains such as openfoodfacts.org.
   s = s.replace(
-    /(?<![@\w/.])((?:https?:\/\/)?(?:[a-z0-9-]+\.)+(?:org\.uk|co\.uk|gov\.au|org\.nz|com|org|gov|uk|ie)(?:\/[a-z0-9\/._-]*)?)/gi,
+    /(?<![@\w/.])((?:https?:\/\/)?(?:[a-z0-9-]+\.)+(?:org\.uk|co\.uk|gov\.au|org\.nz|gov\.za|org\.za|co\.za|com|org|gov|uk|ie)(?:\/[a-z0-9\/._-]*)?)/gi,
     (m) => {
       const trimmed = m.replace(/[.]+$/, '');
       const rest = m.slice(trimmed.length);
