@@ -30,7 +30,7 @@ if (!appRoot) {
   process.exit(1);
 }
 
-const app = await loadAppModules(appRoot, ['legal', 'storageLocation', 'shelfLife']);
+const app = await loadAppModules(appRoot, ['legal', 'storageLocation', 'shelfLife', 'foodNames']);
 const table = await loadShelfLifeTable(appRoot);
 if (!table) {
   console.error(`No assets/expiryData.json found in ${path.resolve(appRoot)}`);

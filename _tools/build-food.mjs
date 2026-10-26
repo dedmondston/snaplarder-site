@@ -70,6 +70,20 @@ const NAMES = {
 };
 
 /**
+ * Foods whose other name is what people in the US (and often Australia)
+ * search for. It goes in the page title, "How long do courgettes
+ * (zucchini) last?", so one page answers both searches. Only true
+ * alternative names: an aka that describes the food ("uncooked",
+ * "mashed, roast or boiled") stays out of the title.
+ */
+const NAME_IN_TITLE = new Set([
+  'arugula', 'romaine', 'zucchini', 'bell pepper', 'beets', 'scallions',
+  'herbs (cilantro)', 'shredded cheese', 'sour cream', 'heavy cream',
+  'ground beef', 'ground turkey', 'shrimp', 'deli turkey', 'deli ham',
+  'canned beans', 'canned tomatoes',
+]);
+
+/**
  * Left out of the guide. "Half and half" isn't sold in the UK; the two
  * "(opened)" entries are already opened-life figures, so a page would
  * apply opening twice.
@@ -151,8 +165,22 @@ function isPlural(name) {
   return last.endsWith('s') && !last.endsWith('ss');
 }
 
+/**
+ * Every other name the app knows for each table entry, from the app's
+ * own foodNames.js: capsicum, rockmelon, boerewors, rashers... Used by
+ * the food finder, so someone in Sydney typing "capsicum" finds peppers.
+ */
+function otherNames(app) {
+  const byKey = {};
+  for (const [alias, key] of Object.entries(app.NAME_EQUIVALENTS ?? {})) {
+    (byKey[key] ??= []).push(alias);
+  }
+  return byKey;
+}
+
 export function buildFoodList(table, app) {
   const foods = [];
+  const aliases = otherNames(app);
   for (const [category, items] of Object.entries(table)) {
     for (const [key, days] of Object.entries(items)) {
       if (SKIP.has(key)) continue;
@@ -165,6 +193,8 @@ export function buildFoodList(table, app) {
         location,
         name: display.name,
         aka: display.aka ?? null,
+        titleName: NAME_IN_TITLE.has(key) && display.aka ? `${display.name} (${display.aka})` : display.name,
+        aliases: aliases[key] ?? [],
         slug: slugify(display.name),
         opened: app.openedDaysFor({ name: key, category }),
         frozen: app.freezerDaysFor(category, key),
@@ -194,7 +224,7 @@ ${CATEGORIES.map(([c, label]) => `  <li><a href="${prefix}#${c}">${esc(label)}</
 function foodPage(f, foods) {
   const verb = isPlural(f.name) ? 'do' : 'does';
   const lname = lowerFirst(f.name);
-  const title = `How long ${verb} ${lname} last?`;
+  const title = `How long ${verb} ${lowerFirst(f.titleName)} last?`;
   const where = WHERE[f.location];
   const keeps = duration(f.days);
   const opened = f.category === 'produce' ? 'Once cut' : 'Once opened';
@@ -211,15 +241,26 @@ function foodPage(f, foods) {
   if (f.category === 'pantry' && f.location === 'pantry') {
     lines.push('Once opened, check the label: some products need to go in the fridge.');
   }
-  if (NO_FREEZE.has(f.key)) {
-    lines.push(`${f.name} ${verb === 'do' ? "don't" : "doesn't"} freeze well.`);
-  } else if (!showFreezer(f)) {
-    lines.push(`There's no need to freeze ${lname}.`);
-  }
   if (NOTES[f.key]) lines.push(NOTES[f.key]);
   if (f.category === 'protein' || f.category === 'dairy') {
-    lines.push('A use-by date is about safety. Don’t eat food after its use-by date, even if it looks and smells fine.');
+    lines.push('A use-by date is about safety. Don’t eat food after its use-by date, even if it looks and smells fine. <a href="../use-by-vs-best-before.html">Use by vs best before</a>');
   }
+
+  // "Can you freeze courgettes?" is one of the commonest food searches,
+  // so every page answers it under its own heading, from the same
+  // figures as the table above.
+  const them = verb === 'do' ? 'them' : 'it';
+  let freeze;
+  if (f.location === 'freezer') {
+    freeze = `Yes: ${lname} ${verb === 'do' ? 'belong' : 'belongs'} in the freezer, where ${verb === 'do' ? 'they keep' : 'it keeps'} for ${keeps}.`;
+  } else if (NO_FREEZE.has(f.key)) {
+    freeze = `Not really. ${f.name} ${verb === 'do' ? "don't" : "doesn't"} freeze well: the texture changes when ${verb === 'do' ? 'they thaw' : 'it thaws'}.`;
+  } else if (!showFreezer(f)) {
+    freeze = `There's no need. ${f.name} already ${verb === 'do' ? 'keep' : 'keeps'} for ${keeps} in ${where}.`;
+  } else {
+    freeze = `Yes. ${f.name} ${verb === 'do' ? 'keep' : 'keeps'} for ${duration(f.frozen)} in the freezer. Freeze ${them} ${COOKED.has(f.key) ? 'as soon as ' + (verb === 'do' ? 'they have' : 'it has') + ' cooled' : 'before the date on the packet'}, defrost ${them} in the fridge, and use ${them} within ${duration(f.thawed)} of thawing.`;
+  }
+  const freezeTitle = `Can you freeze ${lname}?`;
 
   // The eight foods either side of this one, alphabetically, in its category.
   const same = foods.filter((o) => o.category === f.category && o.slug !== f.slug);
@@ -234,10 +275,13 @@ ${heading(title)}
 <section class="demo" aria-label="${esc(f.name)} at a glance">
   <p class="demo-item">${esc(f.name)}</p>
 ${rows.map(([k, v]) => `  <div class="demo-row"><span>${esc(k)}</span><b class="demo-when">${esc(v)}</b></div>`).join('\n')}
-  <p class="demo-note">${showOpened(f) ? 'Opening never extends a date: if the packet date comes sooner, go by that. ' : ''}Estimates for quality, not a safety ruling. <a href="../food-safety.html">What the dates mean</a></p>
+  <p class="demo-note">${showOpened(f) ? 'Opening never extends a date: if the packet date comes sooner, go by that. ' : ''}Estimates for quality, not a safety ruling. <a href="../use-by-vs-best-before.html">What the dates mean</a></p>
 </section>
 
 ${lines.map((l) => `<p>${l}</p>`).join('\n')}
+
+<h2>${esc(freezeTitle)}</h2>
+<p>${freeze}</p>
 </div>
 
 <aside class="food-side" aria-label="Quick links">
@@ -275,7 +319,7 @@ function indexPage(foods) {
   <table class="food-table">
     <thead><tr><th scope="col">Food</th><th scope="col">Keeps</th><th scope="col">Where</th></tr></thead>
     <tbody>
-${list.map((f) => `      <tr data-name="${esc((f.name + ' ' + (f.aka ?? '') + ' ' + f.key).toLowerCase())}"><td><a href="${f.slug}.html">${esc(f.name)}</a></td><td><span aria-hidden="true">${shortDuration(f.days)}</span><span class="sr">${esc(duration(f.days))}</span></td><td>${WHERE_SHORT[f.location]}</td></tr>`).join('\n')}
+${list.map((f) => `      <tr data-name="${esc([f.name, f.aka ?? '', f.key, ...f.aliases].join(' ').toLowerCase())}"><td><a href="${f.slug}.html">${esc(f.name)}</a></td><td><span aria-hidden="true">${shortDuration(f.days)}</span><span class="sr">${esc(duration(f.days))}</span></td><td>${WHERE_SHORT[f.location]}</td></tr>`).join('\n')}
     </tbody>
   </table>
 </section>`;
@@ -287,7 +331,8 @@ ${heading('How long does food last?', `Typical times for ${foods.length} everyda
   <b>Use-by or best before?</b> A use-by date is about safety: don't eat
   food after it, even if it looks and smells fine. A best-before date is
   about quality. These times are general estimates; when the packet has a
-  date, go by the packet.
+  date, go by the packet. <a href="../use-by-vs-best-before.html">More on date labels</a>
+  · <a href="../sell-by-vs-use-by-vs-best-by.html">US date labels</a>
 </p>
 </div>
 

@@ -95,7 +95,7 @@ ${body}
     </div>
     <nav aria-label="Footer">
       <h2>Explore</h2>
-      <ul><li><a href="${home}">Home</a></li><li><a href="${up}food/">Food guide</a></li><li><a href="${up}support.html">Support</a></li></ul>
+      <ul><li><a href="${home}">Home</a></li><li><a href="${up}food/">Food guide</a></li><li><a href="${up}use-by-vs-best-before.html">Use by vs best before</a></li><li><a href="${up}sell-by-vs-use-by-vs-best-by.html">US date labels</a></li><li><a href="${up}christmas-leftovers.html">Christmas leftovers</a></li><li><a href="${up}thanksgiving-leftovers.html">Thanksgiving leftovers</a></li><li><a href="${up}support.html">Support</a></li></ul>
     </nav>
     <nav aria-label="Legal">
       <h2>Legal</h2>

@@ -853,3 +853,10 @@ li { margin-bottom: 0.5rem; }
 .press-shots { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; align-items: flex-end; }
 .press-shots li { margin: 0; width: 11rem; font-size: 0.9rem; color: var(--ink-soft); }
 .press-shots img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: var(--radius); margin-bottom: 0.4rem; background: var(--card); }
+
+/* Guide pages: a plain comparison table, every column read left to right. */
+.table-scroll { overflow-x: auto; margin: 0 0 1.2rem; max-width: var(--measure); }
+.guide-table td:nth-child(2) { white-space: normal; }
+.guide-table td:last-child,
+.guide-table th:last-child { color: inherit; text-align: left; }
+.guide-table td { padding-top: 0.5rem; padding-bottom: 0.5rem; }
