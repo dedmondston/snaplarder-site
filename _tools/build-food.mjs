@@ -120,6 +120,7 @@ const NOTES = {
   pasta: 'This is dried pasta. <a href="fresh-pasta.html">Fresh pasta</a> from the chiller cabinet keeps for days, not years.',
   'cooked rice': 'Cool it quickly, keep it in the fridge and eat it within a day. Only reheat it once.',
   'fresh pasta': 'This is fresh pasta from the chiller cabinet. <a href="dried-pasta.html">Dried pasta</a> keeps for years.',
+  sugar: 'Some bags of sugar have no date at all: UK labelling rules don’t require one, because sugar kept dry doesn’t go off.',
   eggs: 'UK supermarkets often sell eggs unchilled, but keeping them in the fridge helps them last.',
   leftovers: 'Two days is the UK’s advice and the strictest of the countries SnapLarder covers. Ireland’s safefood says 3 days, and the USDA 3 to 4. Put leftovers in the fridge within 2 hours, and reheat them only once, until steaming hot. Holiday guides: <a href="../christmas-leftovers.html">Christmas leftovers</a> · <a href="../thanksgiving-leftovers.html">Thanksgiving leftovers</a>',
 };
@@ -157,7 +158,21 @@ export function shortDuration(d) {
 }
 
 const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-const lowerFirst = (s) => s.charAt(0).toLowerCase() + s.slice(1);
+/** Words that keep their capital mid-sentence: "Scotch eggs", "Greek yoghurt". */
+const PROPER = ['Scotch', 'Greek', 'Brussels'];
+const lowerFirst = (s) => (PROPER.includes(s.split(' ')[0]) ? s : s.charAt(0).toLowerCase() + s.slice(1));
+
+/** Salad leaves: sold in bags with a use-by date in the UK. */
+const SALAD_LEAVES = new Set(['spinach', 'lettuce', 'kale', 'arugula', 'romaine']);
+
+/** Drinks and pourable dairy: "use" reads better than "eat". */
+const POURED = new Set(['milk', 'heavy cream']);
+
+/** Chilled foods that normally carry a use-by date. */
+const hasUseBy = (f) => f.location === 'fridge' && (f.category !== 'produce' || SALAD_LEAVES.has(f.key));
+
+/** Long-life cupboard food: carries a best-before date, if any. */
+const longLife = (f) => f.location === 'pantry' && f.days >= 180;
 
 /** "Courgettes" -> plural, "Hummus" -> not. Decides "does" or "do". */
 function isPlural(name) {
@@ -222,13 +237,32 @@ ${CATEGORIES.map(([c, label]) => `  <li><a href="${prefix}#${c}">${esc(label)}</
 </ul>`;
 }
 
+const capFirst = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+
+/** "Opened, frozen and use-by ", or "Use-by date explained " on its own. */
+function titleExtra(parts) {
+  if (!parts.length) return '';
+  if (parts.length === 1 && parts[0] === 'opened') return 'Opened times ';
+  if (parts.length === 1 && parts[0] === 'frozen') return 'Freezer times ';
+  if (parts.length === 1 && /use-by|best before/.test(parts[0])) {
+    return `${parts[0].charAt(0).toUpperCase() + parts[0].slice(1)}${parts[0] === 'use-by' ? ' date' : ''} explained `;
+  }
+  const text = parts.join(', ').replace(/, ([^,]+)$/, ' and $1');
+  return `${text.charAt(0).toUpperCase() + text.slice(1)} `;
+}
+
 function foodPage(f, foods) {
   const verb = isPlural(f.name) ? 'do' : 'does';
   const lname = lowerFirst(f.name);
-  const title = `How long ${verb} ${lowerFirst(f.titleName)} last?`;
+  // Most searches say where: "how long do scotch eggs last in the fridge".
+  const title = `How long ${verb} ${lowerFirst(f.titleName)} last${f.location === 'freezer' ? '' : ` in ${WHERE[f.location]}`}?`;
+  const they = verb === 'do' ? 'they' : 'it';
+  const their = verb === 'do' ? 'their' : 'its';
+  const eat = POURED.has(f.key) ? 'use' : 'eat';
   const where = WHERE[f.location];
   const keeps = duration(f.days);
-  const opened = f.category === 'produce' ? 'Once cut' : 'Once opened';
+  const cut = f.category === 'produce' && !SALAD_LEAVES.has(f.key);
+  const opened = cut ? 'Once cut' : 'Once opened';
 
   const rows = [
     [`${COOKED.has(f.key) ? 'Once cooked' : 'As bought'}, in ${where}`, keeps, f.days],
@@ -239,12 +273,29 @@ function foodPage(f, foods) {
 
   const lines = [];
   lines.push(`${f.name} ${verb === 'do' ? 'keep' : 'keeps'} for ${keeps} in ${where}, counted from when you ${COOKED.has(f.key) ? 'cook' : 'buy'} ${verb === 'do' ? 'them' : 'it'}. That's SnapLarder's estimate for ${lname}${f.aka ? ` (${esc(f.aka)})` : ''} in general. If the packet has a date, go by the packet: it's specific to that product.`);
-  if (f.category === 'pantry' && f.location === 'pantry') {
-    lines.push('Once opened, check the label: some products need to go in the fridge.');
-  }
   if (NOTES[f.key]) lines.push(NOTES[f.key]);
-  if (f.category === 'protein' || f.category === 'dairy') {
-    lines.push('A use-by date is about safety. Don’t eat food after its use-by date, even if it looks and smells fine. <a href="../use-by-vs-best-before.html">Use by vs best before</a>');
+  // Questions people search for, each answered under its own heading from
+  // the figures above. Nothing here adds a figure the app doesn't use.
+  const faqs = [];
+  if (showOpened(f)) {
+    faqs.push([
+      `How long ${verb} ${lname} last once ${cut ? 'cut' : 'opened'}?`,
+      `${capFirst(duration(f.opened))}.${cut ? '' : ' Opening never extends a date: if the date on the packet comes sooner, go by that.'}${f.location === 'pantry' && f.opened < 180 ? ' Check the label, too: some products need to go in the fridge once opened.' : ''}`,
+    ]);
+  } else if (f.location === 'pantry') {
+    faqs.push([`What about once opened?`, 'Check the label: some products need to go in the fridge once opened.']);
+  }
+  if (hasUseBy(f)) {
+    faqs.push([
+      `Can you ${eat} ${lname} after the use-by date?`,
+      `No. A use-by date is about safety: don’t ${eat} ${they === 'it' ? 'it' : 'them'} after it, even if ${they} ${verb === 'do' ? 'look and smell' : 'looks and smells'} fine.${showFreezer(f) ? ` If you can’t use ${they === 'it' ? 'it' : 'them'} in time, you can freeze ${they === 'it' ? 'it' : 'them'} up to the use-by date.` : ''} If the packet says best before instead, that’s about quality: check ${they === 'it' ? 'it' : 'them'}, and ${they}${verb === 'do' ? '’re' : '’s'} often fine for a while after. <a href="../use-by-vs-best-before.html">Use by vs best before</a>`,
+    ]);
+  }
+  if (longLife(f)) {
+    faqs.push([
+      `${verb === 'do' ? 'Do' : 'Does'} ${lname} have a use-by date?`,
+      `Usually not. ${f.name} normally ${verb === 'do' ? 'carry' : 'carries'} a best-before date, which is about quality rather than safety. Stored as the label says, ${they}${verb === 'do' ? '’re' : '’s'} usually still safe after it, though ${they} may not be at ${their} best. <a href="../use-by-vs-best-before.html">Use by vs best before</a>`,
+    ]);
   }
 
   // "Can you freeze courgettes?" is one of the commonest food searches,
@@ -281,6 +332,8 @@ ${rows.map(([k, v, d]) => `  <div class="demo-row"><span>${esc(k)}</span><b clas
 
 ${lines.map((l) => `<p>${l}</p>`).join('\n')}
 
+${faqs.map(([q, a]) => `<h2>${esc(q).replace('use-by', '<span style="white-space:nowrap">use-by</span>')}</h2>\n<p>${a}</p>`).join('\n\n')}
+
 <h2>${esc(freezeTitle)}</h2>
 <p>${freeze}</p>
 </div>
@@ -304,10 +357,17 @@ ${related.map((o) => `      <li><a href="${o.slug}.html">${esc(o.name)}</a></li>
 </aside>
 </div>`;
 
+  // What else the page answers, for the search result title.
+  const extra = [
+    showOpened(f) ? 'opened' : null,
+    showFreezer(f) && f.location !== 'freezer' ? 'frozen' : null,
+    hasUseBy(f) ? 'use-by' : longLife(f) ? 'best before' : null,
+  ].filter(Boolean);
+
   return page({
     path: `food/${f.slug}.html`,
-    title: `${title} — SnapLarder food guide`,
-    description: `${f.name} ${verb === 'do' ? 'keep' : 'keeps'} for ${keeps} in ${where}.${showOpened(f) ? ` Once opened: ${duration(f.opened)}.` : ''}${showFreezer(f) && f.location !== 'freezer' ? ` Frozen: ${duration(f.frozen)}.` : ''} Typical times, and when to go by the packet.`,
+    title: `${title} ${titleExtra(extra)}| SnapLarder`,
+    description: `${f.name} ${verb === 'do' ? 'keep' : 'keeps'} for ${keeps} in ${where}.${showOpened(f) ? ` ${opened}: ${duration(f.opened)}.` : ''}${showFreezer(f) && f.location !== 'freezer' ? ` Frozen: ${duration(f.frozen)}.` : ''} ${hasUseBy(f) ? 'Plus what the use-by date means.' : longLife(f) ? 'Plus best before vs use by.' : 'Typical times, and when to go by the packet.'}`,
     body,
   });
 }
