@@ -860,3 +860,154 @@ li { margin-bottom: 0.5rem; }
 .guide-table td:last-child,
 .guide-table th:last-child { color: inherit; text-align: left; }
 .guide-table td { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+/* ---------------------------------------------- food guide: cards */
+
+/* The four categories as big tiles at the top of the guide. */
+.cat-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+.cat-tiles li { margin: 0; }
+.cat-tile {
+  display: grid;
+  gap: 0.15rem;
+  height: 100%;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.cat-tile:hover { border-color: var(--fresh); transform: translateY(-2px); }
+.cat-emoji { font-size: 2rem; line-height: 1.1; }
+.cat-tile b { font-size: 1.02rem; }
+.cat-count { font-size: 0.88rem; color: var(--ink-soft); }
+.cat-sample { font-size: 1.05rem; letter-spacing: 0.1em; margin-top: 0.2rem; }
+@media (min-width: 52rem) { .cat-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* Quick answers. */
+.quick { display: grid; gap: 1rem; margin: 0 0 1.5rem; }
+.quick-card h2 { margin: 0 0 0.2rem; font-size: 1.05rem; }
+.quick-card p { margin: 0 0 0.7rem; font-size: 0.93rem; color: var(--ink-soft); }
+.quick-card .chips { margin: 0; }
+.quick-first { border-left: 4px solid var(--spoil); }
+.quick-long { border-left: 4px solid var(--fresh); }
+@media (min-width: 52rem) { .quick { grid-template-columns: 1fr 1fr; } }
+
+/* Search, filter and sort. */
+.food-tools { grid-template-columns: minmax(0, 1fr); }
+.seg { border: 0; padding: 0; margin: 0; min-width: 0; }
+.seg legend, .sort label { font-weight: 600; font-size: 0.93rem; margin-bottom: 0.35rem; padding: 0; }
+.seg { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.seg legend { width: 100%; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg span {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  font-size: 0.93rem;
+  font-weight: 600;
+}
+.seg input:checked + span { background: var(--fresh); border-color: var(--fresh); color: var(--on-fresh); }
+.seg input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.sort label { display: block; }
+.sort select {
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  min-height: 44px;
+}
+@media (min-width: 56rem) {
+  .food-tools { grid-template-columns: 20rem auto auto; justify-content: start; gap: 1.5rem; }
+}
+
+.legend { font-size: 0.85rem; color: var(--ink-soft); margin: 0 0 1rem; line-height: 1.9; }
+.legend .life { display: inline-block; width: 2.5rem; vertical-align: middle; margin: 0 0.2rem 0 0.6rem; }
+.legend .life:first-of-type { margin-left: 0; }
+
+/* A category of food cards. */
+.food-section { margin: 0 0 2rem; }
+.food-section h2 { font-size: 1.25rem; margin: 0 0 0.8rem; }
+.food-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: 0.7rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.food-card { margin: 0; }
+.food-card a {
+  display: grid;
+  gap: 0.55rem;
+  height: 100%;
+  padding: 0.75rem 0.85rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.food-card a:hover { border-color: var(--fresh); box-shadow: var(--shadow); }
+.fc-head { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+.fc-name { font-size: 0.98rem; line-height: 1.25; }
+.fc-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.3rem; }
+.fc-stat { display: grid; padding: 0.3rem 0.45rem; border-radius: 8px; background: var(--paper-2); }
+.fc-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
+.fc-stat b { font-size: 0.9rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fc-none b { color: var(--ink-soft); font-weight: 400; }
+
+/* The picture or letter beside each food. */
+.badge {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 10px;
+  background: var(--paper-2);
+  font-size: 1.35rem;
+  line-height: 1;
+}
+.badge-produce, .badge-dairy, .badge-protein, .badge-pantry { font-size: 1.05rem; font-weight: 700; color: var(--on-fresh); }
+.badge-produce { background: var(--fresh); }
+.badge-dairy { background: #6f8fae; }
+.badge-protein { background: var(--spoil); }
+.badge-pantry { background: var(--soon); }
+
+/* Shelf-life bar: longer = keeps longer; colour as in the app. */
+.life { display: block; height: 5px; border-radius: 999px; background: var(--rule); overflow: hidden; }
+.life i { display: block; height: 100%; border-radius: inherit; }
+.life-spoil i { background: var(--spoil); }
+.life-soon i { background: var(--soon); }
+.life-fresh i { background: var(--fresh); }
+
+/* A single food page: picture beside the title, bars under each time. */
+.food-hero { display: flex; align-items: flex-start; gap: 0.9rem; }
+.food-hero .badge { width: 3.4rem; height: 3.4rem; font-size: 2rem; margin-top: 2.4rem; border-radius: 14px; }
+.food-hero .page-head { flex: 1; min-width: 0; }
+.demo .life { margin: 0.1rem 0 0.45rem; }
+.quick { align-items: start; }
+.food-tools { align-items: end; }
+.sort select { width: auto; }
+@media (prefers-color-scheme: dark) { .fc-stat { background: #252b1f; } .badge { background: #252b1f; } }
+@media (max-width: 39.99rem) {
+  .food-cards { gap: 0.5rem; }
+  .food-card a { padding: 0.6rem 0.7rem 0.65rem; gap: 0.4rem; }
+  .fc-stat { padding: 0.2rem 0.45rem; }
+  .badge { width: 2rem; height: 2rem; font-size: 1.15rem; }
+}

@@ -231,10 +231,10 @@ function foodPage(f, foods) {
   const opened = f.category === 'produce' ? 'Once cut' : 'Once opened';
 
   const rows = [
-    [`${COOKED.has(f.key) ? 'Once cooked' : 'As bought'}, in ${where}`, keeps],
-    showOpened(f) ? [opened, duration(f.opened)] : null,
-    showFreezer(f) && f.location !== 'freezer' ? ['In the freezer', duration(f.frozen)] : null,
-    showFreezer(f) ? ['After thawing', `use within ${duration(f.thawed)}`] : null,
+    [`${COOKED.has(f.key) ? 'Once cooked' : 'As bought'}, in ${where}`, keeps, f.days],
+    showOpened(f) ? [opened, duration(f.opened), f.opened] : null,
+    showFreezer(f) && f.location !== 'freezer' ? ['In the freezer', duration(f.frozen), f.frozen] : null,
+    showFreezer(f) ? ['After thawing', `use within ${duration(f.thawed)}`, f.thawed] : null,
   ].filter(Boolean);
 
   const lines = [];
@@ -271,11 +271,11 @@ function foodPage(f, foods) {
 
   const body = `<div class="food-layout">
 <div class="food-main">
-${heading(title)}
+<div class="food-hero">${badge(f)}${heading(title)}</div>
 
 <section class="demo" aria-label="${esc(f.name)} at a glance">
   <p class="demo-item">${esc(f.name)}</p>
-${rows.map(([k, v]) => `  <div class="demo-row"><span>${esc(k)}</span><b class="demo-when">${esc(v)}</b></div>`).join('\n')}
+${rows.map(([k, v, d]) => `  <div class="demo-row"><span>${esc(k)}</span><b class="demo-when">${esc(v)}</b></div>\n  <span class="life life-${urgency(d)}" aria-hidden="true"><i style="width:${barWidth(d)}%"></i></span>`).join('\n')}
   <p class="demo-note">${showOpened(f) ? 'Opening never extends a date: if the packet date comes sooner, go by that. ' : ''}Estimates for quality, not a safety ruling. <a href="../use-by-vs-best-before.html">What the dates mean</a></p>
 </section>
 
@@ -312,17 +312,105 @@ ${related.map((o) => `      <li><a href="${o.slug}.html">${esc(o.name)}</a></li>
   });
 }
 
+/** A picture for each food where a clear emoji exists; otherwise a letter badge. */
+const EMOJI = {
+  'cooked potatoes': '🥔', spinach: '🥬', lettuce: '🥬', kale: '🥬', arugula: '🥬', romaine: '🥬',
+  carrots: '🥕', cucumber: '🥒', zucchini: '🥒', broccoli: '🥦', 'bell pepper': '🫑', tomato: '🍅',
+  'cherry tomatoes': '🍅', avocado: '🥑', banana: '🍌', apple: '🍎', orange: '🍊', lemon: '🍋',
+  grapes: '🍇', strawberries: '🍓', blueberries: '🫐', mango: '🥭', pineapple: '🍍', watermelon: '🍉',
+  cantaloupe: '🍈', peach: '🍑', pear: '🍐', kiwi: '🥝', onion: '🧅', garlic: '🧄', potato: '🥔',
+  'sweet potato': '🍠', mushrooms: '🍄', corn: '🌽', cabbage: '🥬',
+  'herbs (basil)': '🌿', 'herbs (cilantro)': '🌿', 'herbs (parsley)': '🌿',
+  'boiled eggs': '🥚', 'scotch eggs': '🥚', eggs: '🥚', 'flavoured butter': '🧈', butter: '🧈',
+  milk: '🥛', 'heavy cream': '🥛', 'cheddar block': '🧀', 'shredded cheese': '🧀', 'cream cheese': '🧀',
+  'cottage cheese': '🧀', parmesan: '🧀',
+  'chicken thighs': '🍗', 'chicken breast': '🍗', 'ground beef': '🥩', steak: '🥩', 'pork chops': '🥩',
+  bacon: '🥓', sausage: '🌭', 'hot dogs': '🌭', salmon: '🐟', 'white fish': '🐟', shrimp: '🦐',
+  'deli turkey': '🥪', 'deli ham': '🥪',
+  'cooked rice': '🍚', rice: '🍚', 'fresh pasta': '🍝', 'cooked pasta': '🍝', pasta: '🍝',
+  'overnight oats': '🥣', oats: '🥣', cereal: '🥣', bread: '🍞', tortillas: '🌯', bagels: '🥯',
+  'canned beans': '🥫', 'canned tomatoes': '🥫', 'peanut butter': '🥜', 'olive oil': '🫒', honey: '🍯',
+  'hot sauce': '🌶️', guacamole: '🥑', pesto: '🌿', 'coffee (ground)': '☕', 'tea bags': '🍵', leftovers: '🍲',
+};
+
+const CAT_EMOJI = { produce: '🍎', dairy: '🧀', protein: '🍗', pantry: '🥫' };
+
+/** The food's picture, or its first letter in the category colour. */
+export function badge(f) {
+  const e = EMOJI[f.key];
+  return e
+    ? `<span class="badge" aria-hidden="true">${e}</span>`
+    : `<span class="badge badge-${f.category}" aria-hidden="true">${esc(f.name.charAt(0))}</span>`;
+}
+
+/**
+ * How full the shelf-life bar is: a log scale from 1 day to about 3
+ * years, so 2 days and 2 weeks look clearly different, and 1 year and
+ * 2 years don't swamp everything else.
+ */
+export function barWidth(days) {
+  return Math.max(6, Math.min(100, Math.round((Math.log(days + 1) / Math.log(1100)) * 100)));
+}
+
+/** The freshness colour the app uses: red for days, amber for weeks, green beyond. */
+export function urgency(days) {
+  return days <= 3 ? 'spoil' : days <= 14 ? 'soon' : 'fresh';
+}
+
+/** One stat in a card: a short figure on screen, the full wording for screen readers. */
+function stat(label, days, prefix = '') {
+  return `<span class="fc-stat"><span class="fc-label">${label}</span><b><span aria-hidden="true">${shortDuration(days)}</span><span class="sr">${esc(label)}: ${prefix}${esc(duration(days))}</span></b></span>`;
+}
+
+/** A stat that doesn't apply, with the reason for screen readers and on hover. */
+function noStat(label, why) {
+  return `<span class="fc-stat fc-none" title="${esc(why)}"><span class="fc-label">${label}</span><b><span aria-hidden="true">–</span><span class="sr">${esc(label)}: ${esc(why)}</span></b></span>`;
+}
+
+function foodCard(f) {
+  const search = [f.name, f.aka ?? '', f.key, ...f.aliases].join(' ').toLowerCase();
+  const canFreeze = showFreezer(f);
+  const why = NO_FREEZE.has(f.key) ? "doesn't freeze well" : 'no need to freeze';
+  const stats = [
+    stat(WHERE_SHORT[f.location], f.days),
+    canFreeze && f.location !== 'freezer' ? stat('Freezer', f.frozen) : noStat('Freezer', why),
+    canFreeze ? stat('Thawed', f.thawed, 'use within ') : noStat('Thawed', why),
+  ].join('');
+  return `    <li class="food-card" data-name="${esc(search)}" data-where="${f.location}" data-days="${f.days}" data-freeze="${canFreeze ? 1 : 0}" data-frozen="${canFreeze && f.location !== 'freezer' ? f.frozen : 0}">
+      <a href="${f.slug}.html">
+        <span class="fc-head">${badge(f)}<b class="fc-name">${esc(f.name)}</b></span>
+        <span class="fc-stats">${stats}</span>
+        <span class="life life-${urgency(f.days)}" aria-hidden="true"><i style="width:${barWidth(f.days)}%"></i></span>
+      </a>
+    </li>`;
+}
+
 function indexPage(foods) {
-  const cards = CATEGORIES.map(([cat, label]) => {
-    const list = foods.filter((f) => f.category === cat);
-    return `<section class="card food-cat">
-  <h2 id="${cat}">${esc(label)} <span class="count">${list.length}</span></h2>
-  <table class="food-table">
-    <thead><tr><th scope="col">Food</th><th scope="col">Keeps</th><th scope="col">Where</th></tr></thead>
-    <tbody>
-${list.map((f) => `      <tr data-name="${esc([f.name, f.aka ?? '', f.key, ...f.aliases].join(' ').toLowerCase())}"><td><a href="${f.slug}.html">${esc(f.name)}</a></td><td><span aria-hidden="true">${shortDuration(f.days)}</span><span class="sr">${esc(duration(f.days))}</span></td><td>${WHERE_SHORT[f.location]}</td></tr>`).join('\n')}
-    </tbody>
-  </table>
+  const byCat = (cat) => foods.filter((f) => f.category === cat);
+
+  const tiles = CATEGORIES.map(([cat, label]) => {
+    const list = byCat(cat);
+    const sample = list.filter((f) => EMOJI[f.key]).slice(0, 5).map((f) => EMOJI[f.key]).join(' ');
+    return `  <li><a class="cat-tile cat-${cat}" href="#${cat}">
+    <span class="cat-emoji" aria-hidden="true">${CAT_EMOJI[cat]}</span>
+    <b>${esc(label)}</b>
+    <span class="cat-count">${list.length} foods</span>
+    <span class="cat-sample" aria-hidden="true">${sample}</span>
+  </a></li>`;
+  }).join('\n');
+
+  // Quick answers: what to eat first, and what you can forget about.
+  const first = foods.filter((f) => f.days <= 3 && f.location !== 'freezer').sort((a, b) => a.days - b.days || a.name.localeCompare(b.name));
+  const long = foods.filter((f) => f.days >= 365).sort((a, b) => b.days - a.days || a.name.localeCompare(b.name));
+  const chip = (f) => `<li><a href="${f.slug}.html">${EMOJI[f.key] ? `<span aria-hidden="true">${EMOJI[f.key]}</span> ` : ''}${esc(f.name)}</a></li>`;
+
+  const sections = CATEGORIES.map(([cat, label]) => {
+    const list = byCat(cat);
+    return `<section class="food-section" aria-labelledby="${cat}">
+  <h2 id="${cat}"><span aria-hidden="true">${CAT_EMOJI[cat]}</span> ${esc(label)} <span class="count">${list.length}</span></h2>
+  <ul class="food-cards">
+${list.map(foodCard).join('\n')}
+  </ul>
 </section>`;
   }).join('\n');
 
@@ -337,20 +425,51 @@ ${heading('How long does food last?', `Typical times for ${foods.length} everyda
 </p>
 </div>
 
-<div class="food-tools">
+<nav aria-label="Food categories">
+<ul class="cat-tiles">
+${tiles}
+</ul>
+</nav>
+
+<div class="quick">
+  <section class="card quick-card quick-first">
+    <h2>Eat these first</h2>
+    <p>Keep for 3 days or less once home, so plan to use them early.</p>
+    <ul class="chips">${first.map(chip).join('')}</ul>
+  </section>
+  <section class="card quick-card quick-long">
+    <h2>Keep for a year or more</h2>
+    <p>Cupboard staples you can stop worrying about.</p>
+    <ul class="chips">${long.map(chip).join('')}</ul>
+  </section>
+</div>
+
+<div class="food-tools" role="search">
   <div class="food-filter" hidden>
     <label for="food-filter">Find a food</label>
     <input id="food-filter" type="search" placeholder="e.g. hummus" autocomplete="off">
-    <p class="food-none" hidden>Nothing matches. Try another name.</p>
   </div>
-  <nav aria-label="Categories">
-    ${categoryChips('')}
-  </nav>
+  <fieldset class="seg" hidden>
+    <legend>Kept in</legend>
+    <label><input type="radio" name="where" value="" checked><span>All</span></label>
+    <label><input type="radio" name="where" value="fridge"><span>Fridge</span></label>
+    <label><input type="radio" name="where" value="pantry"><span>Cupboard</span></label>
+    <label><input type="radio" name="where" value="freeze"><span>Freezable</span></label>
+  </fieldset>
+  <div class="sort" hidden>
+    <label for="food-sort">Sort</label>
+    <select id="food-sort">
+      <option value="name">A to Z</option>
+      <option value="short">Use soonest first</option>
+      <option value="long">Keeps longest first</option>
+      <option value="frozen">Keeps longest frozen</option>
+    </select>
+  </div>
 </div>
+<p class="legend"><b>Fridge or Cupboard</b> = as bought · <b>Freezer</b> = if you freeze it · <b>Thawed</b> = use within, once defrosted.<br><span class="life life-spoil" aria-hidden="true"><i style="width:30%"></i></span> days <span class="life life-soon" aria-hidden="true"><i style="width:55%"></i></span> weeks <span class="life life-fresh" aria-hidden="true"><i style="width:85%"></i></span> months or more</p>
+<p class="food-none" hidden>Nothing matches. Try another name.</p>
 
-<div class="food-grid">
-${cards}
-</div>
+${sections}
 
 <section class="card home-cta">
   <h2>Let your phone keep track</h2>
@@ -359,31 +478,52 @@ ${cards}
 </section>
 
 <script>
-  // Filter the lists as you type. Without script, everything still shows.
+  // Search, filter and sort. Without script, every food still shows, A to Z.
   (function () {
-    var box = document.querySelector('.food-filter');
     var input = document.getElementById('food-filter');
+    var sort = document.getElementById('food-sort');
     var none = document.querySelector('.food-none');
-    box.hidden = false;
-    input.addEventListener('input', filter);
-    // Arriving from the home page search: food/?q=hummus
-    var q0 = new URLSearchParams(location.search).get('q');
-    if (q0) { input.value = q0; filter(); }
-    function filter() {
+    document.querySelectorAll('.food-tools [hidden]').forEach(function (el) { el.hidden = false; });
+
+    function where() {
+      var r = document.querySelector('input[name=where]:checked');
+      return r ? r.value : '';
+    }
+
+    function apply() {
       var q = input.value.trim().toLowerCase();
+      var w = where();
       var shown = 0;
-      document.querySelectorAll('.food-cat').forEach(function (card) {
-        var any = 0;
-        card.querySelectorAll('tbody tr').forEach(function (r) {
-          var hit = !q || r.dataset.name.indexOf(q) !== -1;
-          r.hidden = !hit;
-          if (hit) any++;
+      document.querySelectorAll('.food-section').forEach(function (sec) {
+        var list = sec.querySelector('.food-cards');
+        var items = Array.prototype.slice.call(list.children);
+        items.sort(function (a, b) {
+          if (sort.value === 'short') return a.dataset.days - b.dataset.days || a.dataset.name.localeCompare(b.dataset.name);
+          if (sort.value === 'frozen') return (b.dataset.frozen || 0) - (a.dataset.frozen || 0) || a.dataset.name.localeCompare(b.dataset.name);
+          if (sort.value === 'long') return b.dataset.days - a.dataset.days || a.dataset.name.localeCompare(b.dataset.name);
+          return a.dataset.name.localeCompare(b.dataset.name);
         });
-        card.hidden = !any;
+        var any = 0;
+        items.forEach(function (li) {
+          var hit = (!q || li.dataset.name.indexOf(q) !== -1) && (!w || (w === 'freeze' ? li.dataset.freeze === '1' : li.dataset.where === w));
+          li.hidden = !hit;
+          if (hit) any++;
+          list.appendChild(li);
+        });
+        sec.hidden = !any;
         shown += any;
       });
       none.hidden = shown > 0;
     }
+
+    input.addEventListener('input', apply);
+    sort.addEventListener('change', apply);
+    document.querySelectorAll('input[name=where]').forEach(function (r) { r.addEventListener('change', apply); });
+
+    // Arriving from the home page search: food/?q=hummus
+    var q0 = new URLSearchParams(location.search).get('q');
+    if (q0) input.value = q0;
+    apply();
   })();
 </script>`;
 

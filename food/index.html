@@ -49,169 +49,884 @@
 </p>
 </div>
 
-<div class="food-tools">
+<nav aria-label="Food categories">
+<ul class="cat-tiles">
+  <li><a class="cat-tile cat-produce" href="#produce">
+    <span class="cat-emoji" aria-hidden="true">🍎</span>
+    <b>Fruit and vegetables</b>
+    <span class="cat-count">51 foods</span>
+    <span class="cat-sample" aria-hidden="true">🍎 🥑 🍌 🫐 🥦</span>
+  </a></li>
+  <li><a class="cat-tile cat-dairy" href="#dairy">
+    <span class="cat-emoji" aria-hidden="true">🧀</span>
+    <b>Dairy and eggs</b>
+    <span class="cat-count">15 foods</span>
+    <span class="cat-sample" aria-hidden="true">🧈 🧀 🧀 🧀 🥛</span>
+  </a></li>
+  <li><a class="cat-tile cat-protein" href="#protein">
+    <span class="cat-emoji" aria-hidden="true">🍗</span>
+    <b>Meat, fish and tofu</b>
+    <span class="cat-count">15 foods</span>
+    <span class="cat-sample" aria-hidden="true">🥓 🥩 🍗 🍗 🌭</span>
+  </a></li>
+  <li><a class="cat-tile cat-pantry" href="#pantry">
+    <span class="cat-emoji" aria-hidden="true">🥫</span>
+    <b>Cupboard, bread and dips</b>
+    <span class="cat-count">32 foods</span>
+    <span class="cat-sample" aria-hidden="true">🥯 🍞 🥣 🍝 🍚</span>
+  </a></li>
+</ul>
+</nav>
+
+<div class="quick">
+  <section class="card quick-card quick-first">
+    <h2>Eat these first</h2>
+    <p>Keep for 3 days or less once home, so plan to use them early.</p>
+    <ul class="chips"><li><a href="cooked-rice.html"><span aria-hidden="true">🍚</span> Cooked rice</a></li><li><a href="leftovers.html"><span aria-hidden="true">🍲</span> Leftovers</a></li><li><a href="prawns.html"><span aria-hidden="true">🦐</span> Prawns</a></li><li><a href="salmon.html"><span aria-hidden="true">🐟</span> Salmon</a></li><li><a href="white-fish.html"><span aria-hidden="true">🐟</span> White fish</a></li><li><a href="beef-mince.html"><span aria-hidden="true">🥩</span> Beef mince</a></li><li><a href="blackberries.html">Blackberries</a></li><li><a href="cooked-pasta.html"><span aria-hidden="true">🍝</span> Cooked pasta</a></li><li><a href="cooked-potatoes.html"><span aria-hidden="true">🥔</span> Cooked potatoes</a></li><li><a href="fresh-basil.html"><span aria-hidden="true">🌿</span> Fresh basil</a></li><li><a href="guacamole.html"><span aria-hidden="true">🥑</span> Guacamole</a></li><li><a href="overnight-oats.html"><span aria-hidden="true">🥣</span> Overnight oats</a></li><li><a href="raspberries.html">Raspberries</a></li><li><a href="scotch-eggs.html"><span aria-hidden="true">🥚</span> Scotch eggs</a></li><li><a href="sweetcorn.html"><span aria-hidden="true">🌽</span> Sweetcorn</a></li><li><a href="turkey-mince.html">Turkey mince</a></li></ul>
+  </section>
+  <section class="card quick-card quick-long">
+    <h2>Keep for a year or more</h2>
+    <p>Cupboard staples you can stop worrying about.</p>
+    <ul class="chips"><li><a href="honey.html"><span aria-hidden="true">🍯</span> Honey</a></li><li><a href="dried-pasta.html"><span aria-hidden="true">🍝</span> Dried pasta</a></li><li><a href="rice.html"><span aria-hidden="true">🍚</span> Rice</a></li><li><a href="sugar.html">Sugar</a></li><li><a href="tinned-beans.html"><span aria-hidden="true">🥫</span> Tinned beans</a></li><li><a href="tinned-tomatoes.html"><span aria-hidden="true">🥫</span> Tinned tomatoes</a></li><li><a href="hot-sauce.html"><span aria-hidden="true">🌶️</span> Hot sauce</a></li><li><a href="mustard.html">Mustard</a></li><li><a href="oats.html"><span aria-hidden="true">🥣</span> Oats</a></li><li><a href="olive-oil.html"><span aria-hidden="true">🫒</span> Olive oil</a></li><li><a href="soy-sauce.html">Soy sauce</a></li><li><a href="tea-bags.html"><span aria-hidden="true">🍵</span> Tea bags</a></li></ul>
+  </section>
+</div>
+
+<div class="food-tools" role="search">
   <div class="food-filter" hidden>
     <label for="food-filter">Find a food</label>
     <input id="food-filter" type="search" placeholder="e.g. hummus" autocomplete="off">
-    <p class="food-none" hidden>Nothing matches. Try another name.</p>
   </div>
-  <nav aria-label="Categories">
-    <ul class="chips">
-  <li><a href="#produce">Fruit and vegetables</a></li>
-  <li><a href="#dairy">Dairy and eggs</a></li>
-  <li><a href="#protein">Meat, fish and tofu</a></li>
-  <li><a href="#pantry">Cupboard, bread and dips</a></li>
-</ul>
-  </nav>
+  <fieldset class="seg" hidden>
+    <legend>Kept in</legend>
+    <label><input type="radio" name="where" value="" checked><span>All</span></label>
+    <label><input type="radio" name="where" value="fridge"><span>Fridge</span></label>
+    <label><input type="radio" name="where" value="pantry"><span>Cupboard</span></label>
+    <label><input type="radio" name="where" value="freeze"><span>Freezable</span></label>
+  </fieldset>
+  <div class="sort" hidden>
+    <label for="food-sort">Sort</label>
+    <select id="food-sort">
+      <option value="name">A to Z</option>
+      <option value="short">Use soonest first</option>
+      <option value="long">Keeps longest first</option>
+      <option value="frozen">Keeps longest frozen</option>
+    </select>
+  </div>
 </div>
+<p class="legend"><b>Fridge or Cupboard</b> = as bought · <b>Freezer</b> = if you freeze it · <b>Thawed</b> = use within, once defrosted.<br><span class="life life-spoil" aria-hidden="true"><i style="width:30%"></i></span> days <span class="life life-soon" aria-hidden="true"><i style="width:55%"></i></span> weeks <span class="life life-fresh" aria-hidden="true"><i style="width:85%"></i></span> months or more</p>
+<p class="food-none" hidden>Nothing matches. Try another name.</p>
 
-<div class="food-grid">
-<section class="card food-cat">
-  <h2 id="produce">Fruit and vegetables <span class="count">51</span></h2>
-  <table class="food-table">
-    <thead><tr><th scope="col">Food</th><th scope="col">Keeps</th><th scope="col">Where</th></tr></thead>
-    <tbody>
-      <tr data-name="apples  apple"><td><a href="apples.html">Apples</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="asparagus  asparagus"><td><a href="asparagus.html">Asparagus</a></td><td><span aria-hidden="true">4 days</span><span class="sr">4 days</span></td><td>Fridge</td></tr>
-      <tr data-name="avocados  avocado"><td><a href="avocados.html">Avocados</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="bananas  banana"><td><a href="bananas.html">Bananas</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="beetroot beets beets beetroot"><td><a href="beetroot.html">Beetroot</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="blackberries  blackberries"><td><a href="blackberries.html">Blackberries</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="blueberries  blueberries"><td><a href="blueberries.html">Blueberries</a></td><td><span aria-hidden="true">10 days</span><span class="sr">10 days</span></td><td>Fridge</td></tr>
-      <tr data-name="broccoli  broccoli"><td><a href="broccoli.html">Broccoli</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="brussels sprouts  brussels sprouts"><td><a href="brussels-sprouts.html">Brussels sprouts</a></td><td><span aria-hidden="true">10 days</span><span class="sr">10 days</span></td><td>Fridge</td></tr>
-      <tr data-name="cabbage  cabbage"><td><a href="cabbage.html">Cabbage</a></td><td><span aria-hidden="true">4 wks</span><span class="sr">about 4 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="cantaloupe melon  cantaloupe rockmelon spanspek"><td><a href="cantaloupe-melon.html">Cantaloupe melon</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="carrots  carrots"><td><a href="carrots.html">Carrots</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="cauliflower  cauliflower"><td><a href="cauliflower.html">Cauliflower</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="celery  celery"><td><a href="celery.html">Celery</a></td><td><span aria-hidden="true">2 wks</span><span class="sr">about 2 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="cherry tomatoes  cherry tomatoes"><td><a href="cherry-tomatoes.html">Cherry tomatoes</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="cooked potatoes mashed, roast or boiled cooked potatoes"><td><a href="cooked-potatoes.html">Cooked potatoes</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="cos lettuce romaine romaine cos lettuce romaine lettuce"><td><a href="cos-lettuce.html">Cos lettuce</a></td><td><span aria-hidden="true">9 days</span><span class="sr">9 days</span></td><td>Fridge</td></tr>
-      <tr data-name="courgettes zucchini zucchini courgette courgettes baby marrow baby marrows"><td><a href="courgettes.html">Courgettes</a></td><td><span aria-hidden="true">6 days</span><span class="sr">6 days</span></td><td>Fridge</td></tr>
-      <tr data-name="cucumber  cucumber"><td><a href="cucumber.html">Cucumber</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="fresh basil  herbs (basil) basil"><td><a href="fresh-basil.html">Fresh basil</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="fresh coriander cilantro herbs (cilantro) coriander cilantro"><td><a href="fresh-coriander.html">Fresh coriander</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="fresh parsley  herbs (parsley) parsley"><td><a href="fresh-parsley.html">Fresh parsley</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="garlic  garlic"><td><a href="garlic.html">Garlic</a></td><td><span aria-hidden="true">3 mths</span><span class="sr">about 3 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="ginger  ginger"><td><a href="ginger.html">Ginger</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="grapes  grapes"><td><a href="grapes.html">Grapes</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="green beans  green beans"><td><a href="green-beans.html">Green beans</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="kale  kale"><td><a href="kale.html">Kale</a></td><td><span aria-hidden="true">6 days</span><span class="sr">6 days</span></td><td>Fridge</td></tr>
-      <tr data-name="kiwi fruit  kiwi kiwifruit kiwi fruit"><td><a href="kiwi-fruit.html">Kiwi fruit</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="lemons  lemon"><td><a href="lemons.html">Lemons</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="lettuce  lettuce"><td><a href="lettuce.html">Lettuce</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="limes  lime"><td><a href="limes.html">Limes</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="mangoes  mango"><td><a href="mangoes.html">Mangoes</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="mushrooms  mushrooms"><td><a href="mushrooms.html">Mushrooms</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="onions  onion"><td><a href="onions.html">Onions</a></td><td><span aria-hidden="true">4 wks</span><span class="sr">about 4 weeks</span></td><td>Cupboard</td></tr>
-      <tr data-name="oranges  orange satsuma satsumas clementine clementines tangerine mandarin mandarins naartjie naartjies"><td><a href="oranges.html">Oranges</a></td><td><span aria-hidden="true">2 wks</span><span class="sr">about 2 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="peaches  peach"><td><a href="peaches.html">Peaches</a></td><td><span aria-hidden="true">4 days</span><span class="sr">4 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="pears  pear"><td><a href="pears.html">Pears</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="peppers bell peppers bell pepper peppers red pepper green pepper yellow pepper red peppers capsicum capsicums red capsicum green capsicum"><td><a href="peppers.html">Peppers</a></td><td><span aria-hidden="true">10 days</span><span class="sr">10 days</span></td><td>Fridge</td></tr>
-      <tr data-name="pineapple  pineapple"><td><a href="pineapple.html">Pineapple</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="plums  plum"><td><a href="plums.html">Plums</a></td><td><span aria-hidden="true">4 days</span><span class="sr">4 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="potatoes  potato"><td><a href="potatoes.html">Potatoes</a></td><td><span aria-hidden="true">4 wks</span><span class="sr">about 4 weeks</span></td><td>Cupboard</td></tr>
-      <tr data-name="radishes  radish"><td><a href="radishes.html">Radishes</a></td><td><span aria-hidden="true">2 wks</span><span class="sr">about 2 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="raspberries  raspberries"><td><a href="raspberries.html">Raspberries</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="rocket arugula arugula rocket"><td><a href="rocket.html">Rocket</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="spinach  spinach"><td><a href="spinach.html">Spinach</a></td><td><span aria-hidden="true">6 days</span><span class="sr">6 days</span></td><td>Fridge</td></tr>
-      <tr data-name="spring onions scallions scallions spring onion spring onions green onion green onions"><td><a href="spring-onions.html">Spring onions</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="strawberries  strawberries"><td><a href="strawberries.html">Strawberries</a></td><td><span aria-hidden="true">4 days</span><span class="sr">4 days</span></td><td>Fridge</td></tr>
-      <tr data-name="sweet potatoes  sweet potato kumara"><td><a href="sweet-potatoes.html">Sweet potatoes</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Cupboard</td></tr>
-      <tr data-name="sweetcorn corn on the cob corn sweetcorn corn on the cob mielies"><td><a href="sweetcorn.html">Sweetcorn</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="tomatoes  tomato"><td><a href="tomatoes.html">Tomatoes</a></td><td><span aria-hidden="true">6 days</span><span class="sr">6 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="watermelon  watermelon"><td><a href="watermelon.html">Watermelon</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-    </tbody>
-  </table>
+<section class="food-section" aria-labelledby="produce">
+  <h2 id="produce"><span aria-hidden="true">🍎</span> Fruit and vegetables <span class="count">51</span></h2>
+  <ul class="food-cards">
+    <li class="food-card" data-name="apples  apple" data-where="fridge" data-days="21" data-freeze="1" data-frozen="240">
+      <a href="apples.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍎</span><b class="fc-name">Apples</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 wks</span><span class="sr">Fridge: about 3 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="asparagus  asparagus" data-where="fridge" data-days="4" data-freeze="1" data-frozen="240">
+      <a href="asparagus.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">A</span><b class="fc-name">Asparagus</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">4 days</span><span class="sr">Fridge: 4 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:23%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="avocados  avocado" data-where="pantry" data-days="5" data-freeze="0" data-frozen="0">
+      <a href="avocados.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥑</span><b class="fc-name">Avocados</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">5 days</span><span class="sr">Cupboard: 5 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="bananas  banana" data-where="pantry" data-days="5" data-freeze="1" data-frozen="240">
+      <a href="bananas.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍌</span><b class="fc-name">Bananas</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">5 days</span><span class="sr">Cupboard: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="beetroot beets beets beetroot" data-where="fridge" data-days="21" data-freeze="1" data-frozen="240">
+      <a href="beetroot.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">B</span><b class="fc-name">Beetroot</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 wks</span><span class="sr">Fridge: about 3 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="blackberries  blackberries" data-where="fridge" data-days="3" data-freeze="1" data-frozen="240">
+      <a href="blackberries.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">B</span><b class="fc-name">Blackberries</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="blueberries  blueberries" data-where="fridge" data-days="10" data-freeze="1" data-frozen="240">
+      <a href="blueberries.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🫐</span><b class="fc-name">Blueberries</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">10 days</span><span class="sr">Fridge: 10 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:34%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="broccoli  broccoli" data-where="fridge" data-days="7" data-freeze="1" data-frozen="240">
+      <a href="broccoli.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥦</span><b class="fc-name">Broccoli</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="brussels sprouts  brussels sprouts" data-where="fridge" data-days="10" data-freeze="1" data-frozen="240">
+      <a href="brussels-sprouts.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">B</span><b class="fc-name">Brussels sprouts</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">10 days</span><span class="sr">Fridge: 10 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:34%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cabbage  cabbage" data-where="fridge" data-days="30" data-freeze="1" data-frozen="240">
+      <a href="cabbage.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥬</span><b class="fc-name">Cabbage</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">4 wks</span><span class="sr">Fridge: about 4 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:49%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cantaloupe melon  cantaloupe rockmelon spanspek" data-where="fridge" data-days="5" data-freeze="0" data-frozen="0">
+      <a href="cantaloupe-melon.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍈</span><b class="fc-name">Cantaloupe melon</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="carrots  carrots" data-where="fridge" data-days="21" data-freeze="1" data-frozen="240">
+      <a href="carrots.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥕</span><b class="fc-name">Carrots</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 wks</span><span class="sr">Fridge: about 3 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cauliflower  cauliflower" data-where="fridge" data-days="7" data-freeze="1" data-frozen="240">
+      <a href="cauliflower.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">C</span><b class="fc-name">Cauliflower</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="celery  celery" data-where="fridge" data-days="14" data-freeze="0" data-frozen="0">
+      <a href="celery.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">C</span><b class="fc-name">Celery</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 wks</span><span class="sr">Fridge: about 2 weeks</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:39%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cherry tomatoes  cherry tomatoes" data-where="pantry" data-days="7" data-freeze="0" data-frozen="0">
+      <a href="cherry-tomatoes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍅</span><b class="fc-name">Cherry tomatoes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">7 days</span><span class="sr">Cupboard: 7 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cooked potatoes mashed, roast or boiled cooked potatoes" data-where="fridge" data-days="3" data-freeze="1" data-frozen="240">
+      <a href="cooked-potatoes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥔</span><b class="fc-name">Cooked potatoes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cos lettuce romaine romaine cos lettuce romaine lettuce" data-where="fridge" data-days="9" data-freeze="0" data-frozen="0">
+      <a href="cos-lettuce.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥬</span><b class="fc-name">Cos lettuce</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">9 days</span><span class="sr">Fridge: 9 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:33%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="courgettes zucchini zucchini courgette courgettes baby marrow baby marrows" data-where="fridge" data-days="6" data-freeze="1" data-frozen="240">
+      <a href="courgettes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥒</span><b class="fc-name">Courgettes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">6 days</span><span class="sr">Fridge: 6 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:28%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cucumber  cucumber" data-where="fridge" data-days="7" data-freeze="0" data-frozen="0">
+      <a href="cucumber.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥒</span><b class="fc-name">Cucumber</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="fresh basil  herbs (basil) basil" data-where="fridge" data-days="3" data-freeze="1" data-frozen="240">
+      <a href="fresh-basil.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌿</span><b class="fc-name">Fresh basil</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="fresh coriander cilantro herbs (cilantro) coriander cilantro" data-where="fridge" data-days="5" data-freeze="1" data-frozen="240">
+      <a href="fresh-coriander.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌿</span><b class="fc-name">Fresh coriander</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="fresh parsley  herbs (parsley) parsley" data-where="fridge" data-days="7" data-freeze="1" data-frozen="240">
+      <a href="fresh-parsley.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌿</span><b class="fc-name">Fresh parsley</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="garlic  garlic" data-where="pantry" data-days="90" data-freeze="0" data-frozen="0">
+      <a href="garlic.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧄</span><b class="fc-name">Garlic</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">3 mths</span><span class="sr">Cupboard: about 3 months</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:64%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="ginger  ginger" data-where="fridge" data-days="21" data-freeze="1" data-frozen="240">
+      <a href="ginger.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">G</span><b class="fc-name">Ginger</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 wks</span><span class="sr">Fridge: about 3 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="grapes  grapes" data-where="fridge" data-days="7" data-freeze="1" data-frozen="240">
+      <a href="grapes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍇</span><b class="fc-name">Grapes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="green beans  green beans" data-where="fridge" data-days="5" data-freeze="1" data-frozen="240">
+      <a href="green-beans.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">G</span><b class="fc-name">Green beans</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="kale  kale" data-where="fridge" data-days="6" data-freeze="1" data-frozen="240">
+      <a href="kale.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥬</span><b class="fc-name">Kale</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">6 days</span><span class="sr">Fridge: 6 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:28%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="kiwi fruit  kiwi kiwifruit kiwi fruit" data-where="pantry" data-days="7" data-freeze="0" data-frozen="0">
+      <a href="kiwi-fruit.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥝</span><b class="fc-name">Kiwi fruit</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">7 days</span><span class="sr">Cupboard: 7 days</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="lemons  lemon" data-where="fridge" data-days="21" data-freeze="1" data-frozen="240">
+      <a href="lemons.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍋</span><b class="fc-name">Lemons</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 wks</span><span class="sr">Fridge: about 3 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="lettuce  lettuce" data-where="fridge" data-days="7" data-freeze="0" data-frozen="0">
+      <a href="lettuce.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥬</span><b class="fc-name">Lettuce</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="limes  lime" data-where="fridge" data-days="21" data-freeze="1" data-frozen="240">
+      <a href="limes.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">L</span><b class="fc-name">Limes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 wks</span><span class="sr">Fridge: about 3 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="mangoes  mango" data-where="pantry" data-days="5" data-freeze="1" data-frozen="240">
+      <a href="mangoes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥭</span><b class="fc-name">Mangoes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">5 days</span><span class="sr">Cupboard: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="mushrooms  mushrooms" data-where="fridge" data-days="5" data-freeze="1" data-frozen="240">
+      <a href="mushrooms.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍄</span><b class="fc-name">Mushrooms</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="onions  onion" data-where="pantry" data-days="30" data-freeze="0" data-frozen="0">
+      <a href="onions.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧅</span><b class="fc-name">Onions</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">4 wks</span><span class="sr">Cupboard: about 4 weeks</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:49%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="oranges  orange satsuma satsumas clementine clementines tangerine mandarin mandarins naartjie naartjies" data-where="fridge" data-days="14" data-freeze="1" data-frozen="240">
+      <a href="oranges.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍊</span><b class="fc-name">Oranges</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 wks</span><span class="sr">Fridge: about 2 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:39%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="peaches  peach" data-where="pantry" data-days="4" data-freeze="1" data-frozen="240">
+      <a href="peaches.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍑</span><b class="fc-name">Peaches</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">4 days</span><span class="sr">Cupboard: 4 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:23%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="pears  pear" data-where="pantry" data-days="5" data-freeze="0" data-frozen="0">
+      <a href="pears.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍐</span><b class="fc-name">Pears</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">5 days</span><span class="sr">Cupboard: 5 days</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="peppers bell peppers bell pepper peppers red pepper green pepper yellow pepper red peppers capsicum capsicums red capsicum green capsicum" data-where="fridge" data-days="10" data-freeze="1" data-frozen="240">
+      <a href="peppers.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🫑</span><b class="fc-name">Peppers</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">10 days</span><span class="sr">Fridge: 10 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:34%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="pineapple  pineapple" data-where="pantry" data-days="5" data-freeze="1" data-frozen="240">
+      <a href="pineapple.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍍</span><b class="fc-name">Pineapple</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">5 days</span><span class="sr">Cupboard: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="plums  plum" data-where="pantry" data-days="4" data-freeze="1" data-frozen="240">
+      <a href="plums.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">P</span><b class="fc-name">Plums</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">4 days</span><span class="sr">Cupboard: 4 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:23%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="potatoes  potato" data-where="pantry" data-days="30" data-freeze="0" data-frozen="0">
+      <a href="potatoes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥔</span><b class="fc-name">Potatoes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">4 wks</span><span class="sr">Cupboard: about 4 weeks</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:49%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="radishes  radish" data-where="fridge" data-days="14" data-freeze="0" data-frozen="0">
+      <a href="radishes.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">R</span><b class="fc-name">Radishes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 wks</span><span class="sr">Fridge: about 2 weeks</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:39%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="raspberries  raspberries" data-where="fridge" data-days="3" data-freeze="1" data-frozen="240">
+      <a href="raspberries.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">R</span><b class="fc-name">Raspberries</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="rocket arugula arugula rocket" data-where="fridge" data-days="5" data-freeze="0" data-frozen="0">
+      <a href="rocket.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥬</span><b class="fc-name">Rocket</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="spinach  spinach" data-where="fridge" data-days="6" data-freeze="1" data-frozen="240">
+      <a href="spinach.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥬</span><b class="fc-name">Spinach</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">6 days</span><span class="sr">Fridge: 6 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:28%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="spring onions scallions scallions spring onion spring onions green onion green onions" data-where="fridge" data-days="7" data-freeze="1" data-frozen="240">
+      <a href="spring-onions.html">
+        <span class="fc-head"><span class="badge badge-produce" aria-hidden="true">S</span><b class="fc-name">Spring onions</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="strawberries  strawberries" data-where="fridge" data-days="4" data-freeze="1" data-frozen="240">
+      <a href="strawberries.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍓</span><b class="fc-name">Strawberries</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">4 days</span><span class="sr">Fridge: 4 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:23%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="sweet potatoes  sweet potato kumara" data-where="pantry" data-days="21" data-freeze="0" data-frozen="0">
+      <a href="sweet-potatoes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍠</span><b class="fc-name">Sweet potatoes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">3 wks</span><span class="sr">Cupboard: about 3 weeks</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="sweetcorn corn on the cob corn sweetcorn corn on the cob mielies" data-where="fridge" data-days="3" data-freeze="1" data-frozen="240">
+      <a href="sweetcorn.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌽</span><b class="fc-name">Sweetcorn</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">8 mths</span><span class="sr">Freezer: about 8 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="tomatoes  tomato" data-where="pantry" data-days="6" data-freeze="0" data-frozen="0">
+      <a href="tomatoes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍅</span><b class="fc-name">Tomatoes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">6 days</span><span class="sr">Cupboard: 6 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:28%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="watermelon  watermelon" data-where="fridge" data-days="7" data-freeze="0" data-frozen="0">
+      <a href="watermelon.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍉</span><b class="fc-name">Watermelon</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+  </ul>
 </section>
-<section class="card food-cat">
-  <h2 id="dairy">Dairy and eggs <span class="count">15</span></h2>
-  <table class="food-table">
-    <thead><tr><th scope="col">Food</th><th scope="col">Keeps</th><th scope="col">Where</th></tr></thead>
-    <tbody>
-      <tr data-name="butter  butter"><td><a href="butter.html">Butter</a></td><td><span aria-hidden="true">2 mths</span><span class="sr">about 2 months</span></td><td>Fridge</td></tr>
-      <tr data-name="cheddar  cheddar block cheddar tasty cheese"><td><a href="cheddar.html">Cheddar</a></td><td><span aria-hidden="true">6 wks</span><span class="sr">about 6 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="cottage cheese  cottage cheese"><td><a href="cottage-cheese.html">Cottage cheese</a></td><td><span aria-hidden="true">10 days</span><span class="sr">10 days</span></td><td>Fridge</td></tr>
-      <tr data-name="cream cheese  cream cheese"><td><a href="cream-cheese.html">Cream cheese</a></td><td><span aria-hidden="true">2 wks</span><span class="sr">about 2 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="double cream heavy cream heavy cream double cream single cream whipping cream thickened cream pure cream fresh cream"><td><a href="double-cream.html">Double cream</a></td><td><span aria-hidden="true">10 days</span><span class="sr">10 days</span></td><td>Fridge</td></tr>
-      <tr data-name="eggs  eggs"><td><a href="eggs.html">Eggs</a></td><td><span aria-hidden="true">4 wks</span><span class="sr">about 4 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="flavoured butter garlic or brandy butter flavoured butter"><td><a href="flavoured-butter.html">Flavoured butter</a></td><td><span aria-hidden="true">2 wks</span><span class="sr">about 2 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="grated cheese shredded cheese shredded cheese grated cheese"><td><a href="grated-cheese.html">Grated cheese</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="greek yoghurt  greek yogurt greek yoghurt greek style yoghurt greek style yogurt"><td><a href="greek-yoghurt.html">Greek yoghurt</a></td><td><span aria-hidden="true">2 wks</span><span class="sr">about 2 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="hard-boiled eggs  boiled eggs"><td><a href="hard-boiled-eggs.html">Hard-boiled eggs</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="milk  milk"><td><a href="milk.html">Milk</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="parmesan  parmesan"><td><a href="parmesan.html">Parmesan</a></td><td><span aria-hidden="true">2 mths</span><span class="sr">about 2 months</span></td><td>Fridge</td></tr>
-      <tr data-name="scotch eggs  scotch eggs"><td><a href="scotch-eggs.html">Scotch eggs</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="soured cream sour cream sour cream soured cream"><td><a href="soured-cream.html">Soured cream</a></td><td><span aria-hidden="true">3 wks</span><span class="sr">about 3 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="yoghurt  yogurt yoghurt"><td><a href="yoghurt.html">Yoghurt</a></td><td><span aria-hidden="true">10 days</span><span class="sr">10 days</span></td><td>Fridge</td></tr>
-    </tbody>
-  </table>
+<section class="food-section" aria-labelledby="dairy">
+  <h2 id="dairy"><span aria-hidden="true">🧀</span> Dairy and eggs <span class="count">15</span></h2>
+  <ul class="food-cards">
+    <li class="food-card" data-name="butter  butter" data-where="fridge" data-days="60" data-freeze="1" data-frozen="90">
+      <a href="butter.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧈</span><b class="fc-name">Butter</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 mths</span><span class="sr">Fridge: about 2 months</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">3 mths</span><span class="sr">Freezer: about 3 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:59%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cheddar  cheddar block cheddar tasty cheese" data-where="fridge" data-days="45" data-freeze="1" data-frozen="90">
+      <a href="cheddar.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧀</span><b class="fc-name">Cheddar</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">6 wks</span><span class="sr">Fridge: about 6 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">3 mths</span><span class="sr">Freezer: about 3 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:55%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cottage cheese  cottage cheese" data-where="fridge" data-days="10" data-freeze="0" data-frozen="0">
+      <a href="cottage-cheese.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧀</span><b class="fc-name">Cottage cheese</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">10 days</span><span class="sr">Fridge: 10 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:34%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cream cheese  cream cheese" data-where="fridge" data-days="14" data-freeze="0" data-frozen="0">
+      <a href="cream-cheese.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧀</span><b class="fc-name">Cream cheese</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 wks</span><span class="sr">Fridge: about 2 weeks</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:39%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="double cream heavy cream heavy cream double cream single cream whipping cream thickened cream pure cream fresh cream" data-where="fridge" data-days="10" data-freeze="1" data-frozen="90">
+      <a href="double-cream.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥛</span><b class="fc-name">Double cream</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">10 days</span><span class="sr">Fridge: 10 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">3 mths</span><span class="sr">Freezer: about 3 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:34%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="eggs  eggs" data-where="fridge" data-days="28" data-freeze="0" data-frozen="0">
+      <a href="eggs.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥚</span><b class="fc-name">Eggs</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">4 wks</span><span class="sr">Fridge: about 4 weeks</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:48%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="flavoured butter garlic or brandy butter flavoured butter" data-where="fridge" data-days="14" data-freeze="1" data-frozen="90">
+      <a href="flavoured-butter.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧈</span><b class="fc-name">Flavoured butter</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 wks</span><span class="sr">Fridge: about 2 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">3 mths</span><span class="sr">Freezer: about 3 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:39%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="grated cheese shredded cheese shredded cheese grated cheese" data-where="fridge" data-days="21" data-freeze="1" data-frozen="90">
+      <a href="grated-cheese.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧀</span><b class="fc-name">Grated cheese</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 wks</span><span class="sr">Fridge: about 3 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">3 mths</span><span class="sr">Freezer: about 3 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="greek yoghurt  greek yogurt greek yoghurt greek style yoghurt greek style yogurt" data-where="fridge" data-days="14" data-freeze="0" data-frozen="0">
+      <a href="greek-yoghurt.html">
+        <span class="fc-head"><span class="badge badge-dairy" aria-hidden="true">G</span><b class="fc-name">Greek yoghurt</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 wks</span><span class="sr">Fridge: about 2 weeks</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:39%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="hard-boiled eggs  boiled eggs" data-where="fridge" data-days="7" data-freeze="0" data-frozen="0">
+      <a href="hard-boiled-eggs.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥚</span><b class="fc-name">Hard-boiled eggs</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="milk  milk" data-where="fridge" data-days="7" data-freeze="1" data-frozen="90">
+      <a href="milk.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥛</span><b class="fc-name">Milk</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">3 mths</span><span class="sr">Freezer: about 3 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="parmesan  parmesan" data-where="fridge" data-days="60" data-freeze="1" data-frozen="90">
+      <a href="parmesan.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🧀</span><b class="fc-name">Parmesan</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 mths</span><span class="sr">Fridge: about 2 months</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">3 mths</span><span class="sr">Freezer: about 3 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:59%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="scotch eggs  scotch eggs" data-where="fridge" data-days="3" data-freeze="0" data-frozen="0">
+      <a href="scotch-eggs.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥚</span><b class="fc-name">Scotch eggs</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="soured cream sour cream sour cream soured cream" data-where="fridge" data-days="21" data-freeze="0" data-frozen="0">
+      <a href="soured-cream.html">
+        <span class="fc-head"><span class="badge badge-dairy" aria-hidden="true">S</span><b class="fc-name">Soured cream</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 wks</span><span class="sr">Fridge: about 3 weeks</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:44%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="yoghurt  yogurt yoghurt" data-where="fridge" data-days="10" data-freeze="0" data-frozen="0">
+      <a href="yoghurt.html">
+        <span class="fc-head"><span class="badge badge-dairy" aria-hidden="true">Y</span><b class="fc-name">Yoghurt</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">10 days</span><span class="sr">Fridge: 10 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:34%"></i></span>
+      </a>
+    </li>
+  </ul>
 </section>
-<section class="card food-cat">
-  <h2 id="protein">Meat, fish and tofu <span class="count">15</span></h2>
-  <table class="food-table">
-    <thead><tr><th scope="col">Food</th><th scope="col">Keeps</th><th scope="col">Where</th></tr></thead>
-    <tbody>
-      <tr data-name="bacon  bacon rashers streaky rashers back rashers"><td><a href="bacon.html">Bacon</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="beef mince ground beef ground beef mince beef mince pork mince lamb mince hamburger meat"><td><a href="beef-mince.html">Beef mince</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="chicken breasts  chicken breast turkey turkey crown turkey breast turkey joint whole turkey"><td><a href="chicken-breasts.html">Chicken breasts</a></td><td><span aria-hidden="true">4 days</span><span class="sr">4 days</span></td><td>Fridge</td></tr>
-      <tr data-name="chicken thighs  chicken thighs turkey thighs"><td><a href="chicken-thighs.html">Chicken thighs</a></td><td><span aria-hidden="true">4 days</span><span class="sr">4 days</span></td><td>Fridge</td></tr>
-      <tr data-name="hot dog sausages  hot dogs frankfurters franks wieners viennas"><td><a href="hot-dog-sausages.html">Hot dog sausages</a></td><td><span aria-hidden="true">2 wks</span><span class="sr">about 2 weeks</span></td><td>Fridge</td></tr>
-      <tr data-name="pork chops  pork chops"><td><a href="pork-chops.html">Pork chops</a></td><td><span aria-hidden="true">4 days</span><span class="sr">4 days</span></td><td>Fridge</td></tr>
-      <tr data-name="prawns shrimp shrimp prawn prawns"><td><a href="prawns.html">Prawns</a></td><td><span aria-hidden="true">2 days</span><span class="sr">2 days</span></td><td>Fridge</td></tr>
-      <tr data-name="salmon  salmon"><td><a href="salmon.html">Salmon</a></td><td><span aria-hidden="true">2 days</span><span class="sr">2 days</span></td><td>Fridge</td></tr>
-      <tr data-name="sausages  sausage boerewors snags chipolatas"><td><a href="sausages.html">Sausages</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="sliced ham deli ham deli ham cold cuts cooked ham sliced ham"><td><a href="sliced-ham.html">Sliced ham</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="sliced turkey deli turkey deli turkey sliced turkey"><td><a href="sliced-turkey.html">Sliced turkey</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="steak  steak"><td><a href="steak.html">Steak</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="tofu  tofu"><td><a href="tofu.html">Tofu</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="turkey mince ground turkey ground turkey turkey mince chicken mince ground chicken"><td><a href="turkey-mince.html">Turkey mince</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="white fish cod, haddock or pollock white fish cod haddock pollock hake plaice"><td><a href="white-fish.html">White fish</a></td><td><span aria-hidden="true">2 days</span><span class="sr">2 days</span></td><td>Fridge</td></tr>
-    </tbody>
-  </table>
+<section class="food-section" aria-labelledby="protein">
+  <h2 id="protein"><span aria-hidden="true">🍗</span> Meat, fish and tofu <span class="count">15</span></h2>
+  <ul class="food-cards">
+    <li class="food-card" data-name="bacon  bacon rashers streaky rashers back rashers" data-where="fridge" data-days="7" data-freeze="1" data-frozen="180">
+      <a href="bacon.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥓</span><b class="fc-name">Bacon</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="beef mince ground beef ground beef mince beef mince pork mince lamb mince hamburger meat" data-where="fridge" data-days="3" data-freeze="1" data-frozen="180">
+      <a href="beef-mince.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥩</span><b class="fc-name">Beef mince</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="chicken breasts  chicken breast turkey turkey crown turkey breast turkey joint whole turkey" data-where="fridge" data-days="4" data-freeze="1" data-frozen="180">
+      <a href="chicken-breasts.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍗</span><b class="fc-name">Chicken breasts</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">4 days</span><span class="sr">Fridge: 4 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:23%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="chicken thighs  chicken thighs turkey thighs" data-where="fridge" data-days="4" data-freeze="1" data-frozen="180">
+      <a href="chicken-thighs.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍗</span><b class="fc-name">Chicken thighs</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">4 days</span><span class="sr">Fridge: 4 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:23%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="hot dog sausages  hot dogs frankfurters franks wieners viennas" data-where="fridge" data-days="14" data-freeze="1" data-frozen="180">
+      <a href="hot-dog-sausages.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌭</span><b class="fc-name">Hot dog sausages</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 wks</span><span class="sr">Fridge: about 2 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:39%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="pork chops  pork chops" data-where="fridge" data-days="4" data-freeze="1" data-frozen="180">
+      <a href="pork-chops.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥩</span><b class="fc-name">Pork chops</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">4 days</span><span class="sr">Fridge: 4 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:23%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="prawns shrimp shrimp prawn prawns" data-where="fridge" data-days="2" data-freeze="1" data-frozen="180">
+      <a href="prawns.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🦐</span><b class="fc-name">Prawns</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 days</span><span class="sr">Fridge: 2 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:16%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="salmon  salmon" data-where="fridge" data-days="2" data-freeze="1" data-frozen="180">
+      <a href="salmon.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🐟</span><b class="fc-name">Salmon</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 days</span><span class="sr">Fridge: 2 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:16%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="sausages  sausage boerewors snags chipolatas" data-where="fridge" data-days="5" data-freeze="1" data-frozen="180">
+      <a href="sausages.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌭</span><b class="fc-name">Sausages</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="sliced ham deli ham deli ham cold cuts cooked ham sliced ham" data-where="fridge" data-days="5" data-freeze="1" data-frozen="180">
+      <a href="sliced-ham.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥪</span><b class="fc-name">Sliced ham</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="sliced turkey deli turkey deli turkey sliced turkey" data-where="fridge" data-days="5" data-freeze="1" data-frozen="180">
+      <a href="sliced-turkey.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥪</span><b class="fc-name">Sliced turkey</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="steak  steak" data-where="fridge" data-days="5" data-freeze="1" data-frozen="180">
+      <a href="steak.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥩</span><b class="fc-name">Steak</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="tofu  tofu" data-where="fridge" data-days="7" data-freeze="1" data-frozen="180">
+      <a href="tofu.html">
+        <span class="fc-head"><span class="badge badge-protein" aria-hidden="true">T</span><b class="fc-name">Tofu</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="turkey mince ground turkey ground turkey turkey mince chicken mince ground chicken" data-where="fridge" data-days="3" data-freeze="1" data-frozen="180">
+      <a href="turkey-mince.html">
+        <span class="fc-head"><span class="badge badge-protein" aria-hidden="true">T</span><b class="fc-name">Turkey mince</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="white fish cod, haddock or pollock white fish cod haddock pollock hake plaice" data-where="fridge" data-days="2" data-freeze="1" data-frozen="180">
+      <a href="white-fish.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🐟</span><b class="fc-name">White fish</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 days</span><span class="sr">Fridge: 2 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:16%"></i></span>
+      </a>
+    </li>
+  </ul>
 </section>
-<section class="card food-cat">
-  <h2 id="pantry">Cupboard, bread and dips <span class="count">32</span></h2>
-  <table class="food-table">
-    <thead><tr><th scope="col">Food</th><th scope="col">Keeps</th><th scope="col">Where</th></tr></thead>
-    <tbody>
-      <tr data-name="bagels  bagels"><td><a href="bagels.html">Bagels</a></td><td><span aria-hidden="true">6 days</span><span class="sr">6 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="bread  bread sliced pan"><td><a href="bread.html">Bread</a></td><td><span aria-hidden="true">6 days</span><span class="sr">6 days</span></td><td>Cupboard</td></tr>
-      <tr data-name="breakfast cereal  cereal"><td><a href="breakfast-cereal.html">Breakfast cereal</a></td><td><span aria-hidden="true">6 mths</span><span class="sr">about 6 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="cooked pasta  cooked pasta"><td><a href="cooked-pasta.html">Cooked pasta</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="cooked rice  cooked rice"><td><a href="cooked-rice.html">Cooked rice</a></td><td><span aria-hidden="true">1 day</span><span class="sr">1 day</span></td><td>Fridge</td></tr>
-      <tr data-name="crackers  crackers"><td><a href="crackers.html">Crackers</a></td><td><span aria-hidden="true">4 mths</span><span class="sr">about 4 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="dried pasta  pasta"><td><a href="dried-pasta.html">Dried pasta</a></td><td><span aria-hidden="true">2 yrs</span><span class="sr">about 2 years</span></td><td>Cupboard</td></tr>
-      <tr data-name="flour  flour"><td><a href="flour.html">Flour</a></td><td><span aria-hidden="true">8 mths</span><span class="sr">about 8 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="fresh pasta  fresh pasta"><td><a href="fresh-pasta.html">Fresh pasta</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="fresh salsa  salsa (fresh)"><td><a href="fresh-salsa.html">Fresh salsa</a></td><td><span aria-hidden="true">5 days</span><span class="sr">5 days</span></td><td>Fridge</td></tr>
-      <tr data-name="ground coffee  coffee (ground) ground coffee"><td><a href="ground-coffee.html">Ground coffee</a></td><td><span aria-hidden="true">4 mths</span><span class="sr">about 4 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="guacamole  guacamole"><td><a href="guacamole.html">Guacamole</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="honey  honey"><td><a href="honey.html">Honey</a></td><td><span aria-hidden="true">3 yrs</span><span class="sr">about 3 years</span></td><td>Cupboard</td></tr>
-      <tr data-name="hot sauce  hot sauce"><td><a href="hot-sauce.html">Hot sauce</a></td><td><span aria-hidden="true">1 yr</span><span class="sr">about a year</span></td><td>Cupboard</td></tr>
-      <tr data-name="hummus  hummus houmous"><td><a href="hummus.html">Hummus</a></td><td><span aria-hidden="true">10 days</span><span class="sr">10 days</span></td><td>Fridge</td></tr>
-      <tr data-name="jam  jam"><td><a href="jam.html">Jam</a></td><td><span aria-hidden="true">6 mths</span><span class="sr">about 6 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="ketchup  ketchup"><td><a href="ketchup.html">Ketchup</a></td><td><span aria-hidden="true">6 mths</span><span class="sr">about 6 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="leftovers  leftovers left overs left-overs"><td><a href="leftovers.html">Leftovers</a></td><td><span aria-hidden="true">2 days</span><span class="sr">2 days</span></td><td>Fridge</td></tr>
-      <tr data-name="mayonnaise  mayonnaise"><td><a href="mayonnaise.html">Mayonnaise</a></td><td><span aria-hidden="true">2 mths</span><span class="sr">about 2 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="mustard  mustard"><td><a href="mustard.html">Mustard</a></td><td><span aria-hidden="true">1 yr</span><span class="sr">about a year</span></td><td>Cupboard</td></tr>
-      <tr data-name="oats  oats"><td><a href="oats.html">Oats</a></td><td><span aria-hidden="true">1 yr</span><span class="sr">about a year</span></td><td>Cupboard</td></tr>
-      <tr data-name="olive oil  olive oil"><td><a href="olive-oil.html">Olive oil</a></td><td><span aria-hidden="true">1 yr</span><span class="sr">about a year</span></td><td>Cupboard</td></tr>
-      <tr data-name="overnight oats  overnight oats"><td><a href="overnight-oats.html">Overnight oats</a></td><td><span aria-hidden="true">3 days</span><span class="sr">3 days</span></td><td>Fridge</td></tr>
-      <tr data-name="peanut butter  peanut butter"><td><a href="peanut-butter.html">Peanut butter</a></td><td><span aria-hidden="true">6 mths</span><span class="sr">about 6 months</span></td><td>Cupboard</td></tr>
-      <tr data-name="pesto  pesto"><td><a href="pesto.html">Pesto</a></td><td><span aria-hidden="true">7 days</span><span class="sr">7 days</span></td><td>Fridge</td></tr>
-      <tr data-name="rice uncooked rice"><td><a href="rice.html">Rice</a></td><td><span aria-hidden="true">2 yrs</span><span class="sr">about 2 years</span></td><td>Cupboard</td></tr>
-      <tr data-name="soy sauce  soy sauce"><td><a href="soy-sauce.html">Soy sauce</a></td><td><span aria-hidden="true">1 yr</span><span class="sr">about a year</span></td><td>Cupboard</td></tr>
-      <tr data-name="sugar  sugar"><td><a href="sugar.html">Sugar</a></td><td><span aria-hidden="true">2 yrs</span><span class="sr">about 2 years</span></td><td>Cupboard</td></tr>
-      <tr data-name="tea bags  tea bags rooibos tea"><td><a href="tea-bags.html">Tea bags</a></td><td><span aria-hidden="true">1 yr</span><span class="sr">about a year</span></td><td>Cupboard</td></tr>
-      <tr data-name="tinned beans canned beans canned beans baked beans tinned beans"><td><a href="tinned-beans.html">Tinned beans</a></td><td><span aria-hidden="true">2 yrs</span><span class="sr">about 2 years</span></td><td>Cupboard</td></tr>
-      <tr data-name="tinned tomatoes canned tomatoes canned tomatoes tinned tomatoes chopped tomatoes"><td><a href="tinned-tomatoes.html">Tinned tomatoes</a></td><td><span aria-hidden="true">2 yrs</span><span class="sr">about 2 years</span></td><td>Cupboard</td></tr>
-      <tr data-name="tortilla wraps  tortillas tortilla wraps"><td><a href="tortilla-wraps.html">Tortilla wraps</a></td><td><span aria-hidden="true">2 wks</span><span class="sr">about 2 weeks</span></td><td>Cupboard</td></tr>
-    </tbody>
-  </table>
+<section class="food-section" aria-labelledby="pantry">
+  <h2 id="pantry"><span aria-hidden="true">🥫</span> Cupboard, bread and dips <span class="count">32</span></h2>
+  <ul class="food-cards">
+    <li class="food-card" data-name="bagels  bagels" data-where="pantry" data-days="6" data-freeze="1" data-frozen="180">
+      <a href="bagels.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥯</span><b class="fc-name">Bagels</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">6 days</span><span class="sr">Cupboard: 6 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:28%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="bread  bread sliced pan" data-where="pantry" data-days="6" data-freeze="1" data-frozen="180">
+      <a href="bread.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍞</span><b class="fc-name">Bread</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">6 days</span><span class="sr">Cupboard: 6 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:28%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="breakfast cereal  cereal" data-where="pantry" data-days="180" data-freeze="0" data-frozen="0">
+      <a href="breakfast-cereal.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥣</span><b class="fc-name">Breakfast cereal</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">6 mths</span><span class="sr">Cupboard: about 6 months</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:74%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cooked pasta  cooked pasta" data-where="fridge" data-days="3" data-freeze="1" data-frozen="180">
+      <a href="cooked-pasta.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍝</span><b class="fc-name">Cooked pasta</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="cooked rice  cooked rice" data-where="fridge" data-days="1" data-freeze="1" data-frozen="30">
+      <a href="cooked-rice.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍚</span><b class="fc-name">Cooked rice</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">1 day</span><span class="sr">Fridge: 1 day</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">4 wks</span><span class="sr">Freezer: about 4 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">1 day</span><span class="sr">Thawed: use within 1 day</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:10%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="crackers  crackers" data-where="pantry" data-days="120" data-freeze="0" data-frozen="0">
+      <a href="crackers.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">C</span><b class="fc-name">Crackers</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">4 mths</span><span class="sr">Cupboard: about 4 months</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:68%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="dried pasta  pasta" data-where="pantry" data-days="730" data-freeze="0" data-frozen="0">
+      <a href="dried-pasta.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍝</span><b class="fc-name">Dried pasta</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">2 yrs</span><span class="sr">Cupboard: about 2 years</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:94%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="flour  flour" data-where="pantry" data-days="240" data-freeze="0" data-frozen="0">
+      <a href="flour.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">F</span><b class="fc-name">Flour</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">8 mths</span><span class="sr">Cupboard: about 8 months</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:78%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="fresh pasta  fresh pasta" data-where="fridge" data-days="7" data-freeze="1" data-frozen="180">
+      <a href="fresh-pasta.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍝</span><b class="fc-name">Fresh pasta</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="fresh salsa  salsa (fresh)" data-where="fridge" data-days="5" data-freeze="0" data-frozen="0">
+      <a href="fresh-salsa.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">F</span><b class="fc-name">Fresh salsa</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">5 days</span><span class="sr">Fridge: 5 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:26%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="ground coffee  coffee (ground) ground coffee" data-where="pantry" data-days="120" data-freeze="0" data-frozen="0">
+      <a href="ground-coffee.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">☕</span><b class="fc-name">Ground coffee</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">4 mths</span><span class="sr">Cupboard: about 4 months</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:68%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="guacamole  guacamole" data-where="fridge" data-days="3" data-freeze="0" data-frozen="0">
+      <a href="guacamole.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥑</span><b class="fc-name">Guacamole</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="honey  honey" data-where="pantry" data-days="1000" data-freeze="0" data-frozen="0">
+      <a href="honey.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍯</span><b class="fc-name">Honey</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">3 yrs</span><span class="sr">Cupboard: about 3 years</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:99%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="hot sauce  hot sauce" data-where="pantry" data-days="365" data-freeze="0" data-frozen="0">
+      <a href="hot-sauce.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌶️</span><b class="fc-name">Hot sauce</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">1 yr</span><span class="sr">Cupboard: about a year</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:84%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="hummus  hummus houmous" data-where="fridge" data-days="10" data-freeze="1" data-frozen="180">
+      <a href="hummus.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">H</span><b class="fc-name">Hummus</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">10 days</span><span class="sr">Fridge: 10 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:34%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="jam  jam" data-where="pantry" data-days="180" data-freeze="0" data-frozen="0">
+      <a href="jam.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">J</span><b class="fc-name">Jam</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">6 mths</span><span class="sr">Cupboard: about 6 months</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:74%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="ketchup  ketchup" data-where="pantry" data-days="180" data-freeze="0" data-frozen="0">
+      <a href="ketchup.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">K</span><b class="fc-name">Ketchup</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">6 mths</span><span class="sr">Cupboard: about 6 months</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:74%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="leftovers  leftovers left overs left-overs" data-where="fridge" data-days="2" data-freeze="1" data-frozen="90">
+      <a href="leftovers.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍲</span><b class="fc-name">Leftovers</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">2 days</span><span class="sr">Fridge: 2 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">3 mths</span><span class="sr">Freezer: about 3 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">1 day</span><span class="sr">Thawed: use within 1 day</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:16%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="mayonnaise  mayonnaise" data-where="pantry" data-days="60" data-freeze="0" data-frozen="0">
+      <a href="mayonnaise.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">M</span><b class="fc-name">Mayonnaise</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">2 mths</span><span class="sr">Cupboard: about 2 months</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:59%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="mustard  mustard" data-where="pantry" data-days="365" data-freeze="0" data-frozen="0">
+      <a href="mustard.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">M</span><b class="fc-name">Mustard</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">1 yr</span><span class="sr">Cupboard: about a year</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:84%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="oats  oats" data-where="pantry" data-days="365" data-freeze="0" data-frozen="0">
+      <a href="oats.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥣</span><b class="fc-name">Oats</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">1 yr</span><span class="sr">Cupboard: about a year</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:84%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="olive oil  olive oil" data-where="pantry" data-days="365" data-freeze="0" data-frozen="0">
+      <a href="olive-oil.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🫒</span><b class="fc-name">Olive oil</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">1 yr</span><span class="sr">Cupboard: about a year</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:84%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="overnight oats  overnight oats" data-where="fridge" data-days="3" data-freeze="0" data-frozen="0">
+      <a href="overnight-oats.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥣</span><b class="fc-name">Overnight oats</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">3 days</span><span class="sr">Fridge: 3 days</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: doesn't freeze well</span></b></span><span class="fc-stat fc-none" title="doesn't freeze well"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: doesn't freeze well</span></b></span></span>
+        <span class="life life-spoil" aria-hidden="true"><i style="width:20%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="peanut butter  peanut butter" data-where="pantry" data-days="180" data-freeze="0" data-frozen="0">
+      <a href="peanut-butter.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥜</span><b class="fc-name">Peanut butter</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">6 mths</span><span class="sr">Cupboard: about 6 months</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:74%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="pesto  pesto" data-where="fridge" data-days="7" data-freeze="1" data-frozen="180">
+      <a href="pesto.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌿</span><b class="fc-name">Pesto</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Fridge</span><b><span aria-hidden="true">7 days</span><span class="sr">Fridge: 7 days</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:30%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="rice uncooked rice" data-where="pantry" data-days="730" data-freeze="0" data-frozen="0">
+      <a href="rice.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍚</span><b class="fc-name">Rice</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">2 yrs</span><span class="sr">Cupboard: about 2 years</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:94%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="soy sauce  soy sauce" data-where="pantry" data-days="365" data-freeze="0" data-frozen="0">
+      <a href="soy-sauce.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">S</span><b class="fc-name">Soy sauce</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">1 yr</span><span class="sr">Cupboard: about a year</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:84%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="sugar  sugar" data-where="pantry" data-days="730" data-freeze="0" data-frozen="0">
+      <a href="sugar.html">
+        <span class="fc-head"><span class="badge badge-pantry" aria-hidden="true">S</span><b class="fc-name">Sugar</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">2 yrs</span><span class="sr">Cupboard: about 2 years</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:94%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="tea bags  tea bags rooibos tea" data-where="pantry" data-days="365" data-freeze="0" data-frozen="0">
+      <a href="tea-bags.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🍵</span><b class="fc-name">Tea bags</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">1 yr</span><span class="sr">Cupboard: about a year</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:84%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="tinned beans canned beans canned beans baked beans tinned beans" data-where="pantry" data-days="730" data-freeze="0" data-frozen="0">
+      <a href="tinned-beans.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥫</span><b class="fc-name">Tinned beans</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">2 yrs</span><span class="sr">Cupboard: about 2 years</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:94%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="tinned tomatoes canned tomatoes canned tomatoes tinned tomatoes chopped tomatoes" data-where="pantry" data-days="730" data-freeze="0" data-frozen="0">
+      <a href="tinned-tomatoes.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🥫</span><b class="fc-name">Tinned tomatoes</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">2 yrs</span><span class="sr">Cupboard: about 2 years</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Freezer</span><b><span aria-hidden="true">–</span><span class="sr">Freezer: no need to freeze</span></b></span><span class="fc-stat fc-none" title="no need to freeze"><span class="fc-label">Thawed</span><b><span aria-hidden="true">–</span><span class="sr">Thawed: no need to freeze</span></b></span></span>
+        <span class="life life-fresh" aria-hidden="true"><i style="width:94%"></i></span>
+      </a>
+    </li>
+    <li class="food-card" data-name="tortilla wraps  tortillas tortilla wraps" data-where="pantry" data-days="14" data-freeze="1" data-frozen="180">
+      <a href="tortilla-wraps.html">
+        <span class="fc-head"><span class="badge" aria-hidden="true">🌯</span><b class="fc-name">Tortilla wraps</b></span>
+        <span class="fc-stats"><span class="fc-stat"><span class="fc-label">Cupboard</span><b><span aria-hidden="true">2 wks</span><span class="sr">Cupboard: about 2 weeks</span></b></span><span class="fc-stat"><span class="fc-label">Freezer</span><b><span aria-hidden="true">6 mths</span><span class="sr">Freezer: about 6 months</span></b></span><span class="fc-stat"><span class="fc-label">Thawed</span><b><span aria-hidden="true">2 days</span><span class="sr">Thawed: use within 2 days</span></b></span></span>
+        <span class="life life-soon" aria-hidden="true"><i style="width:39%"></i></span>
+      </a>
+    </li>
+  </ul>
 </section>
-</div>
 
 <section class="card home-cta">
   <h2>Let your phone keep track</h2>
@@ -220,31 +935,52 @@
 </section>
 
 <script>
-  // Filter the lists as you type. Without script, everything still shows.
+  // Search, filter and sort. Without script, every food still shows, A to Z.
   (function () {
-    var box = document.querySelector('.food-filter');
     var input = document.getElementById('food-filter');
+    var sort = document.getElementById('food-sort');
     var none = document.querySelector('.food-none');
-    box.hidden = false;
-    input.addEventListener('input', filter);
-    // Arriving from the home page search: food/?q=hummus
-    var q0 = new URLSearchParams(location.search).get('q');
-    if (q0) { input.value = q0; filter(); }
-    function filter() {
+    document.querySelectorAll('.food-tools [hidden]').forEach(function (el) { el.hidden = false; });
+
+    function where() {
+      var r = document.querySelector('input[name=where]:checked');
+      return r ? r.value : '';
+    }
+
+    function apply() {
       var q = input.value.trim().toLowerCase();
+      var w = where();
       var shown = 0;
-      document.querySelectorAll('.food-cat').forEach(function (card) {
-        var any = 0;
-        card.querySelectorAll('tbody tr').forEach(function (r) {
-          var hit = !q || r.dataset.name.indexOf(q) !== -1;
-          r.hidden = !hit;
-          if (hit) any++;
+      document.querySelectorAll('.food-section').forEach(function (sec) {
+        var list = sec.querySelector('.food-cards');
+        var items = Array.prototype.slice.call(list.children);
+        items.sort(function (a, b) {
+          if (sort.value === 'short') return a.dataset.days - b.dataset.days || a.dataset.name.localeCompare(b.dataset.name);
+          if (sort.value === 'frozen') return (b.dataset.frozen || 0) - (a.dataset.frozen || 0) || a.dataset.name.localeCompare(b.dataset.name);
+          if (sort.value === 'long') return b.dataset.days - a.dataset.days || a.dataset.name.localeCompare(b.dataset.name);
+          return a.dataset.name.localeCompare(b.dataset.name);
         });
-        card.hidden = !any;
+        var any = 0;
+        items.forEach(function (li) {
+          var hit = (!q || li.dataset.name.indexOf(q) !== -1) && (!w || (w === 'freeze' ? li.dataset.freeze === '1' : li.dataset.where === w));
+          li.hidden = !hit;
+          if (hit) any++;
+          list.appendChild(li);
+        });
+        sec.hidden = !any;
         shown += any;
       });
       none.hidden = shown > 0;
     }
+
+    input.addEventListener('input', apply);
+    sort.addEventListener('change', apply);
+    document.querySelectorAll('input[name=where]').forEach(function (r) { r.addEventListener('change', apply); });
+
+    // Arriving from the home page search: food/?q=hummus
+    var q0 = new URLSearchParams(location.search).get('q');
+    if (q0) input.value = q0;
+    apply();
   })();
 </script>
 </main>
