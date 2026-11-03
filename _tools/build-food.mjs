@@ -485,6 +485,19 @@ ${heading('How long does food last?', `Typical times for ${foods.length} everyda
 </p>
 </div>
 
+<aside class="season" aria-label="Seasonal guides">
+  <span class="season-emoji" aria-hidden="true">🎄</span>
+  <div>
+    <h2>Leftovers</h2>
+    <p>How long cooked leftovers keep, plus holiday guides.</p>
+  </div>
+  <ul class="chips">
+    <li><a href="leftovers.html"><b>Everyday leftovers</b></a></li>
+    <li><a href="../christmas-leftovers.html">Christmas leftovers</a></li>
+    <li><a href="../thanksgiving-leftovers.html">Thanksgiving leftovers</a></li>
+  </ul>
+</aside>
+
 <nav aria-label="Food categories">
 <ul class="cat-tiles">
 ${tiles}
